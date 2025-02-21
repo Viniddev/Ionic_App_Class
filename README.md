@@ -118,8 +118,8 @@ Este projeto está sob a licença MIT.
 
 Caso tenha dúvidas ou sugestões, entre em contato:
 
-- **E-mail**: vinicius@exemplo.com
-- **LinkedIn**: [linkedin.com/in/vinicius](https://linkedin.com/in/vinicius)
+- **E-mail**: diasvinicius95@outlook.com
+- **LinkedIn**: [linkedin.com/in/vinícius-dias-rodrigues/](https://www.linkedin.com/in/vin%C3%ADcius-dias-rodrigues/)
 
 ---
 
