@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="dark">
+  <ion-toolbar>
     <ion-title>
       Ionic App
     </ion-title>
@@ -17,12 +17,12 @@
     <strong>Vinícius Dias Rodrigues <br/> Desenvolvedor Full-Stack</strong>
 
     <div>
-      <ion-button>Logar</ion-button> 
-      <ion-button [disabled]="true">Deslogar</ion-button>
+      <ion-button (click)="Login()">Logar</ion-button> 
     </div>
 
     <ion-icon name="airplane-outline" size="large"></ion-icon>
 
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <app-floating-button/>
   </div>
 </ion-content>
