@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonButton } from '@ionic/angular/standalone';
+import { IonButton, IonInput, IonItem, IonList } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/frontEndUrls';
@@ -8,8 +8,9 @@ import { HOME } from 'src/utils/frontEndUrls';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  imports: [IonButton, RouterModule],
+  imports: [IonButton, RouterModule, IonInput, IonItem],
 })
+
 export class LoginPage implements OnInit {
   constructor(private router: Router) {}
 

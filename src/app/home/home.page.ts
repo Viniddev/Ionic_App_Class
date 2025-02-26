@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
   IonFab,
-  IonFabButton,
-  IonFabList,
   IonButton,
   IonIcon,
 } from '@ionic/angular/standalone';
@@ -31,16 +26,11 @@ import { FloatingButtonComponent } from '../../components/floating-button/floati
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
     IonButton,
     IonIcon,
     IonContent,
     IonFab,
-    IonFabButton,
-    IonFabList,
     FloatingButtonComponent,
   ],
 })
