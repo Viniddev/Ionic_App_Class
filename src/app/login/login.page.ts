@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonButton, IonInput, IonItem, IonList } from '@ionic/angular/standalone';
+import { IonButton, IonInput, IonItem } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/frontEndUrls';

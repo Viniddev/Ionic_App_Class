@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {
   IonContent,
-  IonFab,
   IonButton,
   IonIcon,
 } from '@ionic/angular/standalone';
@@ -30,7 +29,6 @@ import { FloatingButtonComponent } from '../../components/floating-button/floati
     IonButton,
     IonIcon,
     IonContent,
-    IonFab,
     FloatingButtonComponent,
   ],
 })
