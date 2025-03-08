@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonItem, IonList, IonButton} from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonInput,
+  IonItem,
+  IonList,
+} from '@ionic/angular/standalone';
 import { RouterLinkWithHref } from '@angular/router';
 
 @Component({
@@ -11,20 +20,18 @@ import { RouterLinkWithHref } from '@angular/router';
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     CommonModule,
     FormsModule,
+    IonButton,
+    RouterLinkWithHref,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
     IonInput,
     IonItem,
     IonList,
-    IonButton,
-    RouterLinkWithHref,
   ],
 })
-export class PerfilPage implements OnInit {
+export class PerfilPage {
   constructor() {}
-
-  ngOnInit() {}
 }

@@ -1,14 +1,19 @@
 <ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title> Easy Order </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <div id="container">
-    <strong>Seus pedidos de forma mais simples <br/> e na palma da sua mão!</strong>
+    <strong>Seus pedidos de forma mais simples <br /> na palma da sua mão!</strong>
 
     <div>
-      <ion-button (click)="Login()">Logar</ion-button> 
+      <ion-button (click)="Login()">Logar</ion-button>
     </div>
 
     <ion-icon name="airplane-outline" size="large"></ion-icon>
 
     <p></p>
-    <app-floating-button/>
+    <app-floating-button />
   </div>
 </ion-content>

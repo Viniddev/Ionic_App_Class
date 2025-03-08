@@ -3,6 +3,9 @@ import {
   IonContent,
   IonButton,
   IonIcon,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -19,7 +22,6 @@ import { Router } from '@angular/router';
 import { LOGIN } from 'src/utils/frontEndUrls';
 import { FloatingButtonComponent } from '../../components/floating-button/floating-button.component';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -30,9 +32,11 @@ import { FloatingButtonComponent } from '../../components/floating-button/floati
     IonIcon,
     IonContent,
     FloatingButtonComponent,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
   ],
 })
-
 export class HomePage {
   constructor(private router: Router) {
     addIcons({
