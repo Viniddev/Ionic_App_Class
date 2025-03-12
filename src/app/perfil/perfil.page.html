@@ -1,0 +1,52 @@
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title> Easy Order </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="conteinerPerfil">
+    <div id="conteinerPersonalInfo">
+      <img
+        [src]="'../../assets/icon/' + selectedUser.id + '.png'"
+        alt="profile picture"
+        id="profilePic"
+      />
+
+      <div id="userImutableInformation">
+        <h2>Nome: {{ selectedUser.nome }}</h2>
+        <h3>RG: {{ selectedUser.rg }}</h3>
+        <h3>CPF: {{ selectedUser.cpf }}</h3>
+        <h3>Cargo: {{ selectedUser.cargo }}</h3>
+      </div>
+    </div>
+    <div id="mutableInformations">
+      <ion-list>
+        <ion-item>
+          <ion-input fill="outline"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input fill="outline"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input fill="outline"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input fill="outline"></ion-input>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="navegacao">
+      <a [routerLink]="['/home']">
+        <ion-button class="btnNav">Atualizar</ion-button>
+      </a>
+      <a [routerLink]="['/home']">
+        <ion-button class="btnNav">Sair</ion-button>
+      </a>
+    </div>
+  </div>
+</ion-content>
