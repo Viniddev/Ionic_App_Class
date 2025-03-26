@@ -1,4 +1,7 @@
 <section id="conteinerLogin">
+
+  <img src="../../assets/Logo.png" alt="logo do app" class="logoDoApp">
+
   <form class="formLogin">
 
     <h2>Entrar</h2>
@@ -14,15 +17,12 @@
     </div>
 
     <div id="esqueciSenha">
-      <a [routerLink]="['/home']">esqueci minha senha</a>
+      <a [routerLink]="['/home']" class="linkEsqueciMinhaSenha">esqueci minha senha</a>
     </div>
 
     <div id="navigation">
-      <a [routerLink]="['/home']">
-        <ion-button color="danger" class="btnNav">Cadastrar</ion-button>
-      </a>
       <a [routerLink]="['/perfil']">
-        <ion-button class="btnNav">Entrar</ion-button>
+        <ion-button class="btnNav">Confirmar</ion-button>
       </a>
     </div>
   </form>

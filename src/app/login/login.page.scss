@@ -1,23 +1,25 @@
 #conteinerLogin{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 5rem;
     flex-direction: column;
     height: 100%;
+    padding: 5rem 1rem 10px 1rem;
 }
 
 .formLogin{
-    height: 55%;
+    height: 35%;
     width: 90%;
-    background-color: var(--formularioLogin);
+    background-color: var(--backgroundPrimary);
     border-radius: 5px;
-    box-shadow: 0px 1px 2px 1px rgba(255, 255, 255, 0.3);
 
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
     gap: 10px;
+    padding: 5px;
 }
 
 h2{
@@ -62,4 +64,14 @@ h2{
     width: 100%;
     text-align: end;
     padding-right: 7%;
+}
+
+.linkEsqueciMinhaSenha{
+    color: white;
+}
+
+.logoDoApp{
+    height: 15rem;
+    width: 15rem;
+    border-radius: 50%;
 }
