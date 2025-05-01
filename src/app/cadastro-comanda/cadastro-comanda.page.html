@@ -1,0 +1,42 @@
+<app-header />
+
+<ion-content class="ion-padding" fullscreen="true">
+  <div class="conteiner-cadastro">
+    <form id="campos-pesquisa">
+      <ion-select
+        class="customSelect"  
+        label="Selecionar mesa"
+        size="large"
+        label-placement="floating"
+        fill="outline"
+        [(ngModel)]="mesaSelecionada"
+        name="mesaSelecionada"
+      >
+        <ion-select-option *ngFor="let mesa of mesas"
+          >{{mesa.idMesa}}</ion-select-option
+        >
+      </ion-select>
+
+      <ion-searchbar
+        class="customSearchbar"  
+        placeholder="Buscar produtos"
+        (ionChange)="pesquisa($event)"
+        fill="outline"
+        size="large"
+      />
+
+      <span class="filtros">
+        <ion-button type="button" expand="full" size="large" class="btnFiltro">Hamburguer</ion-button>
+        <ion-button type="button" expand="full" size="large" class="btnFiltro">Pizza</ion-button>
+        <ion-button type="button" expand="full" size="large" class="btnFiltro">Bebidas</ion-button>
+      </span>
+    </form>
+
+    <section id="pedido-list">
+      <app-card-pedido/>
+    </section>
+    
+    <ion-button type="button" expand="full" size="large" class="btnFinalizar">Finalizar</ion-button>
+
+  </div>
+</ion-content>

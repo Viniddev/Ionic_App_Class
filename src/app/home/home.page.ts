@@ -2,25 +2,11 @@ import { Component } from '@angular/core';
 import {
   IonContent,
   IonButton,
-  IonIcon,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
 } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import {
-  logoIonic,
-  airplaneOutline,
-  chevronDownCircle,
-  chevronForwardCircle,
-  chevronUpCircle,
-  colorPalette,
-  document,
-  globe,
-} from 'ionicons/icons';
+
 import { Router } from '@angular/router';
 import { LOGIN } from 'src/utils/frontEndUrls';
-import { FloatingButtonComponent } from '../../components/floating-button/floating-button.component';
+import { HeaderComponent } from 'src/components/header/header.component';
 
 @Component({
   selector: 'app-home',
@@ -29,27 +15,11 @@ import { FloatingButtonComponent } from '../../components/floating-button/floati
   imports: [
     IonContent,
     IonButton,
-    IonIcon,
-    IonContent,
-    FloatingButtonComponent,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
+    HeaderComponent,
   ],
 })
 export class HomePage {
-  constructor(private router: Router) {
-    addIcons({
-      logoIonic,
-      airplaneOutline,
-      chevronDownCircle,
-      chevronForwardCircle,
-      chevronUpCircle,
-      colorPalette,
-      document,
-      globe,
-    });
-  }
+  constructor(private router: Router) {}
 
   Login() {
     this.router.navigate([LOGIN]);

@@ -1,0 +1,113 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="conteiner-cadastro">
+    <h1 id="title-cadastro">EASY ORDER</h1>
+    <h3 id="subtitle-cadastro">Gerenciando seus pedidos</h3>
+
+    <form action="" class="form-cadastro" [formGroup]="cadastro">
+      <h2>Cadastrar</h2>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="Nome"
+          formControlName="nome"
+          labelPlacement="stacked"
+          label="Digite seu nome completo:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="(nome?.dirty || nome?.touched) && nome?.errors"
+        >
+          Nome inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="email"
+          formControlName="email"
+          labelPlacement="stacked"
+          label="Digite seu E-mail:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="(email?.dirty || email?.touched) && email?.errors"
+        >
+          Email inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="CPF"
+          formControlName="cpf"
+          labelPlacement="stacked"
+          label="CPF:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors"
+        >
+          CPF inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="Telefone"
+          formControlName="telefone"
+          labelPlacement="stacked"
+          label="Telefone:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="(telefone?.dirty || telefone?.touched) && telefone?.errors"
+        >
+          Telefone inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="Senha"
+          formControlName="password"
+          labelPlacement="stacked"
+          label="Senha:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="(password?.dirty || password?.touched) && password?.errors"
+        >
+          Senha inválida
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="Senha"
+          formControlName="passwordConfirm"
+          labelPlacement="stacked"
+          label="Repita a senha:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note
+          slot="error"
+          *ngIf="(passwordConfirm?.dirty || passwordConfirm?.touched) && passwordConfirm?.errors"
+        >
+          As senhas não correspondem
+        </ion-note>
+      </ion-item>
+
+      <ion-button type="button" expand="block" color="secondary">
+        Confirmar
+      </ion-button>
+
+      <p class="informations">Ja possui cadastro? <strong (click)="voltar()">Voltar</strong></p>
+
+    </form>
+  </div>
+</ion-content>

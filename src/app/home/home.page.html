@@ -1,19 +1,15 @@
-<ion-content [fullscreen]="true">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title> Easy Order </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div id="container">
-    <strong>Seus pedidos de forma mais simples <br /> na palma da sua mão!</strong>
+<app-header/>
 
-    <div>
-      <ion-button (click)="Login()">Logar</ion-button>
+<ion-content class="ion-padding">
+  <div class="conteiner-links">
+
+    <img src="../../assets/logo-oficial.png" alt="logo" class="icone-logo">
+
+    <div class="links">
+      <ion-button type="button" expand="full" size="large">Abrir Comanda</ion-button>
+      <ion-button type="button" expand="full" size="large">Cadastrar Pedido</ion-button>
+      <ion-button type="button" expand="full" size="large">Visualizar Pedidos</ion-button>
+      <ion-button type="button" expand="full" size="large">Resumo Comanda</ion-button>
     </div>
-
-    <ion-icon name="airplane-outline" size="large"></ion-icon>
-
-    <p></p>
-    <app-floating-button />
   </div>
 </ion-content>

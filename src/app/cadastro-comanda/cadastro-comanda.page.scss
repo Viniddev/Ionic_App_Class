@@ -1,0 +1,46 @@
+ion-searchbar.customSearchbar {
+  --color: white;
+  --placeholder-color: white;
+  --icon-color: white;
+  --clear-button-color: white;
+
+  --border-radius: 4px;
+  --background:var(--backgroundPrimary);
+  
+  margin-top: 10px;
+  padding: 0;
+}
+
+ion-select.customSelect{
+  --placeholder-color: white;
+  --icon-color: white;
+  --clear-button-color: white;
+  --color: white;
+  
+}
+
+.filtros{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 5%;
+  gap: 2%;
+
+  ion-button.btnFiltro{
+    --color:white;
+
+    font-size: 1rem;
+    flex-grow: 1;
+  }
+}
+
+#pedido-list{
+  height: 100%;
+  margin: .5rem 0 .5rem 0;
+}
+
+ion-button.btnFinalizar{
+  --color: white;
+}

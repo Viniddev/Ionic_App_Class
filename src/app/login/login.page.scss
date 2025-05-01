@@ -1,77 +1,40 @@
-#conteinerLogin{
+.conteiner-login{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 5rem;
     flex-direction: column;
+    padding-top: 10%;
+    gap: 7%;
     height: 100%;
-    padding: 5rem 1rem 10px 1rem;
-}
 
-.formLogin{
-    height: 40%;
-    width: 90%;
-    background-color: var(--backgroundPrimary);
-    border-radius: 5px;
+    .icone-logo{
+        height: 12rem;
+        width: 12rem;
+        border-radius: 50%;
+    }
 
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-    gap: 10px;
-    padding: 5px;
-}
+    .form-login{
+        width: 100%;
+        height: 25rem;
+        box-sizing: border-box;
+        background-color: var(--backgroundPrimary);
+        padding: 1rem;
+        border-radius: 20px;
+        
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5%;
 
-h2{
-    color: white;
-    font-size: 2.5rem;
-}
+        ion-note{
+            --color: white;
+        }
 
-.labelsFormLogin{
-    width: 90%;
-    border-radius: 5px;
-}
-
-#inputs{
-    width: 100%;
-    height: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#navigation{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: row;
-    gap: 20px;
-}
-
-#navigation a {
-  flex: 1; 
-  text-align: center;
-}
-
-.btnNav{
-    width: 80%;
-}
-
-#esqueciSenha{
-    width: 100%;
-    text-align: end;
-    padding-right: 7%;
-}
-
-.linkEsqueciMinhaSenha{
-    color: white;
-}
-
-.logoDoApp{
-    height: 13rem;
-    width: 13rem;
-    border-radius: 50%;
+        #esqueceu-senha{
+            line-height: 10px;
+            margin: 0;
+            padding: 0;
+            text-align: end;
+            text-decoration: underline;
+        }
+    }
 }

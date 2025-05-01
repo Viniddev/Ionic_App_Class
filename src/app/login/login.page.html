@@ -1,29 +1,28 @@
-<section id="conteinerLogin">
+<ion-content class="ion-padding" id="content-login">
+  <div class="conteiner-login">
+    <img src="../../assets/logo-oficial.png" alt="logo" class="icone-logo">
+    <form (ngSubmit)="login()" [formGroup]="credentials" class="form-login">
+      <h2>Entrar</h2>
 
-  <img src="../../assets/TesteOfc.png" alt="logo do app" class="logoDoApp">
-
-  <form class="formLogin">
-
-    <h2>Entrar</h2>
-
-    <div id="inputs">
-      <ion-item class="labelsFormLogin">
-        <ion-input label="Login"></ion-input>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+        <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">
+          Email inválido
+        </ion-note>
       </ion-item>
 
-      <ion-item class="labelsFormLogin">
-        <ion-input label="Password" type="password"></ion-input>
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+        <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">
+          Senhas de seis caracteres
+        </ion-note>
       </ion-item>
-    </div>
+      
+      <ion-note id="esqueceu-senha" (click)="register()">esqueceu a senha?</ion-note>
 
-    <div id="esqueciSenha">
-      <a [routerLink]="['/home']" class="linkEsqueciMinhaSenha">esqueci minha senha</a>
-    </div>
-
-    <div id="navigation">
-      <a [routerLink]="['/perfil']">
-        <ion-button class="btnNav">Confirmar</ion-button>
-      </a>
-    </div>
-  </form>
-</section>
+      <ion-button type="button" expand="block" color="secondary" (click)="register()">
+        Confirmar
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

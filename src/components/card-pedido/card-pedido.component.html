@@ -1,0 +1,14 @@
+<ion-card class="card-produto">
+  <ion-card-content>
+    <ion-list>
+      <ion-item
+        *ngFor="let produto of ProdutosCardapio"
+      >
+        <div class="conteiner-produto"> 
+          <h2 class="title">{{produto.id + 1}} - {{ produto.nome }}</h2> <br/>
+          <p>{{ produto.ingredientes }}</p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

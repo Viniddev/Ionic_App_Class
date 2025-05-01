@@ -1,0 +1,38 @@
+.conteiner-cadastro{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    #title-cadastro{
+        font-weight: 600;
+        color: var(--backgroundPrimary);
+        margin: 3rem 0px 0rem 0px;
+    }
+
+    #subtitle-cadastro{
+        color: var(--backgroundSecondary);
+        margin: .5rem 0px 2rem 0px;
+    }
+
+    .form-cadastro{
+        width: 100%;
+        border-radius: 20px;
+        background-color: var(--backgroundPrimary);
+        padding: 1.5rem;
+
+        ion-item {
+            --border-radius: 10px;
+        }
+
+        .informations{
+            text-align: center;
+            font-size: 1rem;
+
+            strong{
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -17,5 +17,13 @@ export const routes: Routes = [
     path: 'perfil',
     loadComponent: () => import('./perfil/perfil.page').then( m => m.PerfilPage)
   },
+  {
+    path: 'cadastro-comanda',
+    loadComponent: () => import('./cadastro-comanda/cadastro-comanda.page').then( m => m.CadastroComandaPage)
+  },
+  {
+    path: 'cadastro',
+    loadComponent: () => import('./cadastro/cadastro.page').then( m => m.CadastroPage)
+  },
 
 ];
