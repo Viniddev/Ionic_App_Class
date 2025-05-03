@@ -25,18 +25,16 @@ export class AuthService {
     setPersistence(this.firebaseAuth, browserSessionPersistence);
   }
 
-  login(email: string, password: string): Observable<void> {
+  async login({ email, password }) {
     const promise = signInWithEmailAndPassword(
       this.firebaseAuth,
       email,
       password
-    ).then(() => {
-      //
-    });
+    ).then(() => {});
     return from(promise);
   }
 
-  logout(): Observable<void> {
+  logout() {
     const promise = signOut(this.firebaseAuth).then(() => {
       sessionStorage.clear();
     });

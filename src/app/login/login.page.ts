@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/frontEndUrls';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 import {
   IonContent,
@@ -12,6 +13,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from 'src/utils/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +39,9 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private auth: AuthService,
+    private loadingController: LoadingController,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -59,11 +64,21 @@ export class LoginPage implements OnInit {
   }
 
   async register() {
-   console.log('register clicado');
+    console.log('register clicado');
   }
 
   async login() {
-    console.log('login clicado');
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    const user = await this.auth.login(this.credentials.value);
+    await loading.dismiss();
+
+    if (user) {
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+    } else {
+      this.showAlert('Falha no registro', 'Tente novamente!');
+    }
   }
 
   async showAlert(header: string, message: string) {
