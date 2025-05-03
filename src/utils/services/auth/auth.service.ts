@@ -10,6 +10,11 @@ import {
 import { setPersistence } from 'firebase/auth';
 import { from, Observable } from 'rxjs';
 
+interface credentials{
+  email: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -25,7 +30,7 @@ export class AuthService {
     setPersistence(this.firebaseAuth, browserSessionPersistence);
   }
 
-  async login({ email, password }) {
+  async login({ email, password }: credentials) {
     const promise = signInWithEmailAndPassword(
       this.firebaseAuth,
       email,

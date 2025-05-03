@@ -19,6 +19,7 @@ import { AuthService } from 'src/utils/services/auth/auth.service';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  standalone: true,
   imports: [
     IonContent,
     IonButton,

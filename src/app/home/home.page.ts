@@ -12,11 +12,8 @@ import { HeaderComponent } from 'src/components/header/header.component';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [
-    IonContent,
-    IonButton,
-    HeaderComponent,
-  ],
+  standalone: true,
+  imports: [IonContent, IonButton, HeaderComponent],
 })
 export class HomePage {
   constructor(private router: Router) {}
