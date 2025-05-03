@@ -12,7 +12,6 @@ import { HeaderComponent } from 'src/components/header/header.component';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: true,
   imports: [
     IonContent,
     IonButton,

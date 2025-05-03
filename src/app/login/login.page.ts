@@ -17,7 +17,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone: true,
   imports: [
     IonContent,
     IonButton,
@@ -29,15 +28,9 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class LoginPage implements OnInit {
-  credentials: FormGroup = this.fb.group({
-    email: [''],
-    password: [''],
-  });
+  credentials!: FormGroup;
 
-  constructor(
-    private router: Router,
-    private fb: FormBuilder,
-  ) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.credentials = this.fb.group({
@@ -59,14 +52,14 @@ export class LoginPage implements OnInit {
   }
 
   async register() {
-   console.log('register clicado');
+    //todo
   }
 
   async login() {
-    console.log('login clicado');
+    //todo
   }
 
   async showAlert(header: string, message: string) {
-    console.log('showAlert acionado');
+    //todo
   }
 }
