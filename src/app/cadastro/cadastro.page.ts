@@ -23,11 +23,19 @@ import { Validacoes } from 'src/utils/forms/validacoes';
     IonButton,
   ],
 })
-export class CadastroPage implements OnInit{
-  cadastro!: FormGroup;
+
+export class CadastroPage implements OnInit {
+  cadastro: FormGroup = this.fb.group({
+    nome: [''],
+    email: [''],
+    cpf: [''],
+    telefone: [''],
+    password: [''],
+    passwordConfirm: [''],
+  });
 
   constructor(private fb: FormBuilder, private router: Router) {}
-  
+
   ngOnInit() {
     this.cadastro = this.fb.group({
       nome: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
