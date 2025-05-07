@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { ProfileInfo } from 'src/utils/mock/profile-info';
+import { Router } from '@angular/router';
+import { HOME } from 'src/utils/frontEndUrls';
 
 @Component({
   selector: 'app-perfil',
@@ -10,13 +13,11 @@ import { FormsModule } from '@angular/forms';
   imports: [IonicModule, FormsModule],
 })
 export class PerfilPage {
-  perfil = {
-    nome: '',
-    email: '',
-    cpf: '',
-    telefone: '',
-    cargo: ''
-  };
+  perfil = ProfileInfo
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  Voltar(){
+    this.router.navigateByUrl(HOME);
+  }
 }

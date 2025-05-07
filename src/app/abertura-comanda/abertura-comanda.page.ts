@@ -4,9 +4,8 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { IonContent, IonItem, IonInput, IonNote, IonButton } from '@ionic/angular/standalone';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LOGIN } from 'src/utils/frontEndUrls';
-import { Validacoes } from 'src/utils/forms/validacoes';
-
+import { HOME, LOGIN } from 'src/utils/frontEndUrls';
+import { HeaderComponent } from 'src/components/header/header.component';
 
 @Component({
   selector: 'app-abertura-comanda',
@@ -22,6 +21,7 @@ import { Validacoes } from 'src/utils/forms/validacoes';
     IonNote,
     ReactiveFormsModule,
     IonButton,
+    HeaderComponent
   ]
 })
 export class AberturaComandaPage implements OnInit {
@@ -55,7 +55,7 @@ export class AberturaComandaPage implements OnInit {
   }
 
   voltar() {
-    this.router.navigate([LOGIN]);
+    this.router.navigate([HOME]);
   }
 }
 

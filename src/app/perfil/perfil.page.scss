@@ -1,65 +1,65 @@
 .content-background {
-    --background: #266041; // verde escuro
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  --background: #266041;
+  
+  height: 100vh;  
+  width: 100%;
+}
+
+.conteiner-perfil{
+  height: 100vh;  
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 5rem;
+}
+
+.form-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 15px;
+  width: 95%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #2d4739;
+  border-radius: 50%;
+}
+
+.input-item {
+  --background: #ffffff;
+  --color: #000000;
+  margin-bottom: 12px;
+
+  ion-label {
+    color: #333;
+    font-weight: 800;
   }
-  
-  .form-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 16px;
+
+  ion-input {
+    color: #000;
+    --placeholder-color: #aaa;
   }
-  
-  .form-box {
-    background: #fff;
-    border-radius: 16px;
-    padding: 24px;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .avatar-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
-  }
-  
-  .profile-avatar {
-    width: 100px;
-    height: 100px;
-    border: 3px solid #2d4739;
-    border-radius: 50%;
-  }
-  
-  .input-item {
-    --background: #ffffff;
-    --color: #000000;
-    margin-bottom: 12px;
-  
-    ion-label {
-      color: #333;
-      font-weight: 500;
-    }
-  
-    ion-input {
-      color: #000;
-      --placeholder-color: #aaa;
-    }
-  }
-  
-  .button-container {
-    margin-top: 16px;
-  }
-  
-  ion-button {
-    --background: #2d4739;
-    --color: white;
-    font-weight: bold;
-    border-radius: 8px;
-  }
-  
+}
+
+.button-container {
+  margin-top: 16px;
+}
+
+ion-button {
+  --background: #2d4739;
+  --color: white;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
   

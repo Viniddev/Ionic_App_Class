@@ -1,9 +1,9 @@
+<app-header/>
+
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="conteiner-cadastro">
-    <img src="../../assets/logo-oficial.png" alt="logo" class="icone-logo" />
-
     <form class="form-cadastro" [formGroup]="cadastro">
-      <h2>Abertura de comanda</h2>
+      <h2 id="title-cadastro">Abertura de comanda</h2>
 
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input
@@ -57,7 +57,7 @@
         </ion-note>
       </ion-item>
 
-      <ion-button type="submit" expand="block" color="secondary">
+      <ion-button id="btn-voltar" type="submit" expand="block" color="secondary">
         Confirmar
       </ion-button>
 
