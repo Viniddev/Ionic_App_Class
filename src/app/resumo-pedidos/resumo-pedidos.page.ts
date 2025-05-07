@@ -2,24 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
-import { ComandaItemComponent } from 'src/components/comanda-item/comanda-item.component';
-
-interface ItemComanda {
-  id: number;
-  numero: number;
-  itens: {
-    quantidade: number;
-    nome: string;
-  }[];
-  total: number,
-}
+import { CardComandaItemComponent } from 'src/components/card-comanda-item/card-comanda-item.component';
 
 @Component({
   selector: 'app-resumo-pedidos',
   templateUrl: './resumo-pedidos.page.html',
   styleUrls: ['./resumo-pedidos.page.scss'],
   standalone: true,
-  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ComandaItemComponent]
+  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, CardComandaItemComponent]
 })
 export class ResumoPedidosPage implements OnInit {
   itens = [

@@ -1,18 +1,17 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Resumo Pedidos</ion-title>
+    <ion-title>Fechamento Comanda</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <app-card-comanda-item
-  *ngFor="let item of itens"
-  [itemComanda]="{
+  <app-card-fechamento-item
+  [item]="{
     id: item.id,
     numero: item.numero,
     itens: item.itens,
     total: item.total
-  }"></app-card-comanda-item>
+  }"></app-card-fechamento-item>
 
   <div class="actions">
     <ion-button expand="block" class="centered-button">
@@ -20,3 +19,4 @@
     </ion-button>
   </div>
 </ion-content>
+
