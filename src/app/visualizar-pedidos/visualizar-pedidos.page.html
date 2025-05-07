@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Visualizador de Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <app-card-item
+    *ngFor="let pedido of pedidos"
+    [mesa]="{
+      id: pedido.id,
+      numero: pedido.numero,
+      status: pedido.status,
+      itens: pedido.itens
+    }">
+  </app-card-item>
+
+  <div class="actions">
+    <ion-button expand="block" (click)="atualizarStatus(1, 'Pronto')" class="centered-button">
+      Voltar
+    </ion-button>
+  </div>
+</ion-content>
