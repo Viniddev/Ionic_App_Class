@@ -20,7 +20,7 @@ export const routes: Routes = [
     path: 'perfil',
     loadComponent: () =>
       import('./perfil/perfil.page').then((m) => m.PerfilPage),
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
   {
     path: 'cadastro-comanda',
@@ -28,11 +28,16 @@ export const routes: Routes = [
       import('./cadastro-comanda/cadastro-comanda.page').then(
         (m) => m.CadastroComandaPage
       ),
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
   },
   {
     path: 'cadastro',
     loadComponent: () =>
       import('./cadastro/cadastro.page').then((m) => m.CadastroPage),
+  },
+  {
+    path: 'abertura-comanda',
+    loadComponent: () =>
+      import('./abertura-comanda/abertura-comanda.page').then((m) => m.AberturaComandaPage),
   },
 ];

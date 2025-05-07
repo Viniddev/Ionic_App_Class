@@ -1,0 +1,69 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="conteiner-cadastro">
+    <img src="../../assets/logo-oficial.png" alt="logo" class="icone-logo" />
+
+    <form class="form-cadastro" [formGroup]="cadastro">
+      <h2>Abertura de comanda</h2>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="number"
+          formControlName="numeroMesa"
+          labelPlacement="stacked"
+          label="Digite o número da mesa:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note slot="error" *ngIf="numeroMesa?.touched && numeroMesa?.errors">
+          Número da mesa inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="text"
+          formControlName="nome"
+          labelPlacement="stacked"
+          label="Digite seu nome completo:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note slot="error" *ngIf="nome?.touched && nome?.errors">
+          Nome inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="text"
+          formControlName="cpf"
+          labelPlacement="stacked"
+          label="CPF:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note slot="error" *ngIf="cpf?.touched && cpf?.errors">
+          CPF inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input
+          type="tel"
+          formControlName="telefone"
+          labelPlacement="stacked"
+          label="Telefone:"
+          [clearInput]="true"
+        ></ion-input>
+        <ion-note slot="error" *ngIf="telefone?.touched && telefone?.errors">
+          Telefone inválido
+        </ion-note>
+      </ion-item>
+
+      <ion-button type="submit" expand="block" color="secondary">
+        Confirmar
+      </ion-button>
+
+      <div class="informations">
+        <strong (click)="voltar()">Voltar</strong>
+      </div>
+    </form>
+  </div>
+</ion-content>

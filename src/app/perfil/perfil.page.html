@@ -1,1 +1,53 @@
-<p>todo</p>
+<!--
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+-->
+  
+  <ion-content class="content-background">
+    <div class="form-wrapper">
+      <div class="form-box">
+        <div class="avatar-container">
+          <ion-avatar class="profile-avatar">
+            <img src="https://www.gravatar.com/avatar?d=mp" alt="Avatar do Usuário" />
+          </ion-avatar>
+        </div>
+  
+        <ion-list lines="none">
+          <ion-item class="input-item">
+            <ion-label position="stacked">Nome Completo:</ion-label>
+            <ion-input [(ngModel)]="perfil.nome" placeholder="Digite seu nome"></ion-input>
+          </ion-item>
+  
+          <ion-item class="input-item">
+            <ion-label position="stacked">Email:</ion-label>
+            <ion-input [(ngModel)]="perfil.email" type="email" placeholder="exemplo@email.com"></ion-input>
+          </ion-item>
+  
+          <ion-item class="input-item">
+            <ion-label position="stacked">CPF:</ion-label>
+            <ion-input [(ngModel)]="perfil.cpf" placeholder="000.000.000-00"></ion-input>
+          </ion-item>
+  
+          <ion-item class="input-item">
+            <ion-label position="stacked">Telefone:</ion-label>
+            <ion-input [(ngModel)]="perfil.telefone" type="tel" placeholder="(00) 00000-0000"></ion-input>
+          </ion-item>
+  
+          <ion-item class="input-item">
+            <ion-label position="stacked">Cargo:</ion-label>
+            <ion-input [(ngModel)]="perfil.cargo" placeholder="Administrador"></ion-input>
+          </ion-item>
+        </ion-list>
+  
+        <div class="button-container">
+          <ion-button expand="block" color="dark">EDITAR PERFIL</ion-button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  
+  
+  

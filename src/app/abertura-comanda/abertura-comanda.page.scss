@@ -1,0 +1,49 @@
+.conteiner-cadastro{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    #title-cadastro{
+        font-weight: 600;
+        color: var(--backgroundPrimary);
+        margin: 3rem 0px 0rem 0px;
+    }
+
+    #subtitle-cadastro{
+        color: var(--backgroundSecondary);
+        margin: .5rem 0px 2rem 0px;
+    }
+
+    .form-cadastro{
+        width: 100%;
+        border-radius: 20px;
+        background-color: var(--backgroundPrimary);
+        padding: 1.5rem;
+
+        ion-item {
+            --border-radius: 10px;
+        }
+
+        .informations{
+            text-align: center;
+            font-size: 1rem;
+
+            strong{
+                text-decoration: underline;
+            }
+        }
+    }
+      // Estilo da imagem/logo
+  .icone-logo {
+    width: 120px;                // Define largura fixa da imagem
+    height: 120px;               // Define altura fixa da imagem
+    border-radius: 50%;          // Torna a imagem redonda
+    object-fit: cover;           // Garante que a imagem não distorça
+    margin-bottom: 1.5rem;       // Espaçamento abaixo da imagem
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); // Sombra sutil para destacar
+  }
+}
+
+  
