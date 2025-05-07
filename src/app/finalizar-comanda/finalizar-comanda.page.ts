@@ -1,0 +1,29 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
+import { CardFechamentoItemComponent } from 'src/components/card-fechamento-item/card-fechamento-item.component';
+import { Router } from '@angular/router';
+import { HOME } from 'src/utils/frontEndUrls';
+import { ItemFecharComanda } from 'src/utils/mock/lista-Itens';
+
+@Component({
+  selector: 'app-finalizar-comanda',
+  templateUrl: './finalizar-comanda.page.html',
+  styleUrls: ['./finalizar-comanda.page.scss'],
+  standalone: true,
+  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, CardFechamentoItemComponent]
+})
+export class FinalizarComandaPage implements OnInit {
+  item = ItemFecharComanda
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+  }
+
+  Voltar(){
+    this.router.navigateByUrl(HOME)
+  }
+
+}

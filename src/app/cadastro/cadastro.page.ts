@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { IonContent, IonItem, IonInput, IonNote, IonButton } from '@ionic/angular/standalone';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LOGIN } from 'src/utils/frontEndUrls';
+import { LOGIN, PERFIL } from 'src/utils/frontEndUrls';
 import { Validacoes } from 'src/utils/forms/validacoes';
 
 @Component({
@@ -97,5 +97,9 @@ export class CadastroPage implements OnInit{
 
   voltar() {
     this.router.navigate([LOGIN]);
+  }
+
+  Perfil(){
+    this.router.navigate([PERFIL]);
   }
 }

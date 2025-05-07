@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Fechamento Comanda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <app-card-fechamento-item
+  [item]="{
+    id: item.id,
+    numero: item.numero,
+    itens: item.itens,
+    total: item.total
+  }"></app-card-fechamento-item>
+
+  <div class="actions">
+    <ion-button expand="block" class="centered-button" (click)="Voltar()">
+      Voltar
+    </ion-button>
+  </div>
+</ion-content>
+

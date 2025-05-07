@@ -1,0 +1,22 @@
+<div class="mesa-card">
+  <div class="card-content">
+    <div class="left-column">
+      <div class="pedido-number">N° {{ mesa.id }}</div>
+      <div class="pedido-itens">
+        <div *ngFor="let item of mesa.itens" class="pedido-item">
+          {{ item.quantidade }}x {{ item.nome }}
+        </div>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="mesa-number">Mesa: {{ mesa.numero }}</div>
+      <div class="status-container">
+        <div class="status-label">Status:</div>
+        <div class="status-value" [ngClass]="getStatusClass(mesa.status)">
+          {{ mesa.status }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
