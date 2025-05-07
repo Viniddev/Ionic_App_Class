@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { CADASTRO_COMANDA, FINALIZAR_COMANDA } from 'src/utils/frontEndUrls';
 
 interface ItemComanda {
   id: number;
@@ -19,11 +21,16 @@ interface ItemComanda {
 })
 export class CardComandaItemComponent  implements OnInit {
   @Input({ required: true }) itemComanda!: ItemComanda;
-  @Output() editar = new EventEmitter<void>();
-  @Output() fechar = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
+  editar(){
+    this.router.navigateByUrl(CADASTRO_COMANDA)
+  }
+
+  fechar(){
+    this.router.navigateByUrl(FINALIZAR_COMANDA)
+  }
 }

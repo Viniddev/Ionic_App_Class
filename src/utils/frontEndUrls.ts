@@ -6,3 +6,4 @@ export const CADASTRO = '/cadastro';
 
 export const RESUMO_PEDIDO = '/resumo-pedidos'
 export const VISUALIZAR_PEDIDO = '/visualizar-pedidos'
+export const FINALIZAR_COMANDA = '/finalizar-comanda'

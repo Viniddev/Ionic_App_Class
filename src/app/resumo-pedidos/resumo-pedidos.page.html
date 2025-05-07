@@ -5,13 +5,14 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  
   <app-card-comanda-item
-  *ngFor="let item of itens"
-  [itemComanda]="{
-    id: item.id,
-    numero: item.numero,
-    itens: item.itens,
-    total: item.total
+    *ngFor="let item of itens"
+    [itemComanda]="{
+      id: item.id,
+      numero: item.numero,
+      itens: item.itens,
+      total: item.total
   }"></app-card-comanda-item>
 
   <div class="actions">

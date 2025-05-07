@@ -47,7 +47,6 @@ export const routes: Routes = [
     path: 'finalizar-comanda',
     loadComponent: () => import('./finalizar-comanda/finalizar-comanda.page').then( m => m.FinalizarComandaPage)
   },
-
   {
     path: 'abertura-comanda',
     loadComponent: () =>
