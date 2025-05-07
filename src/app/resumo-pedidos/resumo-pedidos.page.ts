@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
 import { CardComandaItemComponent } from 'src/components/card-comanda-item/card-comanda-item.component';
-import { ComandaItemComponent } from 'src/components/comanda-item/comanda-item.component';
 import { ListaItens } from 'src/utils/mock/lista-Itens';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/frontEndUrls';

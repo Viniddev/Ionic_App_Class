@@ -65,3 +65,18 @@ export const ListaItens: Array<IItemComanda> = [
       total: 120.00
     }
   ];
+
+
+export const ItemFecharComanda: IItemComanda = {
+  id: 1,
+  numero: 11,
+  itens: [
+    { quantidade: 3, nome: 'Original Burguer' },
+    { quantidade: 1, nome: 'Pizza Calabresa' },
+    { quantidade: 1, nome: 'Coca Cola Lata' },
+    { quantidade: 1, nome: 'Guaraná Zero' },
+    { quantidade: 1, nome: 'Double Smash Burguer' },
+    { quantidade: 1, nome: 'Coca Cola Zero' }
+  ],
+  total: 120
+}
