@@ -34,5 +34,13 @@ export const routes: Routes = [
     path: 'cadastro',
     loadComponent: () =>
       import('./cadastro/cadastro.page').then((m) => m.CadastroPage),
+  },  {
+    path: 'visualizar-pedidos',
+    loadComponent: () => import('./visualizar-pedidos/visualizar-pedidos.page').then( m => m.VisualizarPedidosPage)
   },
+  {
+    path: 'resumo-pedidos',
+    loadComponent: () => import('./resumo-pedidos/resumo-pedidos.page').then( m => m.ResumoPedidosPage)
+  },
+
 ];
