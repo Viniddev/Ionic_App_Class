@@ -65,17 +65,19 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    const loading = await this.loadingController.create();
-    await loading.present();
+    // const loading = await this.loadingController.create();
+    // await loading.present();
 
-    const user = await this.auth.login(this.credentials.value);
-    await loading.dismiss();
+    // const user = await this.auth.login(this.credentials.value);
+    // await loading.dismiss();
 
-    if (user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-    } else {
-      this.showAlert('Falha no registro', 'Tente novamente!');
-    }
+    // if (user) {
+    //   this.router.navigateByUrl('/home', { replaceUrl: true });
+    // } else {
+    //   this.showAlert('Falha no registro', 'Tente novamente!');
+    // }
+
+    this.router.navigateByUrl(HOME);
   }
 
   async showAlert(header: string, message: string) {

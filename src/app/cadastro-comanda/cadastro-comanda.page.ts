@@ -6,6 +6,8 @@ import { HeaderComponent } from 'src/components/header/header.component';
 import { IMesas } from 'src/@types/IMesas';
 import { ListaMesas } from 'src/utils/mock/lista-mesas';
 import { CardPedidoComponent } from 'src/components/card-pedido/card-pedido.component';
+import { Router } from '@angular/router';
+import { HOME } from 'src/utils/frontEndUrls';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -28,7 +30,7 @@ export class CadastroComandaPage implements OnInit {
   mesas: Array<IMesas> = ListaMesas;
   mesaSelecionada: string;
 
-  constructor() {
+  constructor(private router: Router) {
     this.mesaSelecionada = '';
   }
 
@@ -36,5 +38,9 @@ export class CadastroComandaPage implements OnInit {
 
   pesquisa(event: any) {
     //todo
+  }
+
+  Voltar(){
+    this.router.navigateByUrl(HOME)
   }
 }

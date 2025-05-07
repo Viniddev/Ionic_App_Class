@@ -5,7 +5,7 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   {
     path: 'login',
@@ -20,7 +20,7 @@ export const routes: Routes = [
     path: 'perfil',
     loadComponent: () =>
       import('./perfil/perfil.page').then((m) => m.PerfilPage),
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   {
     path: 'cadastro-comanda',
@@ -28,13 +28,14 @@ export const routes: Routes = [
       import('./cadastro-comanda/cadastro-comanda.page').then(
         (m) => m.CadastroComandaPage
       ),
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   {
     path: 'cadastro',
     loadComponent: () =>
       import('./cadastro/cadastro.page').then((m) => m.CadastroPage),
-  },  {
+  },
+  {
     path: 'visualizar-pedidos',
     loadComponent: () => import('./visualizar-pedidos/visualizar-pedidos.page').then( m => m.VisualizarPedidosPage)
   },
