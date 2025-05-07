@@ -4,16 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonList, IonButton, IonLabel } from '@ionic/angular/standalone';
 import { CardItemComponent } from 'src/components/card-item/card-item.component';
 
-interface Pedido {
-  id: number;
-  numeroMesa: number;
-  status: 'Pronto' | 'Em Produção' | 'Aguardando confirmação';
-  itens: {
-    quantidade: number;
-    nome: string;
-  }[];
-}
-
 @Component({
   selector: 'app-visualizar-pedidos',
   templateUrl: './visualizar-pedidos.page.html',

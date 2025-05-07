@@ -42,5 +42,9 @@ export const routes: Routes = [
     path: 'resumo-pedidos',
     loadComponent: () => import('./resumo-pedidos/resumo-pedidos.page').then( m => m.ResumoPedidosPage)
   },
+  {
+    path: 'finalizar-comanda',
+    loadComponent: () => import('./finalizar-comanda/finalizar-comanda.page').then( m => m.FinalizarComandaPage)
+  },
 
 ];
