@@ -1,0 +1,16 @@
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+
+  .centered-button {
+    width: 80%;
+    max-width: 300px;
+  }
+}
+
+app-mesa-item {
+  margin-bottom: 16px;
+  display: block;
+}
