@@ -6,6 +6,7 @@ import { CardComandaItemComponent } from 'src/components/card-comanda-item/card-
 import { ListaItens } from 'src/utils/mock/lista-Itens';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/frontEndUrls';
+import { HeaderComponent } from 'src/components/header/header.component';
 
 
 @Component({
@@ -13,7 +14,17 @@ import { HOME } from 'src/utils/frontEndUrls';
   templateUrl: './resumo-pedidos.page.html',
   styleUrls: ['./resumo-pedidos.page.scss'],
   standalone: true,
-  imports: [IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, CardComandaItemComponent]
+  imports: [
+    IonButton, 
+    IonContent, 
+    IonHeader, 
+    IonTitle, 
+    IonToolbar, 
+    CommonModule, 
+    FormsModule, 
+    CardComandaItemComponent,
+    HeaderComponent
+  ]
 })
 export class ResumoPedidosPage implements OnInit {
   itens = ListaItens;
