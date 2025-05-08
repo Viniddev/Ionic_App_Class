@@ -2,3 +2,16 @@ ion-header, ion-toolbar {
     --background-color: transparent;
     --border-color: transparent;
 }
+
+.header-section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5%;
+
+    .titulo-geral{
+        font-weight: 400;
+        opacity: .8;
+    }
+}

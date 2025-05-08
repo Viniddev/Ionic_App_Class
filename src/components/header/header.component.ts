@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -14,10 +14,15 @@ import { PERFIL } from 'src/utils/frontEndUrls';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [IonHeader, IonToolbar],
+  imports: [
+    IonHeader, 
+    IonToolbar
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HeaderComponent {
+  @Input({ required: true }) title!: string; 
+
   constructor(private router: Router) {
     addIcons({ personCircle });
   }

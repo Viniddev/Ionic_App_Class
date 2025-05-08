@@ -2,16 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CADASTRO_COMANDA, FINALIZAR_COMANDA } from 'src/utils/frontEndUrls';
-
-interface ItemComanda {
-  id: number;
-  numero: number;
-  itens: {
-    quantidade: number;
-    nome: string;
-  }[];
-  total: number,
-}
+import { IItemComanda } from 'src/@types/IItemComanda';
 
 @Component({
   selector: 'app-card-comanda-item',
@@ -20,7 +11,7 @@ interface ItemComanda {
   imports: [CommonModule]
 })
 export class CardComandaItemComponent  implements OnInit {
-  @Input({ required: true }) itemComanda!: ItemComanda;
+  @Input({ required: true }) itemComanda!: IItemComanda;
 
   constructor(private router: Router) { }
 

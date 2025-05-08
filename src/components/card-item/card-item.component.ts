@@ -1,15 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-export interface Mesa {
-  id: number;
-  numero: number;
-  status: string;
-  itens: {
-    quantidade: number;
-    nome: string;
-  }[];
-}
+import { IMesa } from 'src/@types/IMesa';
 
 @Component({
   selector: 'app-card-item',
@@ -18,7 +9,7 @@ export interface Mesa {
   imports: [CommonModule]
 })
 export class CardItemComponent  implements OnInit {
-  @Input({ required: true }) mesa!: Mesa;
+  @Input({ required: true }) mesa!: IMesa;
 
   constructor() { }
 

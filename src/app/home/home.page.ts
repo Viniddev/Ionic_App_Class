@@ -23,7 +23,7 @@ export class HomePage {
   }
 
   CadastrarPedido() {
-    this.router.navigate([CADASTRO]);
+    this.router.navigate([CADASTRO_COMANDA]);
   }
 
   Visualizar() {
