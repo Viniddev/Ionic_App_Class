@@ -79,6 +79,12 @@ export class LoginPage implements OnInit {
   }
 
   async showAlert(header: string, message: string) {
-    //todo
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['ok'],
+    });
+
+    await alert.present();
   }
 }

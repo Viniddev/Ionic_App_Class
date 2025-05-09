@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonButton } from '@ionic/angular/standalone';
 import { CardFechamentoItemComponent } from 'src/components/card-fechamento-item/card-fechamento-item.component';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/frontEndUrls';
@@ -16,9 +16,6 @@ import { HeaderComponent } from 'src/components/header/header.component';
   imports: [
     IonButton, 
     IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar, 
     CommonModule, 
     FormsModule,
     CardFechamentoItemComponent, 

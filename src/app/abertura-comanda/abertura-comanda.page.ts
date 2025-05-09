@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { IonContent, IonItem, IonInput, IonNote, IonButton } from '@ionic/angular/standalone';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HOME, LOGIN } from 'src/utils/frontEndUrls';
+import { HOME } from 'src/utils/frontEndUrls';
 import { HeaderComponent } from 'src/components/header/header.component';
 
 @Component({

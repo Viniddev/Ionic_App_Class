@@ -4,8 +4,11 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { IonContent, IonItem, IonInput, IonNote, IonButton } from '@ionic/angular/standalone';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LOGIN, PERFIL } from 'src/utils/frontEndUrls';
+import { LOGIN } from 'src/utils/frontEndUrls';
 import { Validacoes } from 'src/utils/forms/validacoes';
+import { AuthService } from 'src/utils/services/auth/auth.service';
+import { LoadingController, AlertController } from '@ionic/angular';
+import { ICredentials } from 'src/@types/ICredentials';
 
 @Component({
   selector: 'app-cadastro',
@@ -23,11 +26,17 @@ import { Validacoes } from 'src/utils/forms/validacoes';
     IonButton,
   ],
 })
-export class CadastroPage implements OnInit{
+export class CadastroPage implements OnInit {
   cadastro!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
-  
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private loadingController: LoadingController,
+    private alertController: AlertController
+  ) {}
+
   ngOnInit() {
     this.cadastro = this.fb.group({
       nome: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]],
@@ -99,7 +108,32 @@ export class CadastroPage implements OnInit{
     this.router.navigate([LOGIN]);
   }
 
-  Perfil(){
-    this.router.navigate([PERFIL]);
+  async Cadastrar() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    const credentials: ICredentials = {
+      email: this.email?.value || '',
+      password: this.password?.value || '',
+    };
+
+    const user = await this.authService.register(credentials);
+    await loading.dismiss();
+
+    if (user) {
+      this.router.navigateByUrl(LOGIN);
+    } else {
+      this.showAlert('Falha no registro', 'Tente novamente!');
+    }
+  }
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['ok'],
+    });
+
+    await alert.present();
   }
 }

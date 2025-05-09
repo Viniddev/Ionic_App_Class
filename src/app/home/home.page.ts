@@ -5,7 +5,7 @@ import {
 } from '@ionic/angular/standalone';
 
 import { Router } from '@angular/router';
-import { CADASTRO, CADASTRO_COMANDA, LOGIN, RESUMO_PEDIDO, VISUALIZAR_PEDIDO } from 'src/utils/frontEndUrls';
+import { ABERTURA_COMANDA, CADASTRO, CADASTRO_COMANDA, LOGIN, RESUMO_PEDIDO, VISUALIZAR_PEDIDO } from 'src/utils/frontEndUrls';
 import { HeaderComponent } from 'src/components/header/header.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class HomePage {
   constructor(private router: Router) {}
 
   AbrirComanda() {
-    this.router.navigate([CADASTRO_COMANDA]);
+    this.router.navigate([ABERTURA_COMANDA]);
   }
 
   CadastrarPedido() {
