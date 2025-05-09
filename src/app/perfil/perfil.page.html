@@ -1,13 +1,16 @@
-  <ion-content class="content-background">
-    <div class="conteiner-perfil">
-      <div class="form-box">
+<app-header title="Perfil"/>
+
+<ion-content class="content-background">
+  <div class="conteiner-perfil">
+    <div class="form-box">
+      <section class="personal-informations">
         <div class="avatar-container">
           <ion-avatar class="profile-avatar">
             <img src="https://www.gravatar.com/avatar?d=mp" alt="Avatar do Usuário" />
           </ion-avatar>
         </div>
   
-        <ion-list lines="none">
+        <ion-list class="input-area">
           <ion-item class="input-item">
             <ion-label position="stacked">Nome Completo:</ion-label>
             <ion-input [(ngModel)]="perfil.nome" placeholder="Digite seu nome"></ion-input>
@@ -33,16 +36,19 @@
             <ion-input [(ngModel)]="perfil.cargo" placeholder="Administrador"></ion-input>
           </ion-item>
         </ion-list>
-  
+      </section>
+
+      <section class="navigation">
         <div class="button-container">
           <ion-button expand="block" color="danger">EDITAR PERFIL</ion-button>
         </div>
         <div class="button-container">
           <ion-button expand="block" color="dark" (click)="Voltar()">Voltar</ion-button>
         </div>
-      </div>
+      </section>
     </div>
-  </ion-content>
-  
+  </div>
+</ion-content>
+
   
   

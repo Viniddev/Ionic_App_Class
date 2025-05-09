@@ -1,10 +1,10 @@
-export const HOME = '/home';
 export const LOGIN = "/login";
 export const PERFIL = '/perfil';
-export const CADASTRO_COMANDA = '/cadastro-comanda';
 export const CADASTRO = '/cadastro';
 
-export const RESUMO_PEDIDO = '/resumo-pedidos'
-export const VISUALIZAR_PEDIDO = '/visualizar-pedidos'
-export const FINALIZAR_COMANDA = '/finalizar-comanda'
-export const ABERTURA_COMANDA = '/abertura-comanda';
+export const HOME = '/service/abertura-comanda';
+export const CADASTRO_COMANDA = '/service/cadastro-comanda';
+export const RESUMO_PEDIDO = '/service/resumo-pedidos'
+export const VISUALIZAR_PEDIDO = '/service/visualizar-pedidos'
+export const FINALIZAR_COMANDA = '/service/finalizar-comanda'
+export const ABERTURA_COMANDA = '/service/abertura-comanda';

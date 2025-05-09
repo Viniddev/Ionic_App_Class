@@ -12,16 +12,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./cadastro/cadastro.page').then((m) => m.CadastroPage),
   },
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-    canActivate: [authGuard],
-  },
+  // {
+  //   path: 'home',
+  //   loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+  //   canActivate: [authGuard],
+  // },
   {
     path: 'perfil',
     loadComponent: () =>
@@ -29,7 +24,12 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'services',
+    path: 'home',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path:'service',
     component: TabNavegacaoComponent,
     children: [
       {
@@ -77,6 +77,6 @@ export const routes: Routes = [
         redirectTo: 'abertura-comanda',
         pathMatch: 'full',
       },
-    ],
-  },
+    ]
+  }
 ];
