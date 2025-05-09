@@ -72,7 +72,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.router.navigateByUrl(HOME, { replaceUrl: true });
+      this.router.navigateByUrl(HOME);
     } else {
       this.showAlert('Falha no registro', 'Tente novamente!');
     }

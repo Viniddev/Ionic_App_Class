@@ -31,12 +31,12 @@ export class AuthService {
   }
 
   async login({ email, password }: credentials) {
-    const promise = signInWithEmailAndPassword(
-      this.firebaseAuth,
-      email,
-      password
-    ).then(() => {});
-    return from(promise);
+    try {
+      const user = await signInWithEmailAndPassword(this.firebaseAuth, email, password)
+      return user
+    } catch(e) {
+      return null
+    }
   }
 
   logout() {
