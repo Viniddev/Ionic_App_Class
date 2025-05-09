@@ -29,11 +29,4 @@ export const ListaProdutos: Array<IProdutos> = [
       'Polvilho, queijo parmesão, leite fresco, ovos, óleo de girassol, sal e fermento.',
     preco: 100,
   },
-  {
-    id: 4,
-    nome: 'Pão de queijo Goiás',
-    ingredientes:
-      'Queijo minas, polvilho, creme de leite, margarina, ovos, sal e ervas finas.',
-    preco: 125,
-  },
 ];

@@ -39,8 +39,8 @@ export class CadastroComandaPage implements OnInit {
   pesquisa(event: any) {
     //todo
   }
-
-  Voltar(){
-    this.router.navigateByUrl(HOME)
+  
+  Voltar() {
+    this.router.navigateByUrl(HOME);
   }
 }
