@@ -24,6 +24,7 @@ import { removeCircleOutline, addCircleOutline } from 'ionicons/icons';
     IonIcon,
   ],
 })
+
 export class CardPedidoComponent implements OnInit {
   @Input({ required: true }) produtosCardapio: Array<IProdutos>;
   @Input({ required: true }) produtosFiltrados: Array<IProdutos>;

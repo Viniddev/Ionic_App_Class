@@ -6,6 +6,13 @@
     <form action="" class="form-cadastro" [formGroup]="cadastro">
       <h2>Cadastrar</h2>
 
+      <ion-note
+        slot="error"
+        *ngIf="(nome?.dirty || nome?.touched) && nome?.errors"
+        color="danger"
+      >
+        Nome inválido
+      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input
           type="Nome"
@@ -14,14 +21,15 @@
           label="Digite seu nome completo:"
           [clearInput]="true"
         ></ion-input>
-        <ion-note
-          slot="error"
-          *ngIf="(nome?.dirty || nome?.touched) && nome?.errors"
-        >
-          Nome inválido
-        </ion-note>
       </ion-item>
 
+      <ion-note
+        slot="error"
+        *ngIf="(email?.dirty || email?.touched) && email?.errors"
+        color="danger"
+      >
+        Email inválido
+      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input
           type="email"
@@ -30,14 +38,15 @@
           label="Digite seu E-mail:"
           [clearInput]="true"
         ></ion-input>
-        <ion-note
-          slot="error"
-          *ngIf="(email?.dirty || email?.touched) && email?.errors"
-        >
-          Email inválido
-        </ion-note>
       </ion-item>
 
+      <ion-note
+        slot="error"
+        *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors"
+        color="danger"
+      >
+        CPF inválido
+      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input
           type="CPF"
@@ -45,31 +54,39 @@
           labelPlacement="stacked"
           label="CPF:"
           [clearInput]="true"
+          maxlength="11"
+          placeholder="999.999.999-99"
         ></ion-input>
-        <ion-note
-          slot="error"
-          *ngIf="(cpf?.dirty || cpf?.touched) && cpf?.errors"
-        >
-          CPF inválido
-        </ion-note>
       </ion-item>
-
+      
+      <ion-note
+        slot="error"
+        *ngIf="(telefone?.dirty || telefone?.touched) && telefone?.errors"
+        color="danger"
+      >
+        Telefone inválido
+      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input
-          type="Telefone"
-          formControlName="telefone"
-          labelPlacement="stacked"
+          type="tel"
           label="Telefone:"
           [clearInput]="true"
+          labelPlacement="stacked"
+          formControlName="telefone"
+          placeholder="(99) 99999-9999"
+          [maskito]="phoneMask"
+          [maskitoElement]="maskPredicate"
+          maxlength="15"
         ></ion-input>
-        <ion-note
-          slot="error"
-          *ngIf="(telefone?.dirty || telefone?.touched) && telefone?.errors"
-        >
-          Telefone inválido
-        </ion-note>
       </ion-item>
 
+      <ion-note
+        slot="error"
+        *ngIf="(password?.dirty || password?.touched) && password?.errors"
+        color="danger"
+      >
+        Senha inválida
+      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input
           type="Senha"
@@ -77,15 +94,17 @@
           labelPlacement="stacked"
           label="Senha:"
           [clearInput]="true"
+          type="password"
         ></ion-input>
-        <ion-note
-          slot="error"
-          *ngIf="(password?.dirty || password?.touched) && password?.errors"
-        >
-          Senha inválida
-        </ion-note>
       </ion-item>
-
+      
+      <ion-note
+        slot="error"
+        *ngIf="(passwordConfirm?.dirty || passwordConfirm?.touched) && passwordConfirm?.errors"
+        color="danger"
+      >
+        As senhas não correspondem
+      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input
           type="Senha"
@@ -93,13 +112,8 @@
           labelPlacement="stacked"
           label="Repita a senha:"
           [clearInput]="true"
+          type="password"
         ></ion-input>
-        <ion-note
-          slot="error"
-          *ngIf="(passwordConfirm?.dirty || passwordConfirm?.touched) && passwordConfirm?.errors"
-        >
-          As senhas não correspondem
-        </ion-note>
       </ion-item>
 
       <ion-button type="button" expand="block" color="secondary" (click)="Cadastrar()">

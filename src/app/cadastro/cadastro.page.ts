@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { IonContent, IonItem, IonInput, IonNote, IonButton } from '@ionic/angular/standalone';
@@ -9,6 +9,7 @@ import { Validacoes } from 'src/utils/forms/validacoes';
 import { AuthService } from 'src/utils/services/auth/auth.service';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { ICredentials } from 'src/@types/ICredentials';
+import { MaskitoOptions, MaskitoElementPredicate } from '@maskito/core';
 
 @Component({
   selector: 'app-cadastro',
@@ -25,10 +26,23 @@ import { ICredentials } from 'src/@types/ICredentials';
     ReactiveFormsModule,
     IonButton,
   ],
+  schemas: [NO_ERRORS_SCHEMA],
 })
 export class CadastroPage implements OnInit {
   cadastro!: FormGroup;
 
+  readonly phoneMask: MaskitoOptions = {
+    mask: [
+      '(', /\d/, /\d/, ')', ' ',
+      /\d/, /\d/, /\d/, /\d/, /\d/,
+      '-', /\d/, /\d/, /\d/, /\d/,
+    ],
+  };
+
+  readonly maskPredicate: MaskitoElementPredicate = async (el) => {
+    return (el as unknown as HTMLIonInputElement).getInputElement();
+  };
+  
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -74,7 +88,7 @@ export class CadastroPage implements OnInit {
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(100),
-          Validacoes.senhasCombinam('password', true),
+          Validacoes.senhasCombinam('password', false),
         ]),
       ],
     });
