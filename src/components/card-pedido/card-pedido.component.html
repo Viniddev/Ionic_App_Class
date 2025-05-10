@@ -2,11 +2,28 @@
   <ion-card-content>
     <ion-list>
       <ion-item
-        *ngFor="let produto of ProdutosCardapio"
+        *ngFor="let produto of produtosFiltrados"
       >
         <div class="conteiner-produto"> 
-          <h2 class="title">{{produto.id + 1}} - {{ produto.nome }}</h2> <br/>
+          <h2 class="title">{{produto.id + 1}} - {{ produto.nome }}</h2> 
+          <br/>
           <p>{{ produto.ingredientes }}</p>
+
+          <section class="actions">
+            <ion-icon 
+              name="remove-circle-outline" 
+              class="icons" 
+              color="danger" 
+              (click)="DecrementarPedido(produto.id)"
+            />
+            {{produto.quantidade}}
+            <ion-icon 
+              name="add-circle-outline" 
+              class="icons" 
+              color="success" 
+              (click)="IncrementarPedido(produto.id)"
+            />
+          </section>
         </div>
       </ion-item>
     </ion-list>

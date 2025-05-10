@@ -3,4 +3,6 @@ export interface IProdutos{
     nome:string;
     ingredientes:string;
     preco: number;
+    quantidade: number;
+    categoria: "Bebida" | "Promoção" | "Recomendado";
 }

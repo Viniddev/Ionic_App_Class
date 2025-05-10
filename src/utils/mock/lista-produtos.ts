@@ -7,6 +7,8 @@ export const ListaProdutos: Array<IProdutos> = [
     ingredientes:
       'Polvilho, queijo minas, leite, ovos, óleo vegetal, sal, fermento e margarina.',
     preco: 120,
+    quantidade: 0,
+    categoria: 'Recomendado',
   },
   {
     id: 1,
@@ -14,6 +16,8 @@ export const ListaProdutos: Array<IProdutos> = [
     ingredientes:
       'Polvilho azedo, queijo meia cura, leite integral, ovos, óleo de soja e sal.',
     preco: 123,
+    quantidade: 0,
+    categoria: 'Promoção',
   },
   {
     id: 2,
@@ -21,6 +25,8 @@ export const ListaProdutos: Array<IProdutos> = [
     ingredientes:
       'Queijo prato, polvilho doce, leite, manteiga, sal e ovos caipiras.',
     preco: 112,
+    quantidade: 0,
+    categoria: 'Recomendado',
   },
   {
     id: 3,
@@ -28,5 +34,40 @@ export const ListaProdutos: Array<IProdutos> = [
     ingredientes:
       'Polvilho, queijo parmesão, leite fresco, ovos, óleo de girassol, sal e fermento.',
     preco: 100,
+    quantidade: 0,
+    categoria: 'Promoção',
+  },
+  {
+    id: 4,
+    nome: 'Pão de queijo Goiania',
+    ingredientes:
+      'Polvilho, queijo parmesão, goiabada, leite fresco, ovos, óleo de girassol, sal e fermento.',
+    preco: 100,
+    quantidade: 0,
+    categoria: 'Recomendado',
+  },
+  {
+    id: 5,
+    nome: 'Guaraná',
+    ingredientes: 'Guaraná padrão 2l. Serve até 4 pessoas.',
+    preco: 50,
+    quantidade: 0,
+    categoria: 'Bebida',
+  },
+  {
+    id: 6,
+    nome: 'Coca Cola',
+    ingredientes: 'Coca cola padrão 2l. Serve até 4 pessoas.',
+    preco: 10,
+    quantidade: 0,
+    categoria: 'Bebida',
+  },
+  {
+    id: 7,
+    nome: 'Pastel de vento',
+    ingredientes: 'Massa de pastel frita sem recheio.',
+    preco: 20,
+    quantidade: 0,
+    categoria: 'Promoção',
   },
 ];

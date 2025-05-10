@@ -1,4 +1,4 @@
-<app-header title="Cadastro Comanda"/>
+<app-header title="Cadastro Pedido"/>
 
 <ion-content class="ion-padding" fullscreen="true">
   <div class="conteiner-cadastro">
@@ -26,17 +26,47 @@
       />
 
       <span class="filtros">
-        <ion-button type="button" expand="full" size="large" class="btnFiltro">Hamburguer</ion-button>
-        <ion-button type="button" expand="full" size="large" class="btnFiltro">Pizza</ion-button>
-        <ion-button type="button" expand="full" size="large" class="btnFiltro">Bebidas</ion-button>
+        <ion-button 
+          type="button" 
+          expand="full" 
+          size="small" 
+          class="btnFiltro"
+          (click)="filtraCategoria('Bebida')"
+        >Bebida</ion-button>
+
+        <ion-button 
+          type="button" 
+          expand="full" 
+          size="small" 
+          class="btnFiltro"
+          (click)="filtraCategoria('Promoção')"
+        >Promoção</ion-button>
+
+        <ion-button 
+          type="button" 
+          expand="full" 
+          size="small" 
+          class="btnFiltro"
+          (click)="filtraCategoria('Recomendado')"
+        >Recomendado</ion-button>
+
       </span>
     </form>
 
     <section id="pedido-list">
-      <app-card-pedido/>
+      <app-card-pedido 
+        [produtosCardapio]="ProdutosCardapio" 
+        [produtosFiltrados]="PedidosFiltrados"
+      />
     </section>
     
-    <ion-button type="button" expand="full" size="large" class="btnFinalizar" (click)="Voltar()">Finalizar</ion-button>
+    <ion-button 
+      type="button" 
+      expand="full" 
+      size="large" 
+      class="btnFinalizar" 
+      (click)="Finalizar()"
+    >Finalizar</ion-button>
 
   </div>
 </ion-content>

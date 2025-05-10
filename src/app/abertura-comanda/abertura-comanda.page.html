@@ -3,59 +3,59 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="conteiner-cadastro">
     <form class="form-cadastro" [formGroup]="cadastro">
-      <h2 id="title-cadastro">Abertura de comanda</h2>
-
-      <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input
-          type="number"
-          formControlName="numeroMesa"
-          labelPlacement="stacked"
-          label="Digite o número da mesa:"
-          [clearInput]="true"
-        ></ion-input>
-        <ion-note slot="error" *ngIf="numeroMesa?.touched && numeroMesa?.errors">
-          Número da mesa inválido
-        </ion-note>
-      </ion-item>
-
-      <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input
-          type="text"
-          formControlName="nome"
-          labelPlacement="stacked"
-          label="Digite seu nome completo:"
-          [clearInput]="true"
-        ></ion-input>
-        <ion-note slot="error" *ngIf="nome?.touched && nome?.errors">
-          Nome inválido
-        </ion-note>
-      </ion-item>
-
-      <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input
-          type="text"
-          formControlName="cpf"
-          labelPlacement="stacked"
-          label="CPF:"
-          [clearInput]="true"
-        ></ion-input>
-        <ion-note slot="error" *ngIf="cpf?.touched && cpf?.errors">
-          CPF inválido
-        </ion-note>
-      </ion-item>
-
-      <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input
-          type="tel"
-          formControlName="telefone"
-          labelPlacement="stacked"
-          label="Telefone:"
-          [clearInput]="true"
-        ></ion-input>
-        <ion-note slot="error" *ngIf="telefone?.touched && telefone?.errors">
-          Telefone inválido
-        </ion-note>
-      </ion-item>
+      <section class="form-fields">
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-input
+            type="number"
+            formControlName="numeroMesa"
+            labelPlacement="stacked"
+            label="Digite o número da mesa:"
+            [clearInput]="true"
+          ></ion-input>
+          <ion-note slot="error" *ngIf="numeroMesa?.touched && numeroMesa?.errors">
+            Número da mesa inválido
+          </ion-note>
+        </ion-item>
+  
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-input
+            type="text"
+            formControlName="nome"
+            labelPlacement="stacked"
+            label="Digite seu nome completo:"
+            [clearInput]="true"
+          ></ion-input>
+          <ion-note slot="error" *ngIf="nome?.touched && nome?.errors">
+            Nome inválido
+          </ion-note>
+        </ion-item>
+  
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-input
+            type="text"
+            formControlName="cpf"
+            labelPlacement="stacked"
+            label="CPF:"
+            [clearInput]="true"
+          ></ion-input>
+          <ion-note slot="error" *ngIf="cpf?.touched && cpf?.errors">
+            CPF inválido
+          </ion-note>
+        </ion-item>
+  
+        <ion-item fill="solid" class="ion-margin-bottom">
+          <ion-input
+            type="tel"
+            formControlName="telefone"
+            labelPlacement="stacked"
+            label="Telefone:"
+            [clearInput]="true"
+          ></ion-input>
+          <ion-note slot="error" *ngIf="telefone?.touched && telefone?.errors">
+            Telefone inválido
+          </ion-note>
+        </ion-item>
+      </section>
 
       <ion-button id="btn-voltar" type="submit" expand="block" color="secondary" >
         Confirmar

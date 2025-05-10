@@ -12,11 +12,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./cadastro/cadastro.page').then((m) => m.CadastroPage),
   },
-  // {
-  //   path: 'home',
-  //   loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  //   canActivate: [authGuard],
-  // },
   {
     path: 'perfil',
     loadComponent: () =>
@@ -24,7 +19,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'home',
+    path: '',
     redirectTo: 'login',
     pathMatch: 'full',
   },

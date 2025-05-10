@@ -7,7 +7,9 @@ import { IMesas } from 'src/@types/IMesas';
 import { ListaMesas } from 'src/utils/mock/lista-mesas';
 import { CardPedidoComponent } from 'src/components/card-pedido/card-pedido.component';
 import { Router } from '@angular/router';
-import { HOME } from 'src/utils/frontEndUrls';
+import { IProdutos } from 'src/@types/IProdutos';
+import { ListaProdutos } from 'src/utils/mock/lista-produtos';
+import { VISUALIZAR_PEDIDO } from 'src/utils/frontEndUrls';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -27,6 +29,9 @@ import { HOME } from 'src/utils/frontEndUrls';
   ],
 })
 export class CadastroComandaPage implements OnInit {
+  PedidosFiltrados: Array<IProdutos> = ListaProdutos;
+  ProdutosCardapio: Array<IProdutos> = ListaProdutos;
+
   mesas: Array<IMesas> = ListaMesas;
   mesaSelecionada: string;
 
@@ -37,10 +42,34 @@ export class CadastroComandaPage implements OnInit {
   ngOnInit() {}
 
   pesquisa(event: any) {
-    //todo
+    const termo = event.detail.value;
+    
+    if (termo !== '') {
+      const listaFiltrada: Array<IProdutos> = this.ProdutosCardapio.filter(
+        (element: IProdutos) => element.nome.toLowerCase().includes(termo.toLowerCase())
+      );
+      this.PedidosFiltrados = listaFiltrada;
+    } else {
+      this.PedidosFiltrados = this.ProdutosCardapio;
+    }
   }
-  
-  Voltar() {
-    this.router.navigateByUrl(HOME);
+
+  filtraCategoria(categoria: string){
+    const listaFiltrada: Array<IProdutos> = this.ProdutosCardapio.filter(
+      (element: IProdutos) => element.categoria === categoria
+    );
+    this.PedidosFiltrados = listaFiltrada;
+  }
+
+  Finalizar() {
+    const lista: Array<IProdutos> = this.ProdutosCardapio.filter(
+      (product: IProdutos) => product.quantidade > 0
+    );
+
+    if(lista.length > 0){
+      console.log('mesaSelecionada', this.mesaSelecionada);
+      console.log('lista', lista);
+      this.router.navigateByUrl(VISUALIZAR_PEDIDO);
+    }
   }
 }
