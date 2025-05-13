@@ -51,6 +51,20 @@
   font-size: 14px;
 }
 
+.status-value-wrapper ion-button.status-value {
+  --backgroud: transparent;
+  --box-shadow: none;
+  margin: 0;
+  padding: 0;
+  min-height: auto;
+  height: auto;
+  line-height: inherit;
+
+  &.button-native {
+    padding: 0 !important;
+  }
+}
+
 .status-value {
   display: inline-block;
   padding: 4px 10px;

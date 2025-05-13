@@ -1,22 +1,36 @@
-<div class="mesa-card">
-  <div class="card-content">
-    <div class="left-column">
-      <div class="pedido-number">N° {{ mesa.id }}</div>
-      <div class="pedido-itens">
-        <div *ngFor="let item of mesa.itens" class="pedido-item">
-          {{ item.quantidade }}x {{ item.nome }}
+<ng-container *ngIf="mesa">
+  <div class="mesa-card">
+    <div class="card-content">
+      <div class="left-column">
+        <div class="pedido-number">N° {{ mesa.id }}</div>
+        <div class="pedido-itens">
+          <div *ngFor="let item of mesa.itens" class="pedido-item">
+            {{ item.quantidade }}x {{ item.nome }}
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="right-column">
-      <div class="mesa-number">Mesa: {{ mesa.numero }}</div>
-      <div class="status-container">
-        <div class="status-label">Status:</div>
-        <div class="status-value" [ngClass]="getStatusClass(mesa.status)">
-          {{ mesa.status }}
+      <div class="right-column">
+        <div class="mesa-number">Mesa: {{ mesa.numero }}</div>
+        <div class="status-container">
+          <div class="status-label">Status:</div>
+            <div class="status-value-wrapper">
+              <ion-button
+                [id]="'status-btn-' + mesa.id"
+                fill="clear"
+                class="status-value"
+                [ngClass]="getStatusClass(mesa.status)">
+                {{ mesa.status }}
+              </ion-button>
+              <ion-action-sheet
+                  [trigger]="'status-btn-' + mesa.id"
+                  header="Alterar status do pedido"
+                  [buttons]="getStatus()"
+                  (didDismiss)="handleStatusChange($event, mesa)">
+              </ion-action-sheet>
+            </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>

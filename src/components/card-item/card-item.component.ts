@@ -1,18 +1,36 @@
+import { IonButton, IonActionSheet } from '@ionic/angular/standalone';
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IMesa } from 'src/@types/IMesa';
 import { Router } from '@angular/router';
+import { StatusHandler } from 'src/utils/forms/statusHandler';
+import { StatusOptions } from 'src/@types/Status';
 
 @Component({
   selector: 'app-card-item',
   templateUrl: './card-item.component.html',
   styleUrls: ['./card-item.component.scss'],
-  imports: [CommonModule]
+  imports: [IonActionSheet, CommonModule, IonButton]
 })
 export class CardItemComponent  implements OnInit {
   @Input({ required: true }) mesa!: IMesa;
+  statusButtons: any[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private statusHandler: StatusHandler) { }
+
+  ngOnChanges() {
+    if(this.mesa) {
+      this.statusButtons = this.statusHandler.getStatus();
+    }
+  }
+
+  getStatus() {
+    return this.statusHandler.getStatus();
+  }
+
+  handleStatusChange(event: CustomEvent, mesa: IMesa) {
+    return this.statusHandler.handleStatusChange(event, mesa);
+  }
 
   ngOnInit() {}
 
@@ -41,4 +59,7 @@ export class CardItemComponent  implements OnInit {
 
     return statusTranslations[status] || status;
   }
+
+
+
 }
