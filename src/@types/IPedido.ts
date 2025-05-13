@@ -1,9 +1,10 @@
 import { IItem } from "./IItem";
+import { StatusOptions } from "./Status";
 
 export interface IPedido {
   id: number;
   numero: number;
-  status: 'Pronto' | 'Em Produção' | 'Aguardando confirmação' | 'Aguardando confirmação da cozinha';
+  status: StatusOptions;
   itens: Array<IItem>;
 }
 

@@ -1,10 +1,11 @@
 import { IPedido } from "src/@types/IPedido";
+import { StatusOptions } from "src/@types/Status";
 
 export const ListaPedidos: Array<IPedido> = [
     {
       id: 1,
       numero: 11,
-      status: 'Pronto',
+      status: StatusOptions.Pronto,
       itens: [
         { quantidade: 2, nome: 'Original Burguer' },
         { quantidade: 1, nome: 'Double Smash Burguer' },
@@ -14,7 +15,7 @@ export const ListaPedidos: Array<IPedido> = [
     {
       id: 2,
       numero: 3,
-      status: 'Pronto',
+      status: StatusOptions.Pronto,
       itens: [
         { quantidade: 2, nome: 'Pizza Calabresa' },
         { quantidade: 1, nome: 'Pizza Carne seca com Cream Cheese' },
@@ -24,7 +25,7 @@ export const ListaPedidos: Array<IPedido> = [
     {
       id: 3,
       numero: 5,
-      status: 'Em Produção',
+      status: StatusOptions.EmProdutocao,
       itens: [
         { quantidade: 4, nome: 'Double Smash Burguer' },
         { quantidade: 1, nome: 'Pizza Calabresa' },
@@ -35,7 +36,7 @@ export const ListaPedidos: Array<IPedido> = [
     {
       id: 4,
       numero: 13,
-      status: 'Em Produção',
+      status: StatusOptions.EmProdutocao,
       itens: [
         { quantidade: 2, nome: 'Double Smash Burguer' },
         { quantidade: 1, nome: 'Pizza Carne Seca com Cream Cheese' },
@@ -46,7 +47,7 @@ export const ListaPedidos: Array<IPedido> = [
     {
       id: 5,
       numero: 7,
-      status: 'Em Produção',
+      status: StatusOptions.EmProdutocao,
       itens: [
         { quantidade: 4, nome: 'Double Smash Burguer' },
         { quantidade: 1, nome: 'Original Burguer' },
@@ -56,7 +57,7 @@ export const ListaPedidos: Array<IPedido> = [
     {
       id: 6,
       numero: 14,
-      status: 'Aguardando confirmação da cozinha',
+      status: StatusOptions.AguardandoConfirmacaoCozinha,
       itens: [
         { quantidade: 3, nome: 'Original Burguer' },
         { quantidade: 1, nome: 'Pizza Calabresa' },

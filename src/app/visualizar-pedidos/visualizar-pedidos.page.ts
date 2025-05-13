@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
 import { CardItemComponent } from 'src/components/card-item/card-item.component';
 import { ListaPedidos } from 'src/utils/mock/lista-pedidos';
 import { Router } from '@angular/router';
@@ -14,11 +14,10 @@ import { HeaderComponent } from 'src/components/header/header.component';
   styleUrls: ['./visualizar-pedidos.page.scss'],
   standalone: true,
   imports: [
-    IonButton, 
-    IonContent, 
-    CommonModule, 
-    FormsModule, 
-    CardItemComponent, 
+    IonContent,
+    CommonModule,
+    FormsModule,
+    CardItemComponent,
     HeaderComponent
   ]
 })
