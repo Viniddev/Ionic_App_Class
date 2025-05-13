@@ -1,10 +1,10 @@
 import { IItem } from "./IItem";
-import { StatusOptions } from "./Status";
+import { EnumStatusOptions } from "./Enums/Status";
 
 export interface IPedido {
   id: number;
   numero: number;
-  status: StatusOptions;
+  status: EnumStatusOptions;
   itens: Array<IItem>;
 }
 

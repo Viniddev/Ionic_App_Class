@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { IMesa } from 'src/@types/IMesa';
 import { Router } from '@angular/router';
 import { StatusHandler } from 'src/utils/forms/statusHandler';
-import { StatusOptions } from 'src/@types/Status';
 
 @Component({
   selector: 'app-card-item',
@@ -59,7 +58,4 @@ export class CardItemComponent  implements OnInit {
 
     return statusTranslations[status] || status;
   }
-
-
-
 }

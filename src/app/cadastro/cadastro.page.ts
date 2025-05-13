@@ -123,21 +123,25 @@ export class CadastroPage implements OnInit {
   }
 
   async Cadastrar() {
-    const loading = await this.loadingController.create();
-    await loading.present();
+    if(!this.cadastro.invalid){
+      const loading = await this.loadingController.create();
+      await loading.present();
 
-    const credentials: ICredentials = {
-      email: this.email?.value || '',
-      password: this.password?.value || '',
-    };
+      const credentials: ICredentials = {
+        email: this.email?.value || '',
+        password: this.password?.value || '',
+      };
 
-    const user = await this.authService.register(credentials);
-    await loading.dismiss();
+      const user = await this.authService.register(credentials);
+      await loading.dismiss();
 
-    if (user) {
-      this.router.navigateByUrl(LOGIN);
-    } else {
-      this.showAlert('Falha no registro', 'Tente novamente!');
+      if (user) {
+        this.router.navigateByUrl(LOGIN);
+      } else {
+        this.showAlert('Falha no registro', 'Tente novamente!');
+      }
+    }else{
+       this.showAlert('Dados inválidos', 'Todos os campos devem ser preenchidos antes de submeter.');
     }
   }
 

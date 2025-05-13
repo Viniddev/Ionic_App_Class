@@ -5,18 +5,18 @@
       
       <h2 class="login-title">Entrar</h2>
       
+      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">
+        Email inválido
+      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-        <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">
-          Email inválido
-        </ion-note>
       </ion-item>
 
+      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">
+        Senhas de seis caracteres
+      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-        <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">
-          Senhas de seis caracteres
-        </ion-note>
       </ion-item>
       
       <ion-note id="esqueceu-senha" (click)="register()">esqueceu a senha?</ion-note>

@@ -65,16 +65,20 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    const loading = await this.loadingController.create();
-    await loading.present();
+    if(!this.credentials.invalid){
+      const loading = await this.loadingController.create();
+      await loading.present();
 
-    const user = await this.auth.login(this.credentials.value);
-    await loading.dismiss();
+      const user = await this.auth.login(this.credentials.value);
+      await loading.dismiss();
 
-    if (user) {
-      this.router.navigateByUrl(HOME);
-    } else {
-      this.showAlert('Falha no registro', 'Tente novamente!');
+      if (user) {
+        this.router.navigateByUrl(HOME);
+      } else {
+        this.showAlert('Email ou Senha incorretos.', 'Tente novamente!');
+      }
+    }else{
+      this.showAlert('Email / Senha inválidos.', 'Login e senha não podem ser vazios.');
     }
   }
 
