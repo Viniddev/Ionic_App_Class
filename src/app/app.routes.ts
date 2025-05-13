@@ -24,17 +24,9 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path:'service',
+    path: 'service',
     component: TabNavegacaoComponent,
     children: [
-      {
-        path: 'abertura-comanda',
-        loadComponent: () =>
-          import('./abertura-comanda/abertura-comanda.page').then(
-            (m) => m.AberturaComandaPage
-          ),
-        canActivate: [authGuard],
-      },
       {
         path: 'cadastro-comanda',
         loadComponent: () =>
@@ -69,9 +61,9 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'abertura-comanda',
+        redirectTo: 'cadastro-comanda',
         pathMatch: 'full',
       },
-    ]
-  }
+    ],
+  },
 ];

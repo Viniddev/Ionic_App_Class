@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IMesa } from 'src/@types/IMesa';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-item',
@@ -11,7 +12,7 @@ import { IMesa } from 'src/@types/IMesa';
 export class CardItemComponent  implements OnInit {
   @Input({ required: true }) mesa!: IMesa;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
@@ -40,5 +41,4 @@ export class CardItemComponent  implements OnInit {
 
     return statusTranslations[status] || status;
   }
-
 }

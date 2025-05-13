@@ -2,8 +2,9 @@
   <div class="conteiner-login">
     <img src="../../assets/logo-oficial.png" alt="logo" class="icone-logo">
     <form (ngSubmit)="login()" [formGroup]="credentials" class="form-login">
+      
       <h2 class="login-title">Entrar</h2>
-
+      
       <ion-item fill="solid" class="ion-margin-bottom">
         <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
         <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">
