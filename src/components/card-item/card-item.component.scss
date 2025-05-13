@@ -58,7 +58,6 @@
   padding: 0;
   min-height: auto;
   height: auto;
-  line-height: inherit;
 
   &.button-native {
     padding: 0 !important;
@@ -68,9 +67,9 @@
 .status-value {
   display: inline-block;
   padding: 4px 10px;
-  border-radius: 14px;
+  border-radius: 10px;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 12px;
   margin-top: 4px;
   white-space: normal;
   word-break: break-word;
