@@ -1,23 +1,29 @@
-<ion-content class="ion-padding" id="content-login">
+<ion-content class="ion-padding" [fullscreen]="true">
   <div class="conteiner-login">
     <img src="../../assets/logo-oficial.png" alt="logo" class="icone-logo">
     <form (ngSubmit)="login()" [formGroup]="credentials" class="form-login">
       
       <h2 class="login-title">Entrar</h2>
       
-      <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">
-        Email inválido
-      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+        <ion-input 
+          type="email" 
+          label="Email"
+          formControlName="email"
+          labelPlacement="stacked"
+          [clearInput]="true"
+        ></ion-input>
       </ion-item>
 
-      <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">
-        Senhas de seis caracteres
-      </ion-note>
       <ion-item fill="solid" class="ion-margin-bottom">
-        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-      </ion-item>
+        <ion-input 
+          type="password" 
+          label="Senha"
+          formControlName="password"
+          labelPlacement="stacked"
+          [clearInput]="true"
+        ></ion-input>
+      </ion-item> 
       
       <ion-note id="esqueceu-senha" (click)="register()">Não possui conta?</ion-note>
 
