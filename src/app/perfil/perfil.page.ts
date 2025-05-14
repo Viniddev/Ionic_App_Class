@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ProfileInfo } from 'src/utils/mock/profile-info';
 import { Router } from '@angular/router';
-import { HOME } from 'src/utils/frontEndUrls';
+import { HOME } from 'src/utils/constants/frontEndUrls';
 import { HeaderComponent } from 'src/components/header/header.component';
 
 @Component({

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton } from '@ionic/angular/standalone';
 import { CardFechamentoItemComponent } from 'src/components/card-fechamento-item/card-fechamento-item.component';
 import { Router } from '@angular/router';
-import { HOME } from 'src/utils/frontEndUrls';
+import { HOME } from 'src/utils/constants/frontEndUrls';
 import { ItemFecharComanda } from 'src/utils/mock/lista-Itens';
 import { HeaderComponent } from 'src/components/header/header.component';
 

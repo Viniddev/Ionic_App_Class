@@ -4,13 +4,15 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { IonContent, IonItem, IonInput, IonNote, IonButton } from '@ionic/angular/standalone';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LOGIN } from 'src/utils/frontEndUrls';
 import { Validacoes } from 'src/utils/forms/validacoes';
 import { AuthService } from 'src/utils/services/auth/auth.service';
 import { LoadingController, AlertController } from '@ionic/angular';
-import { ICredentials } from 'src/@types/ICredentials';
+import { ICredentials, MapUserCredentials } from 'src/@types/ICredentials';
 import { MaskitoOptions, MaskitoElementPredicate } from '@maskito/core';
 import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
+import { USUARIOS } from 'src/utils/constants/backEndUrls';
+import { LOGIN } from 'src/utils/constants/frontEndUrls';
+import { IUserInformations, MapUserInformations } from 'src/@types/IUserInformations';
 
 @Component({
   selector: 'app-cadastro',
@@ -129,12 +131,10 @@ export class CadastroPage implements OnInit {
       const loading = await this.loadingController.create();
       await loading.present();
 
-      const credentials: ICredentials = {
-        email: this.email?.value || '',
-        password: this.password?.value || '',
-      };
+      const credentials: ICredentials = MapUserCredentials(this.cadastro);
+      const userInformations: IUserInformations = MapUserInformations(this.cadastro)
 
-      await this.fs.addDocument("usuarios", this.cadastro.value);
+      await this.fs.addDocument(USUARIOS, userInformations);
       const user = await this.authService.register(credentials);
 
       await loading.dismiss();

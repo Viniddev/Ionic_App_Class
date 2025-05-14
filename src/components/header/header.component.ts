@@ -8,7 +8,7 @@ import { addIcons } from 'ionicons';
 import { personCircle } from 'ionicons/icons';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
-import { PERFIL } from 'src/utils/frontEndUrls';
+import { PERFIL } from 'src/utils/constants/frontEndUrls';
 
 @Component({
   selector: 'app-header',

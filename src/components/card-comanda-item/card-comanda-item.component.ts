@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { CADASTRO_COMANDA, FINALIZAR_COMANDA } from 'src/utils/frontEndUrls';
+import { CADASTRO_COMANDA, FINALIZAR_COMANDA } from 'src/utils/constants/frontEndUrls';
 import { IItemComanda } from 'src/@types/IItemComanda';
 
 @Component({

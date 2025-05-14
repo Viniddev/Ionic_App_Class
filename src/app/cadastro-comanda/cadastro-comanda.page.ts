@@ -9,8 +9,11 @@ import { CardPedidoComponent } from 'src/components/card-pedido/card-pedido.comp
 import { Router } from '@angular/router';
 import { IProdutos } from 'src/@types/IProdutos';
 import { ListaProdutos } from 'src/utils/mock/lista-produtos';
-import { VISUALIZAR_PEDIDO } from 'src/utils/frontEndUrls';
+import { VISUALIZAR_PEDIDO } from 'src/utils/constants/frontEndUrls';
 import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
+import { INovoPedido } from 'src/@types/INovoPedido';
+import { PEDIDOS } from 'src/utils/constants/backEndUrls';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -36,11 +39,16 @@ export class CadastroComandaPage implements OnInit {
   mesas: Array<IMesas> = ListaMesas;
   mesaSelecionada: string;
 
-  constructor(private router: Router, private fs: FirestoreService) {
+  constructor(
+    private router: Router, 
+    private fs: FirestoreService,
+    private loadingController: LoadingController,
+    private alertController: AlertController,
+  ) {}
+
+  ngOnInit() {
     this.mesaSelecionada = '';
   }
-
-  ngOnInit() {}
 
   pesquisa(event: any) {
     const termo = event.detail.value;
@@ -62,17 +70,36 @@ export class CadastroComandaPage implements OnInit {
     this.PedidosFiltrados = listaFiltrada;
   }
 
-  Finalizar() {
+  async Finalizar() {
     const lista: Array<IProdutos> = this.ProdutosCardapio.filter(
       (product: IProdutos) => product.quantidade > 0
     );
 
-    if(lista.length > 0){
-      const finalRequest: any = [...lista, { mesa: this.mesaSelecionada }];
+    if(lista.length > 0 && this.mesaSelecionada !== ""){
+      const loading = await this.loadingController.create();
+      await loading.present();
 
-      // this.fs.addDocument('items', finalRequest[0]); //todo - estruturar melhor como inserir os dados de pedidos no FB
+      const finalRequest: INovoPedido = {
+        produtos: lista,
+        mesa: this.mesaSelecionada
+      };
 
+      this.fs.addDocument(PEDIDOS, finalRequest);
+
+      await loading.dismiss();
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
+    }else{
+      this.showAlert('Dados inválidos', 'É necessário informar o número da mesa e o pedido para finalizar.');
     }
+  }
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['ok'],
+    });
+
+    await alert.present();
   }
 }

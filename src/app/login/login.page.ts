@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CADASTRO, CADASTRO_COMANDA, HOME, LOGIN } from 'src/utils/frontEndUrls';
+import { CADASTRO, HOME, LOGIN } from 'src/utils/constants/frontEndUrls';
 import { LoadingController, AlertController } from '@ionic/angular';
 
 import {

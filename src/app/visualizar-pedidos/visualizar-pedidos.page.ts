@@ -5,7 +5,7 @@ import { IonContent } from '@ionic/angular/standalone';
 import { CardItemComponent } from 'src/components/card-item/card-item.component';
 import { ListaPedidos } from 'src/utils/mock/lista-pedidos';
 import { Router } from '@angular/router';
-import { HOME } from 'src/utils/frontEndUrls';
+import { HOME } from 'src/utils/constants/frontEndUrls';
 import { HeaderComponent } from 'src/components/header/header.component';
 
 @Component({
