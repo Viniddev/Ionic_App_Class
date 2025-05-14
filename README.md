@@ -123,5 +123,5 @@ Caso tenha dúvidas ou sugestões, entre em contato:
 
 ---
 
-Desenvolvido com ❤️ por Vinícius 🚀
+Desenvolvido com ❤️ por Vinícius, Gentil e Camily 🚀
 
