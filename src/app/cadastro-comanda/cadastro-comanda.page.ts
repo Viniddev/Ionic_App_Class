@@ -70,7 +70,7 @@ export class CadastroComandaPage implements OnInit {
     if(lista.length > 0){
       const finalRequest: any = [...lista, { mesa: this.mesaSelecionada }];
 
-      this.fs.addDocument('items', finalRequest[0]);
+      // this.fs.addDocument('items', finalRequest[0]); //todo - estruturar melhor como inserir os dados de pedidos no FB
 
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
     }

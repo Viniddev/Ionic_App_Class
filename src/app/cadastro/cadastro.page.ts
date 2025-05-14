@@ -10,6 +10,7 @@ import { AuthService } from 'src/utils/services/auth/auth.service';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { ICredentials } from 'src/@types/ICredentials';
 import { MaskitoOptions, MaskitoElementPredicate } from '@maskito/core';
+import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -48,7 +49,8 @@ export class CadastroPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private loadingController: LoadingController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private fs: FirestoreService
   ) {}
 
   ngOnInit() {
@@ -132,7 +134,9 @@ export class CadastroPage implements OnInit {
         password: this.password?.value || '',
       };
 
+      await this.fs.addDocument("usuarios", this.cadastro.value);
       const user = await this.authService.register(credentials);
+
       await loading.dismiss();
 
       if (user) {

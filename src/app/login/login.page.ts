@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CADASTRO_COMANDA, HOME, LOGIN } from 'src/utils/frontEndUrls';
+import { CADASTRO, CADASTRO_COMANDA, HOME, LOGIN } from 'src/utils/frontEndUrls';
 import { LoadingController, AlertController } from '@ionic/angular';
 
 import {
@@ -61,7 +61,7 @@ export class LoginPage implements OnInit {
   }
 
   async register() {
-    console.log('register clicado');
+    this.router.navigateByUrl(CADASTRO)
   }
 
   async login() {
