@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
 export const environment = {
-  production: false,
+  production: true,
   firebaseConfig: {
     apiKey: 'AIzaSyAg57iPHyqcNwZI7MIFKcoIk4VehuycENE',
     authDomain: 'easyorder-6347f.firebaseapp.com',
