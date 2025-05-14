@@ -119,9 +119,9 @@ Este projeto está sob a licença MIT.
 Caso tenha dúvidas ou sugestões, entre em contato:
 
 - **E-mail**: diasvinicius95@outlook.com
-- **LinkedIn**: [linkedin.com/in/vinícius-dias-rodrigues/](https://www.linkedin.com/in/vin%C3%ADcius-dias-rodrigues/)
+- **LinkedIn**: [linkedin.com/in/vinicius-dias-rodrigues/](https://www.linkedin.com/in/vinicius-dias-rodrigues/)
 
 ---
 
-Desenvolvido com ❤️ por Vinícius 🚀
+Desenvolvido com ❤️ por Vinícius, Gentil e Camily 🚀
 
