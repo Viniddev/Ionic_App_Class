@@ -1,6 +1,9 @@
-ion-header, ion-toolbar {
-    --background-color: transparent;
-    --border-color: transparent;
+ion-header {
+    padding: 0; 
+}
+
+ion-toolbar{
+    padding: 0 5% 0 5%;
 }
 
 .header-section{

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { IProdutos } from 'src/@types/IProdutos';
 import { ListaProdutos } from 'src/utils/mock/lista-produtos';
 import { VISUALIZAR_PEDIDO } from 'src/utils/frontEndUrls';
+import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -35,7 +36,7 @@ export class CadastroComandaPage implements OnInit {
   mesas: Array<IMesas> = ListaMesas;
   mesaSelecionada: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private fs: FirestoreService) {
     this.mesaSelecionada = '';
   }
 
@@ -67,8 +68,10 @@ export class CadastroComandaPage implements OnInit {
     );
 
     if(lista.length > 0){
-      console.log('mesaSelecionada', this.mesaSelecionada);
-      console.log('lista', lista);
+      const finalRequest: any = [...lista, { mesa: this.mesaSelecionada }];
+
+      this.fs.addDocument('items', finalRequest[0]);
+
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
     }
   }

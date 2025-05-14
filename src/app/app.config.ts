@@ -7,6 +7,7 @@ import { provideRouter, RouteReuseStrategy } from '@angular/router';
 import { environment } from '../environments/environment';
 import { routes } from '../app/app.routes';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideAnimationsAsync(),
     provideHttpClient(),
