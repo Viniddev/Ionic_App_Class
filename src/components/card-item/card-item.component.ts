@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IMesa } from 'src/@types/IMesa';
 import { Router } from '@angular/router';
 import { StatusHandler } from 'src/utils/forms/statusHandler';
+import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 
 @Component({
   selector: 'app-card-item',
@@ -15,7 +16,7 @@ export class CardItemComponent  implements OnInit {
   @Input({ required: true }) mesa!: IMesa;
   statusButtons: any[] = [];
 
-  constructor(private router: Router, private statusHandler: StatusHandler) { }
+  constructor(private statusHandler: StatusHandler, private pedidosService: PedidosFirestoreService) { }
 
   ngOnChanges() {
     if(this.mesa) {
@@ -28,7 +29,8 @@ export class CardItemComponent  implements OnInit {
   }
 
   handleStatusChange(event: CustomEvent, mesa: IMesa) {
-    return this.statusHandler.handleStatusChange(event, mesa);
+    const novoStatus = this.statusHandler.handleStatusChange(event, mesa);
+    this.pedidosService.updateDocumentStatusByDocId(mesa.id, novoStatus);
   }
 
   ngOnInit() {}

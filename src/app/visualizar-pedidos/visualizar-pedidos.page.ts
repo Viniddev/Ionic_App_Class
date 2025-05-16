@@ -32,22 +32,13 @@ export class VisualizarPedidosPage implements OnInit {
   }
 
   atualizarStatus(pedidoId: number, novoStatus: string) {
-    // const pedido = this.pedidos.find(p => p.id === pedidoId);
-    // if (pedido) {
-    //   pedido.status = novoStatus as any;
-    // }
-
      this.router.navigateByUrl(HOME);
   }
 
 
   async getAllPedidos() {
-    this.pedidos = await this.pedidosService.getAllDocuments();
+    this.pedidos = await this.pedidosService.getAllPedidosDocuments();
     return this.pedidos;
   }
-
-  // filtrarPorStatus(status: string) {
-  //   return this.pedidos.filter(pedido => pedido.status === status);
-  // }
 
 }

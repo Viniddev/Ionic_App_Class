@@ -40,6 +40,7 @@ export class StatusHandler {
     if (event.detail.role !== 'cancel' && acao) {
       this.atualizarStatusMesa(mesa, acao);
     }
+    return acao;
   }
 
   atualizarStatusMesa(mesa: IMesa, novoStatus: EnumStatusOptions) {

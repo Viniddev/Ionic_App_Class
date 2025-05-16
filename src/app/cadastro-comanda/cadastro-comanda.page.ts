@@ -12,9 +12,7 @@ import { ListaProdutos } from 'src/utils/mock/lista-produtos';
 import { VISUALIZAR_PEDIDO } from 'src/utils/constants/frontEndUrls';
 import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
 import { INovoPedido } from 'src/@types/INovoPedido';
-import { PEDIDOS } from 'src/utils/constants/backEndUrls';
 import { AlertController } from '@ionic/angular';
-import { IPedido } from 'src/@types/IPedido';
 import { EnumStatusOptions } from 'src/@types/Enums/Status';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 
@@ -73,39 +71,6 @@ export class CadastroComandaPage implements OnInit {
     this.PedidosFiltrados = listaFiltrada;
   }
 
-  // async finalizarPedido() {
-  //   const lista: Array<IProdutos> = this.ProdutosCardapio.filter(
-  //     (product: IProdutos) => product.quantidade > 0
-  //   )
-
-  //   console.log(lista)
-
-  //   const pedido: INovoPedido = {
-  //     numero: +this.mesaSelecionada,
-  //     status: EnumStatusOptions.Pronto,
-  //     itens: lista.filter(item => {
-  //       item.nome,
-  //       item.quantidade
-  //     })
-  //   }
-
-  //   console.log(pedido)
-
-  //   if(lista.length > 0 && this.mesaSelecionada !== "") {
-  //       await this.pedidoService.setNewDocument(pedido);
-  //   //   const finalRequest: INovoPedido = {
-  //   //     produtos: lista,
-  //   //     mesa: this.mesaSelecionada
-  //   //   };
-
-  //   //   this.fs.addDocument(PEDIDOS, finalRequest);
-
-  //   //   this.router.navigateByUrl(VISUALIZAR_PEDIDO);
-  //   }else{
-  //     this.showAlert('Dados inválidos', 'É necessário informar o número da mesa e o pedido para finalizar.');
-  //   }
-  // }
-
   async finalizarPedido() {
     const lista: Array<IProdutos> = this.ProdutosCardapio.filter(
       (product: IProdutos) => product.quantidade > 0
@@ -124,7 +89,7 @@ export class CadastroComandaPage implements OnInit {
     }
 
     if(lista.length > 0 && this.mesaSelecionada !== ""){
-      await this.pedidosService.setNewDocument(pedido);
+      await this.pedidosService.setNewPedidoDocuments(pedido);
 
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
     }else{
