@@ -7,7 +7,7 @@ import {
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
-import { library, playCircle, radio, search } from 'ionicons/icons';
+import { library, playCircle, radio, search, personOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab-navegacao',
@@ -22,7 +22,7 @@ import { library, playCircle, radio, search } from 'ionicons/icons';
 })
 export class TabNavegacaoComponent implements OnInit {
   constructor() {
-    addIcons({ library, playCircle, radio, search });
+    addIcons({ library, playCircle, radio, search, personOutline });
   }
 
   ngOnInit() {}
