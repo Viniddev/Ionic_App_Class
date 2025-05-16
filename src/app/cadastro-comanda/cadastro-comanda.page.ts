@@ -84,13 +84,15 @@ export class CadastroComandaPage implements OnInit {
           .filter(item => item.quantidade > 0)
           .map(item => ({
             nome: item.nome,
-            quantidade: item.quantidade
+            quantidade: item.quantidade,
+            preco: item.preco
       }))
     }
 
     if(lista.length > 0 && this.mesaSelecionada !== ""){
       await this.pedidosService.setNewPedidoDocuments(pedido);
 
+      this.pedidosService.notificarAtualizacao();
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
     }else{
       this.showAlert('Dados inválidos', 'É necessário informar o número da mesa e o pedido para finalizar.');

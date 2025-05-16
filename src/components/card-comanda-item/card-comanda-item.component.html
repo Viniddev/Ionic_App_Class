@@ -1,7 +1,7 @@
 <div class="comanda-card">
   <div class="card-content">
     <div class="left-column">
-      <div class="comanda-number">Mesa: {{ itemComanda.id }}</div>
+      <div class="comanda-number">Mesa: {{ itemComanda.numero }}</div>
       <div class="pedidos-itens">
         <div *ngFor="let item of itemComanda.itens" class="comanda-item">
           {{ item.quantidade }}x {{ item.nome }}
@@ -19,7 +19,7 @@
         <button class="btn-editar" (click)="editar()">
           <i class="icon-pencil"></i> EDITAR
         </button>
-        <button class="btn-fechar" (click)="fechar()">
+        <button class="btn-fechar" (click)="fechar(itemComanda.id)">
           FECHAR COMANDA
         </button>
       </div>
