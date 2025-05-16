@@ -13,12 +13,6 @@ export const routes: Routes = [
       import('./cadastro/cadastro.page').then((m) => m.CadastroPage),
   },
   {
-    path: 'perfil',
-    loadComponent: () =>
-      import('./perfil/perfil.page').then((m) => m.PerfilPage),
-    canActivate: [authGuard],
-  },
-  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
@@ -57,6 +51,12 @@ export const routes: Routes = [
           import('./finalizar-comanda/finalizar-comanda.page').then(
             (m) => m.FinalizarComandaPage
           ),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'perfil',
+        loadComponent: () =>
+          import('./perfil/perfil.page').then((m) => m.PerfilPage),
         canActivate: [authGuard],
       },
       {
