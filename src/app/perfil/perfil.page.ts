@@ -5,6 +5,7 @@ import { ProfileInfo } from 'src/utils/mock/profile-info';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/constants/frontEndUrls';
 import { ProfileFirestoreService } from 'src/utils/services/firestore/profile-firestore.service';
+import { IUserInformations } from 'src/@types/IUserInformations';
 
 @Component({
   selector: 'app-perfil',
@@ -14,8 +15,7 @@ import { ProfileFirestoreService } from 'src/utils/services/firestore/profile-fi
   imports: [IonicModule, FormsModule],
 })
 export class PerfilPage implements OnInit {
-  perfil = ProfileInfo
-  user: any;
+  perfil: IUserInformations = ProfileInfo
   pedidosService: any;
 
   constructor(
@@ -26,15 +26,17 @@ export class PerfilPage implements OnInit {
   ngOnInit(): void {
     this.getAllPedidos();
   }
+  
+  async getAllPedidos() {
+    this.perfil = await this.profileService.getUserProfileInformations();
+    return this.perfil;
+  }
+  
+  async Atualizar(){
+    await this.profileService.updateUserProfileInformations(this.perfil)
+  }
 
   Voltar() {
     this.router.navigateByUrl(HOME);
-  }
-
-  async getAllPedidos() {
-    this.user = await this.profileService.getAllUsers();
-
-    console.log('this.user', this.user);
-    return this.user;
   }
 }

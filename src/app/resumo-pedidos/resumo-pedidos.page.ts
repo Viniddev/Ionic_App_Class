@@ -36,7 +36,7 @@ export class ResumoPedidosPage implements OnInit {
 
   async getAllOpenPedidos() {
     this.pedidos = await this.pedidosService.getAllPedidosDocuments();
-      this.pedidos.forEach(pedido => {
+    this.pedidos.forEach(pedido => {
       this.comandas.push({
         id: pedido.id,
         numero: pedido.numero,
@@ -44,7 +44,6 @@ export class ResumoPedidosPage implements OnInit {
         total: this.calculaTotal(pedido)
       })
     })
-    console.log(this.comandas)
   }
 
   calculaTotal(pedido: IPedido) {
@@ -59,6 +58,5 @@ export class ResumoPedidosPage implements OnInit {
   Voltar(){
     this.router.navigateByUrl(HOME)
   }
-
 }
 

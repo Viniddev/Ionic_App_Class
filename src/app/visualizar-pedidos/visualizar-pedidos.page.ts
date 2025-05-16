@@ -25,7 +25,7 @@ import { IPedido } from 'src/@types/IPedido';
 export class VisualizarPedidosPage implements OnInit {
   pedidos: IPedido[];
 
-  constructor(private router: Router, private pedidosService: PedidosFirestoreService) { }
+  constructor(private pedidosService: PedidosFirestoreService) { }
 
   ngOnInit() {
     this.getAllPedidos()
@@ -36,10 +36,6 @@ export class VisualizarPedidosPage implements OnInit {
         this.pedidosService.notificarAtualizacao();
       }
     })
-  }
-
-  atualizarStatus(pedidoId: number, novoStatus: string) {
-     this.router.navigateByUrl(HOME);
   }
 
   async getAllPedidos() {
