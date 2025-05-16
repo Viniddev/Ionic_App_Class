@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CADASTRO_COMANDA, FINALIZAR_COMANDA } from 'src/utils/constants/frontEndUrls';
 import { IItemComanda } from 'src/@types/IItemComanda';
+import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 
 @Component({
   selector: 'app-card-comanda-item',
@@ -13,7 +14,7 @@ import { IItemComanda } from 'src/@types/IItemComanda';
 export class CardComandaItemComponent  implements OnInit {
   @Input({ required: true }) itemComanda!: IItemComanda;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private pedidosService: PedidosFirestoreService) { }
 
   ngOnInit() {}
 
@@ -21,7 +22,10 @@ export class CardComandaItemComponent  implements OnInit {
     this.router.navigateByUrl(CADASTRO_COMANDA)
   }
 
-  fechar(){
-    this.router.navigateByUrl(FINALIZAR_COMANDA)
+  fechar(documentId: string){
+    this.pedidosService.getPedidoDocumentById(documentId).then(pedido => {
+      this.router.navigateByUrl(FINALIZAR_COMANDA, { state: { documentId: documentId } }
+      );
+    });
   }
 }
