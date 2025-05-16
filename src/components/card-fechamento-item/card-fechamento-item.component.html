@@ -1,7 +1,7 @@
 <div class="comanda-card">
   <div class="card-content">
     <div class="left-column">
-      <div class="comanda-number">Mesa: {{ item.id }}</div>
+      <div class="comanda-number">Mesa: {{ item.numero }}</div>
       <div class="pedidos-itens">
           <div *ngFor="let item of item.itens" class="comanda-item">
             {{ item.quantidade }}x {{ item.nome }}

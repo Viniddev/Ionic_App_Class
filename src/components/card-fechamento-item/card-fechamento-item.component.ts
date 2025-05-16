@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IItemComanda } from 'src/@types/IItemComanda';
+import { IItemComandaResumida } from 'src/@types/IItemComanda';
 
 @Component({
   selector: 'app-card-fechamento-item',
@@ -9,7 +9,7 @@ import { IItemComanda } from 'src/@types/IItemComanda';
   imports: [CommonModule]
 })
 export class CardFechamentoItemComponent  implements OnInit {
-  @Input({ required: true }) item!: IItemComanda;
+  @Input({ required: true }) item!: IItemComandaResumida;
   @Output() fechar = new EventEmitter<void>();
 
   constructor() { }
