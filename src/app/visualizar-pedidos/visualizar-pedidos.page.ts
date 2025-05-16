@@ -35,7 +35,6 @@ export class VisualizarPedidosPage implements OnInit {
      this.router.navigateByUrl(HOME);
   }
 
-
   async getAllPedidos() {
     this.pedidos = await this.pedidosService.getAllPedidosDocuments();
     return this.pedidos;

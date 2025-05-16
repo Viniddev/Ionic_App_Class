@@ -9,7 +9,7 @@ import {
   User,
 } from '@angular/fire/auth';
 import { setPersistence } from 'firebase/auth';
-import { from, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ICredentials } from 'src/@types/ICredentials';
 
 

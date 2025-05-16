@@ -3,20 +3,20 @@ import { IPedido } from 'src/@types/IPedido';
 import { Injectable } from '@angular/core';
 import { Firestore, collection, getDocs, addDoc, getDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { INovoPedido } from 'src/@types/INovoPedido';
+import { PEDIDOS } from 'src/utils/constants/backEndUrls';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PedidosFirestoreService {
-  document = "pedidos";
 
   constructor(private firestore: Firestore) { }
 
   async getAllPedidosDocuments(): Promise<IPedido[]> {
-    const collectionDocs = await getDocs(collection(this.firestore, this.document));
+    const collectionDocs = await getDocs(collection(this.firestore, PEDIDOS));
 
     const pedidos = collectionDocs.docs.map(doc => {
-      const pedido = doc.data()
+      const pedido = doc.data();
 
       return {
         id: doc.id,
@@ -30,21 +30,19 @@ export class PedidosFirestoreService {
   }
 
   async setNewPedidoDocuments(pedido: INovoPedido) {
-    await addDoc(collection(this.firestore, this.document), pedido);
+    await addDoc(collection(this.firestore, PEDIDOS), pedido);
   }
 
   async updateDocumentStatusByDocId(documentId: string, novoStatus: Status) {
-    const pedido = await getDoc(doc(this.firestore, this.document, documentId));
+    const pedido = await getDoc(doc(this.firestore, PEDIDOS, documentId));
 
     if(pedido.exists) {
       await updateDoc(pedido.ref, {
         status: novoStatus
       });
-      return pedido
+      return pedido;
     } else {
-      return null
+      return null;
     }
-
   }
-
 }
