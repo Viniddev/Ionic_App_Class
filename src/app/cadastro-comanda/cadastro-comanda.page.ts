@@ -80,22 +80,22 @@ export class CadastroComandaPage implements OnInit {
     const lista: Array<IProdutos> = this.ProdutosCardapio.filter(
       (product: IProdutos) => product.quantidade > 0
     );
-
-    this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, '');
-
-    const pedido: INovoPedido = {
-      numero: Number(this.mesaSelecionada),
-      status: EnumStatusOptions.AguardandoConfirmacaoCozinha,
-      itens: lista
-        .filter((item) => item.quantidade > 0)
-        .map((item) => ({
-          nome: item.nome,
-          quantidade: item.quantidade,
-          preco: item.preco,
-        })),
-    };
-
+    
     if (lista.length > 0 && this.mesaSelecionada !== '') {
+      this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, '');
+
+      const pedido: INovoPedido = {
+        numero: Number(this.mesaSelecionada),
+        status: EnumStatusOptions.AguardandoConfirmacaoCozinha,
+        itens: lista
+          .filter((item) => item.quantidade > 0)
+          .map((item) => ({
+            nome: item.nome,
+            quantidade: item.quantidade,
+            preco: item.preco,
+          })),
+      };
+
       await this.pedidosService.setNewPedidoDocuments(pedido);
 
       this.pedidosService.notificarAtualizacao();

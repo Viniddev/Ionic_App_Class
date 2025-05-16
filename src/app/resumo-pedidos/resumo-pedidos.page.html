@@ -5,9 +5,9 @@
   <app-card-comanda-item
     *ngFor="let item of comandas"
     [itemComanda]="{
-      id: item.id,
-      numero: item.numero,
-      itens: item.itens,
-      total: item.total
+      id: item?.id,
+      numero: item?.numero,
+      itens: item?.itens,
+      total: item?.total
   }"></app-card-comanda-item>
 </ion-content>

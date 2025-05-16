@@ -29,12 +29,12 @@ export class VisualizarPedidosPage implements OnInit {
   ngOnInit() {
     this.getAllPedidos()
     
-    this.pedidosService.atualizarPedidos$.subscribe(atualizar => {
-      if(atualizar) {
-        this.getAllPedidos();
-        this.pedidosService.notificarAtualizacao();
-      }
-    })
+    // this.pedidosService.atualizarPedidos$.subscribe(atualizar => {
+    //   if(atualizar) {
+    //     this.getAllPedidos();
+    //     this.pedidosService.notificarAtualizacao();
+    //   }
+    // })
   }
 
   async getAllPedidos() {

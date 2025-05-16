@@ -2,12 +2,8 @@ import { IonButton, IonActionSheet } from '@ionic/angular/standalone';
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IPedidosPorMesa } from 'src/@types/IPedidosPorMesa';
-import { Router } from '@angular/router';
 import { StatusHandler } from 'src/utils/forms/statusHandler';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
-import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
-import { EnumStatusOptions } from 'src/@types/Enums/Status';
-
 @Component({
   selector: 'app-card-item',
   templateUrl: './card-item.component.html',
@@ -21,7 +17,6 @@ export class CardItemComponent implements OnInit {
   constructor(
     private statusHandler: StatusHandler,
     private pedidosService: PedidosFirestoreService,
-    private mesaService: MesasFirestoreService
   ) {}
 
   ngOnChanges() {
@@ -37,9 +32,6 @@ export class CardItemComponent implements OnInit {
   handleStatusChange(event: CustomEvent, mesa: IPedidosPorMesa) {
     const novoStatus = this.statusHandler.handleStatusChange(event, mesa);
     this.pedidosService.updateDocumentStatusByDocId(mesa.id, novoStatus);
-
-    if (novoStatus === EnumStatusOptions.Pronto) 
-      this.mesaService.desbloqueiaMesa(mesa.numero); 
   }
 
   ngOnInit() {}
