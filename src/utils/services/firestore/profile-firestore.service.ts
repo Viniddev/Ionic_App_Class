@@ -1,44 +1,35 @@
 import { Injectable } from '@angular/core';
-import { USUARIOS } from 'src/utils/constants/backEndUrls';
-import { FirestoreService } from './firestore.service';
-import { getAuth } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
+import { getDocs, collection, Firestore } from '@angular/fire/firestore';
 import { IUserInformations } from 'src/@types/IUserInformations';
+import { USUARIOS } from 'src/utils/constants/backEndUrls';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProfileFirestoreService {
-  constructor(private firestore: FirestoreService) { }
 
-  async getUserInformations() {
-    const auth = getAuth();
-    let userInfo: IUserInformations;
-    console.log('Usuário logado (dados persistidos):', auth.currentUser.email);
+  constructor(private firestore: Firestore, private auth: Auth) { }
 
-    this.firestore.getCollection(USUARIOS).subscribe({
-      next: (dados) => {
-        console.log('dados', dados)
-        userInfo = dados.find((user:IUserInformations)=> user.email === auth.currentUser.email)
-      },
-      error: (erro) => {
-        console.error('Erro ao buscar perfil:', erro);
+  async getAllUsers() {
+    const pedido = await getDocs(collection(this.firestore, USUARIOS));
+
+     let userInfo = pedido.docs.map((element: any) => {
+      let data = element.data();
+
+      if(data.email === this.auth.currentUser.email){
+        return {
+          cpf: data.cpf,
+          email: data.email,
+          nome: data.nome,
+          telefone: data.telefone
+        } as IUserInformations;
       }
-    });
+    })
+    
+    console.log("userInfo", userInfo)
 
-    return userInfo;
-  };
-
-  // async updateDocumentStatusByDocId(documentId: string, novoStatus: any) {
-  //   const pedido = await getDoc(doc(this.firestore, PEDIDOS, documentId));
-
-  //   if(pedido.exists) {
-  //     await updateDoc(pedido.ref, {
-  //       status: novoStatus
-  //     });
-  //     return pedido;
-  //   } else {
-  //     return null;
-  //   }
-  // }
+    return undefined;
+  }
 }

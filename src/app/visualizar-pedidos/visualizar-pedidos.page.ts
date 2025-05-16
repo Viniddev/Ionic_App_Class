@@ -29,6 +29,7 @@ export class VisualizarPedidosPage implements OnInit {
 
   ngOnInit() {
     this.getAllPedidos()
+    
     this.pedidosService.atualizarPedidos$.subscribe(atualizar => {
       if(atualizar) {
         this.getAllPedidos();
@@ -45,5 +46,4 @@ export class VisualizarPedidosPage implements OnInit {
     this.pedidos = await this.pedidosService.getAllPedidosDocuments();
     return this.pedidos;
   }
-
 }

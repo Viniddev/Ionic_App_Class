@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { ProfileInfo } from 'src/utils/mock/profile-info';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/constants/frontEndUrls';
-import { Firestore } from '@angular/fire/firestore';
 import { ProfileFirestoreService } from 'src/utils/services/firestore/profile-firestore.service';
 
 @Component({
@@ -16,23 +15,26 @@ import { ProfileFirestoreService } from 'src/utils/services/firestore/profile-fi
 })
 export class PerfilPage implements OnInit {
   perfil = ProfileInfo
+  user: any;
+  pedidosService: any;
 
   constructor(
     private router: Router,
-    private firestore: Firestore,
     private profileService: ProfileFirestoreService
-  ) {}
-  
+  ) { }
+
   ngOnInit(): void {
     this.getAllPedidos();
   }
 
-  Voltar(){
+  Voltar() {
     this.router.navigateByUrl(HOME);
   }
 
-  getAllPedidos() {
-    const retorno = this.profileService.getUserInformations();
-    console.log("retorno", retorno)
+  async getAllPedidos() {
+    this.user = await this.profileService.getAllUsers();
+
+    console.log('this.user', this.user);
+    return this.user;
   }
 }
