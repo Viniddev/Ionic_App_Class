@@ -1,5 +1,5 @@
 export interface IMesa {
-    id: number;
+    id: string;
     numero: number;
     status: string;
     itens: {
@@ -7,4 +7,3 @@ export interface IMesa {
         nome: string;
     }[];
 }
-  

@@ -3,7 +3,7 @@ import { EnumStatusOptions } from "src/@types/Enums/Status";
 
 export const ListaPedidos: Array<IPedido> = [
     {
-      id: 1,
+      id: "1",
       numero: 11,
       status: EnumStatusOptions.Pronto,
       itens: [
@@ -13,7 +13,7 @@ export const ListaPedidos: Array<IPedido> = [
       ]
     },
     {
-      id: 2,
+      id: "2",
       numero: 3,
       status: EnumStatusOptions.Pronto,
       itens: [
@@ -23,7 +23,7 @@ export const ListaPedidos: Array<IPedido> = [
       ]
     },
     {
-      id: 3,
+      id: "3",
       numero: 5,
       status: EnumStatusOptions.EmProdutocao,
       itens: [
@@ -34,7 +34,7 @@ export const ListaPedidos: Array<IPedido> = [
       ]
     },
     {
-      id: 4,
+      id: "4",
       numero: 13,
       status: EnumStatusOptions.EmProdutocao,
       itens: [
@@ -45,7 +45,7 @@ export const ListaPedidos: Array<IPedido> = [
       ]
     },
     {
-      id: 5,
+      id: "5",
       numero: 7,
       status: EnumStatusOptions.EmProdutocao,
       itens: [
@@ -55,7 +55,7 @@ export const ListaPedidos: Array<IPedido> = [
       ]
     },
     {
-      id: 6,
+      id: "6",
       numero: 14,
       status: EnumStatusOptions.AguardandoConfirmacaoCozinha,
       itens: [

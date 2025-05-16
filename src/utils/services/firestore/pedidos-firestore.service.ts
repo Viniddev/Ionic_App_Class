@@ -1,6 +1,7 @@
 import { IPedido } from 'src/@types/IPedido';
 import { Injectable } from '@angular/core';
-import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, getDocs, addDoc } from '@angular/fire/firestore';
+import { INovoPedido } from 'src/@types/INovoPedido';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class PedidosFirestoreService {
       const pedido = doc.data()
 
       return {
-        id: pedido['id'],
+        id: doc.id,
         numero: pedido['numero'],
         status: pedido['status'],
         itens: pedido['itens']
@@ -25,6 +26,10 @@ export class PedidosFirestoreService {
     });
 
     return pedidos;
+  }
+
+  async setNewDocument(pedido: INovoPedido) {
+    await addDoc(collection(this.firestore, this.document), pedido);
   }
 
 }
