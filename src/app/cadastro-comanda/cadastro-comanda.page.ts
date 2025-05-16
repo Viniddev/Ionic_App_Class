@@ -12,8 +12,9 @@ import { ListaProdutos } from 'src/utils/mock/lista-produtos';
 import { VISUALIZAR_PEDIDO } from 'src/utils/constants/frontEndUrls';
 import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
 import { INovoPedido } from 'src/@types/INovoPedido';
-import { PEDIDOS } from 'src/utils/constants/backEndUrls';
 import { AlertController } from '@ionic/angular';
+import { EnumStatusOptions } from 'src/@types/Enums/Status';
+import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -40,9 +41,10 @@ export class CadastroComandaPage implements OnInit {
   mesaSelecionada: string;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private fs: FirestoreService,
     private alertController: AlertController,
+    private pedidosService: PedidosFirestoreService
   ) {}
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class CadastroComandaPage implements OnInit {
 
   pesquisa(event: any) {
     const termo = event.detail.value;
-    
+
     if (termo !== '') {
       const listaFiltrada: Array<IProdutos> = this.ProdutosCardapio.filter(
         (element: IProdutos) => element.nome.toLowerCase().includes(termo.toLowerCase())
@@ -69,19 +71,25 @@ export class CadastroComandaPage implements OnInit {
     this.PedidosFiltrados = listaFiltrada;
   }
 
-  async Finalizar() {
+  async finalizarPedido() {
     const lista: Array<IProdutos> = this.ProdutosCardapio.filter(
       (product: IProdutos) => product.quantidade > 0
     );
 
+    this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, "")
+    const pedido: INovoPedido = {
+        numero: Number(this.mesaSelecionada),
+        status: EnumStatusOptions.AguardandoConfirmacaoCozinha,
+        itens: lista
+          .filter(item => item.quantidade > 0)
+          .map(item => ({
+            nome: item.nome,
+            quantidade: item.quantidade
+      }))
+    }
+
     if(lista.length > 0 && this.mesaSelecionada !== ""){
-
-      const finalRequest: INovoPedido = {
-        produtos: lista,
-        mesa: this.mesaSelecionada
-      };
-
-      this.fs.addDocument(PEDIDOS, finalRequest);
+      await this.pedidosService.setNewPedidoDocuments(pedido);
 
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
     }else{

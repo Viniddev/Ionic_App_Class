@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent } from '@ionic/angular/standalone';
 import { CardItemComponent } from 'src/components/card-item/card-item.component';
-import { ListaPedidos } from 'src/utils/mock/lista-pedidos';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/constants/frontEndUrls';
 import { HeaderComponent } from 'src/components/header/header.component';
+import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
+import { IPedido } from 'src/@types/IPedido';
 
 @Component({
   selector: 'app-visualizar-pedidos',
@@ -22,24 +23,22 @@ import { HeaderComponent } from 'src/components/header/header.component';
   ]
 })
 export class VisualizarPedidosPage implements OnInit {
-  pedidos = ListaPedidos;
+  pedidos: IPedido[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private pedidosService: PedidosFirestoreService) { }
 
   ngOnInit() {
+    this.getAllPedidos()
   }
 
   atualizarStatus(pedidoId: number, novoStatus: string) {
-    // const pedido = this.pedidos.find(p => p.id === pedidoId);
-    // if (pedido) {
-    //   pedido.status = novoStatus as any;
-    // }
-
      this.router.navigateByUrl(HOME);
   }
 
-  filtrarPorStatus(status: string) {
-    return this.pedidos.filter(pedido => pedido.status === status);
+
+  async getAllPedidos() {
+    this.pedidos = await this.pedidosService.getAllPedidosDocuments();
+    return this.pedidos;
   }
 
 }

@@ -4,7 +4,7 @@
   <div class="conteiner-cadastro">
     <form id="campos-pesquisa">
       <ion-select
-        class="customSelect"  
+        class="customSelect"
         label="Selecionar mesa"
         size="large"
         label-placement="floating"
@@ -18,7 +18,7 @@
       </ion-select>
 
       <ion-searchbar
-        class="customSearchbar"  
+        class="customSearchbar"
         placeholder="Buscar produtos"
         (ionChange)="pesquisa($event)"
         fill="outline"
@@ -26,26 +26,26 @@
       />
 
       <span class="filtros">
-        <ion-button 
-          type="button" 
-          expand="full" 
-          size="small" 
+        <ion-button
+          type="button"
+          expand="full"
+          size="small"
           class="btnFiltro"
           (click)="filtraCategoria('Bebida')"
         >Bebida</ion-button>
 
-        <ion-button 
-          type="button" 
-          expand="full" 
-          size="small" 
+        <ion-button
+          type="button"
+          expand="full"
+          size="small"
           class="btnFiltro"
           (click)="filtraCategoria('Promoção')"
         >Promoção</ion-button>
 
-        <ion-button 
-          type="button" 
-          expand="full" 
-          size="small" 
+        <ion-button
+          type="button"
+          expand="full"
+          size="small"
           class="btnFiltro"
           (click)="filtraCategoria('Recomendado')"
         >Recomendado</ion-button>
@@ -54,18 +54,18 @@
     </form>
 
     <section id="pedido-list">
-      <app-card-pedido 
-        [produtosCardapio]="ProdutosCardapio" 
+      <app-card-pedido
+        [produtosCardapio]="ProdutosCardapio"
         [produtosFiltrados]="PedidosFiltrados"
       />
     </section>
-    
-    <ion-button 
-      type="button" 
-      expand="full" 
-      size="large" 
-      class="btnFinalizar" 
-      (click)="Finalizar()"
+
+    <ion-button
+      type="button"
+      expand="full"
+      size="large"
+      class="btnFinalizar"
+      (click)="finalizarPedido()"
     >Finalizar</ion-button>
 
   </div>
