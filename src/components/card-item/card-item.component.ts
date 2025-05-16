@@ -1,25 +1,31 @@
 import { IonButton, IonActionSheet } from '@ionic/angular/standalone';
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IMesa } from 'src/@types/IMesa';
+import { IPedidosPorMesa } from 'src/@types/IPedidosPorMesa';
 import { Router } from '@angular/router';
 import { StatusHandler } from 'src/utils/forms/statusHandler';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
+import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
+import { EnumStatusOptions } from 'src/@types/Enums/Status';
 
 @Component({
   selector: 'app-card-item',
   templateUrl: './card-item.component.html',
   styleUrls: ['./card-item.component.scss'],
-  imports: [IonActionSheet, CommonModule, IonButton]
+  imports: [IonActionSheet, CommonModule, IonButton],
 })
-export class CardItemComponent  implements OnInit {
-  @Input({ required: true }) mesa!: IMesa;
+export class CardItemComponent implements OnInit {
+  @Input({ required: true }) mesa!: IPedidosPorMesa;
   statusButtons: any[] = [];
 
-  constructor(private statusHandler: StatusHandler, private pedidosService: PedidosFirestoreService) { }
+  constructor(
+    private statusHandler: StatusHandler,
+    private pedidosService: PedidosFirestoreService,
+    private mesaService: MesasFirestoreService
+  ) {}
 
   ngOnChanges() {
-    if(this.mesa) {
+    if (this.mesa) {
       this.statusButtons = this.statusHandler.getStatus();
     }
   }
@@ -28,34 +34,39 @@ export class CardItemComponent  implements OnInit {
     return this.statusHandler.getStatus();
   }
 
-  handleStatusChange(event: CustomEvent, mesa: IMesa) {
+  handleStatusChange(event: CustomEvent, mesa: IPedidosPorMesa) {
     const novoStatus = this.statusHandler.handleStatusChange(event, mesa);
     this.pedidosService.updateDocumentStatusByDocId(mesa.id, novoStatus);
+
+    if (novoStatus === EnumStatusOptions.Pronto) 
+      this.mesaService.desbloqueiaMesa(mesa.numero); 
   }
 
   ngOnInit() {}
 
   getStatusClass(status: string): { [key: string]: boolean } {
     const statusMap: Record<string, string> = {
-      'Pronto': 'pronto',
+      Pronto: 'pronto',
       'Em Produção': 'em-producao',
-      'Aguardando confirmação da cozinha': 'aguardando'
+      'Aguardando confirmação da cozinha': 'aguardando',
     };
 
-    const normalizedStatus = statusMap[status] ||
-                           status.toLowerCase()
-                                .replace(/\s+/g, '-')
-                                .normalize("NFD")
-                                .replace(/[\u0300-\u036f]/g, "");
+    const normalizedStatus =
+      statusMap[status] ||
+      status
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
 
     return { [normalizedStatus]: true };
   }
 
   getTranslatedStatus(status: string): string {
     const statusTranslations: Record<string, string> = {
-      'Pronto': 'Pronto',
+      Pronto: 'Pronto',
       'Em Produção': 'Em Produção',
-      'Aguardando confirmação da cozinha': 'Aguardando'
+      'Aguardando confirmação da cozinha': 'Aguardando',
     };
 
     return statusTranslations[status] || status;

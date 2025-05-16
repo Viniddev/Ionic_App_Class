@@ -1,4 +1,4 @@
-export interface IMesa {
+export interface IPedidosPorMesa {
     id: string;
     numero: number;
     status: string;

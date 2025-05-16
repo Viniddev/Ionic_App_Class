@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IMesa } from 'src/@types/IMesa';
+import { IPedidosPorMesa } from 'src/@types/IPedidosPorMesa';
 import { EnumStatusOptions } from 'src/@types/Enums/Status';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StatusHandler {
-  mesa: IMesa;
+  mesa: IPedidosPorMesa;
 
   public getStatus() {
     return [
@@ -35,7 +35,7 @@ export class StatusHandler {
     ];
   }
 
-  handleStatusChange(event: CustomEvent, mesa: IMesa) {
+  handleStatusChange(event: CustomEvent, mesa: IPedidosPorMesa) {
     const acao = event.detail.data?.action;
     if (event.detail.role !== 'cancel' && acao) {
       this.atualizarStatusMesa(mesa, acao);
@@ -43,7 +43,7 @@ export class StatusHandler {
     return acao;
   }
 
-  atualizarStatusMesa(mesa: IMesa, novoStatus: EnumStatusOptions) {
-    mesa.status = novoStatus
+  atualizarStatusMesa(mesa: IPedidosPorMesa, novoStatus: EnumStatusOptions) {
+    mesa.status = novoStatus;
   }
 }

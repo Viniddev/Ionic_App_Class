@@ -3,12 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent } from '@ionic/angular/standalone';
 import { CardItemComponent } from 'src/components/card-item/card-item.component';
-import { Router } from '@angular/router';
-import { HOME } from 'src/utils/constants/frontEndUrls';
 import { HeaderComponent } from 'src/components/header/header.component';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { IPedido } from 'src/@types/IPedido';
-
 @Component({
   selector: 'app-visualizar-pedidos',
   templateUrl: './visualizar-pedidos.page.html',
@@ -25,7 +22,9 @@ import { IPedido } from 'src/@types/IPedido';
 export class VisualizarPedidosPage implements OnInit {
   pedidos: IPedido[];
 
-  constructor(private pedidosService: PedidosFirestoreService) { }
+  constructor(
+    private pedidosService: PedidosFirestoreService, 
+  ) { }
 
   ngOnInit() {
     this.getAllPedidos()

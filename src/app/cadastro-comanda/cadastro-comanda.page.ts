@@ -4,13 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonSearchbar, IonSelect, IonSelectOption  } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/components/header/header.component';
 import { IMesas } from 'src/@types/IMesas';
-import { ListaMesas } from 'src/utils/mock/lista-mesas';
 import { CardPedidoComponent } from 'src/components/card-pedido/card-pedido.component';
 import { Router } from '@angular/router';
 import { IProdutos } from 'src/@types/IProdutos';
 import { ListaProdutos } from 'src/utils/mock/lista-produtos';
 import { VISUALIZAR_PEDIDO } from 'src/utils/constants/frontEndUrls';
-import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
 import { INovoPedido } from 'src/@types/INovoPedido';
 import { AlertController } from '@ionic/angular';
 import { EnumStatusOptions } from 'src/@types/Enums/Status';
@@ -38,7 +36,7 @@ export class CadastroComandaPage implements OnInit {
   PedidosFiltrados: Array<IProdutos> = ListaProdutos;
   ProdutosCardapio: Array<IProdutos> = ListaProdutos;
 
-  mesas: Array<IMesas> = ListaMesas;
+  mesas: Array<IMesas>;
   mesaSelecionada: string;
 
   constructor(
@@ -50,6 +48,7 @@ export class CadastroComandaPage implements OnInit {
 
   ngOnInit() {
     this.mesaSelecionada = '';
+    this.pesquisaMesasVazias();
   }
 
   pesquisa(event: any) {
@@ -57,7 +56,8 @@ export class CadastroComandaPage implements OnInit {
 
     if (termo !== '') {
       const listaFiltrada: Array<IProdutos> = this.ProdutosCardapio.filter(
-        (element: IProdutos) => element.nome.toLowerCase().includes(termo.toLowerCase())
+        (element: IProdutos) =>
+          element.nome.toLowerCase().includes(termo.toLowerCase())
       );
       this.PedidosFiltrados = listaFiltrada;
     } else {
@@ -65,11 +65,15 @@ export class CadastroComandaPage implements OnInit {
     }
   }
 
-  filtraCategoria(categoria: string){
+  filtraCategoria(categoria: string) {
     const listaFiltrada: Array<IProdutos> = this.ProdutosCardapio.filter(
       (element: IProdutos) => element.categoria === categoria
     );
     this.PedidosFiltrados = listaFiltrada;
+  }
+
+  async pesquisaMesasVazias() {
+    this.mesas = await this.mesasService.buscaListaMesasVazias();
   }
 
   async finalizarPedido() {
@@ -77,27 +81,30 @@ export class CadastroComandaPage implements OnInit {
       (product: IProdutos) => product.quantidade > 0
     );
 
-    this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, "");
+    this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, '');
 
     const pedido: INovoPedido = {
-        numero: Number(this.mesaSelecionada),
-        status: EnumStatusOptions.AguardandoConfirmacaoCozinha,
-        itens: lista
-          .filter(item => item.quantidade > 0)
-          .map(item => ({
-            nome: item.nome,
-            quantidade: item.quantidade,
-            preco: item.preco
-      }))
-    }
+      numero: Number(this.mesaSelecionada),
+      status: EnumStatusOptions.AguardandoConfirmacaoCozinha,
+      itens: lista
+        .filter((item) => item.quantidade > 0)
+        .map((item) => ({
+          nome: item.nome,
+          quantidade: item.quantidade,
+          preco: item.preco,
+        })),
+    };
 
-    if(lista.length > 0 && this.mesaSelecionada !== ""){
+    if (lista.length > 0 && this.mesaSelecionada !== '') {
       await this.pedidosService.setNewPedidoDocuments(pedido);
 
       this.pedidosService.notificarAtualizacao();
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
-    }else{
-      this.showAlert('Dados inválidos', 'É necessário informar o número da mesa e o pedido para finalizar.');
+    } else {
+      this.showAlert(
+        'Dados inválidos',
+        'É necessário informar o número da mesa e o pedido para finalizar.'
+      );
     }
   }
 

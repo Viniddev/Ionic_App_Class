@@ -5,6 +5,7 @@ import { Firestore, collection, getDocs, addDoc, getDoc, doc, updateDoc } from '
 import { INovoPedido } from 'src/@types/INovoPedido';
 import { BehaviorSubject } from 'rxjs';
 import { PEDIDOS } from 'src/utils/constants/backEndUrls';
+import { MesasFirestoreService } from './mesas-firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class PedidosFirestoreService {
 
   atualizarPedidos$ = this.atualizarPedidos.asObservable();
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private mesasService: MesasFirestoreService) { }
 
   notificarAtualizacao() {
     this.atualizarPedidos.next(true);
@@ -39,6 +40,7 @@ export class PedidosFirestoreService {
 
   async setNewPedidoDocuments(pedido: INovoPedido) {
     await addDoc(collection(this.firestore, PEDIDOS), pedido);
+    await this.mesasService.bloqueiaMesa(pedido.numero);
   }
 
   async getPedidoDocumentById(documentId: string) {

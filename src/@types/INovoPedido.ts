@@ -1,6 +1,5 @@
 import { EnumStatusOptions } from "./Enums/Status";
 import { IItem } from "./IItem";
-import { IProdutos } from "./IProdutos";
 
 // export interface INovoPedido{
 //   produtos: Array<IProdutos>;

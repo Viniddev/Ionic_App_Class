@@ -3,6 +3,7 @@
 <ion-content class="ion-padding" fullscreen="true">
   <div class="conteiner-cadastro">
     <form id="campos-pesquisa">
+      
       <ion-select
         class="customSelect"
         label="Selecionar mesa"
@@ -13,7 +14,7 @@
         name="mesaSelecionada"
       >
         <ion-select-option *ngFor="let mesa of mesas"
-          >{{mesa.idMesa}}</ion-select-option
+          >{{mesa.identificador}}</ion-select-option
         >
       </ion-select>
 
