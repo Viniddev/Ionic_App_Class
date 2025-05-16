@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { getDocs, collection, Firestore, doc, documentId, getDoc, updateDoc } from '@angular/fire/firestore';
+import { getDocs, collection, Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { IUserInformations } from 'src/@types/IUserInformations';
-import { PEDIDOS, USUARIOS } from 'src/utils/constants/backEndUrls';
+import { USUARIOS } from 'src/utils/constants/backEndUrls';
 
 @Injectable({
   providedIn: 'root'

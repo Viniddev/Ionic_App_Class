@@ -2,19 +2,19 @@ import { IMesas } from "src/@types/IMesas";
 
 export const ListaMesas: Array<IMesas> = [
   {
-    idMesa: 'Mesa 1',
-    cliente: 'vazio',
+    identificador: 'Mesa 1',
+    status: 'vazio',
   },
   {
-    idMesa: 'Mesa 2',
-    cliente: 'vazio',
+    identificador: 'Mesa 2',
+    status: 'vazio',
   },
   {
-    idMesa: 'Mesa 3',
-    cliente: 'vazio',
+    identificador: 'Mesa 3',
+    status: 'vazio',
   },
   {
-    idMesa: 'Mesa 4',
-    cliente: 'vazio',
+    identificador: 'Mesa 4',
+    status: 'vazio',
   },
 ];

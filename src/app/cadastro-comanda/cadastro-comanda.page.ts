@@ -15,6 +15,7 @@ import { INovoPedido } from 'src/@types/INovoPedido';
 import { AlertController } from '@ionic/angular';
 import { EnumStatusOptions } from 'src/@types/Enums/Status';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
+import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -42,9 +43,9 @@ export class CadastroComandaPage implements OnInit {
 
   constructor(
     private router: Router,
-    private fs: FirestoreService,
     private alertController: AlertController,
-    private pedidosService: PedidosFirestoreService
+    private pedidosService: PedidosFirestoreService,
+    private mesasService: MesasFirestoreService
   ) {}
 
   ngOnInit() {
@@ -76,7 +77,8 @@ export class CadastroComandaPage implements OnInit {
       (product: IProdutos) => product.quantidade > 0
     );
 
-    this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, "")
+    this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, "");
+
     const pedido: INovoPedido = {
         numero: Number(this.mesaSelecionada),
         status: EnumStatusOptions.AguardandoConfirmacaoCozinha,

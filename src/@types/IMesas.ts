@@ -1,4 +1,4 @@
 export interface IMesas{
-    idMesa: string;
-    cliente: string;
+    identificador: string;
+    status: string;
 }
