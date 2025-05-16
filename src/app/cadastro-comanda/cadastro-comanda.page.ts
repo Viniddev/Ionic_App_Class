@@ -13,7 +13,7 @@ import { VISUALIZAR_PEDIDO } from 'src/utils/constants/frontEndUrls';
 import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
 import { INovoPedido } from 'src/@types/INovoPedido';
 import { PEDIDOS } from 'src/utils/constants/backEndUrls';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -42,7 +42,6 @@ export class CadastroComandaPage implements OnInit {
   constructor(
     private router: Router, 
     private fs: FirestoreService,
-    private loadingController: LoadingController,
     private alertController: AlertController,
   ) {}
 
@@ -76,8 +75,6 @@ export class CadastroComandaPage implements OnInit {
     );
 
     if(lista.length > 0 && this.mesaSelecionada !== ""){
-      const loading = await this.loadingController.create();
-      await loading.present();
 
       const finalRequest: INovoPedido = {
         produtos: lista,
@@ -86,7 +83,6 @@ export class CadastroComandaPage implements OnInit {
 
       this.fs.addDocument(PEDIDOS, finalRequest);
 
-      await loading.dismiss();
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
     }else{
       this.showAlert('Dados inválidos', 'É necessário informar o número da mesa e o pedido para finalizar.');

@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Validacoes } from 'src/utils/forms/validacoes';
 import { AuthService } from 'src/utils/services/auth/auth.service';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { ICredentials, MapUserCredentials } from 'src/@types/ICredentials';
 import { MaskitoOptions, MaskitoElementPredicate } from '@maskito/core';
 import { FirestoreService } from 'src/utils/services/firestore/firestore.service';
@@ -50,7 +50,6 @@ export class CadastroPage implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private loadingController: LoadingController,
     private alertController: AlertController,
     private fs: FirestoreService
   ) {}
@@ -128,16 +127,12 @@ export class CadastroPage implements OnInit {
 
   async Cadastrar() {
     if(!this.cadastro.invalid){
-      const loading = await this.loadingController.create();
-      await loading.present();
 
       const credentials: ICredentials = MapUserCredentials(this.cadastro);
       const userInformations: IUserInformations = MapUserInformations(this.cadastro)
 
       await this.fs.addDocument(USUARIOS, userInformations);
       const user = await this.authService.register(credentials);
-
-      await loading.dismiss();
 
       if (user) {
         this.router.navigateByUrl(LOGIN);

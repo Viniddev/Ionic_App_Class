@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CADASTRO, HOME, LOGIN } from 'src/utils/constants/frontEndUrls';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 import {
   IonContent,
@@ -37,7 +37,6 @@ export class LoginPage implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private auth: AuthService,
-    private loadingController: LoadingController,
     private alertController: AlertController
   ) {}
 
@@ -66,11 +65,8 @@ export class LoginPage implements OnInit {
 
   async login() {
     if(!this.credentials.invalid){
-      const loading = await this.loadingController.create();
-      await loading.present();
 
       const user = await this.auth.login(this.credentials.value);
-      await loading.dismiss();
 
       if (user) {
         this.router.navigateByUrl(HOME);
