@@ -15,7 +15,6 @@ import { IPedido } from 'src/@types/IPedido';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
 import { IMesas } from 'src/@types/IMesas';
-import { IItem } from 'src/@types/IItem';
 
 @Component({
   selector: 'app-resumo-pedidos',
@@ -44,8 +43,10 @@ export class ResumoPedidosPage implements OnInit {
   constructor(
     private router: Router,
     private pedidosService: PedidosFirestoreService,
-    private mesasService: MesasFirestoreService
-  ) {}
+    private mesasService: MesasFirestoreService,
+  ) {
+
+  }
 
   ngOnInit() {
     this.getAllOpenPedidos();

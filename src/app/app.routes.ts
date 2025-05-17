@@ -46,7 +46,7 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
-        path: 'finalizar-comanda',
+        path: 'finalizar-comanda/:id',
         loadComponent: () =>
           import('./finalizar-comanda/finalizar-comanda.page').then(
             (m) => m.FinalizarComandaPage

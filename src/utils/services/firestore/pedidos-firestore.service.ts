@@ -1,11 +1,12 @@
 import { Status } from './../../../../node_modules/google-gax/node_modules/@grpc/grpc-js/src/constants';
 import { IPedido } from 'src/@types/IPedido';
 import { Injectable } from '@angular/core';
-import { Firestore, collection, getDocs, addDoc, getDoc, doc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, getDocs, addDoc, getDoc, doc, updateDoc, query } from '@angular/fire/firestore';
 import { INovoPedido } from 'src/@types/INovoPedido';
 import { BehaviorSubject } from 'rxjs';
 import { PEDIDOS } from 'src/utils/constants/backEndUrls';
 import { MesasFirestoreService } from './mesas-firestore.service';
+import { EnumStatusOptions } from 'src/@types/Enums/Status';
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +25,17 @@ export class PedidosFirestoreService {
   async getAllPedidosDocuments(): Promise<IPedido[]> {
     const collectionDocs = await getDocs(collection(this.firestore, PEDIDOS));
 
-    const pedidos = collectionDocs.docs.map(doc => {
-      const pedido = doc.data();
+    const pedidos = collectionDocs.docs
+      .filter(doc => doc.data()['status'] !== 'Fechado')
+      .map(doc => {
+        const pedido = doc.data();
 
-      return {
-        id: doc.id,
-        numero: pedido['numero'],
-        status: pedido['status'],
-        itens: pedido['itens']
-      } as IPedido;
+        return {
+          id: doc.id,
+          numero: pedido['numero'],
+          status: pedido['status'],
+          itens: pedido['itens']
+        } as IPedido;
     });
 
     return pedidos;
@@ -51,6 +54,16 @@ export class PedidosFirestoreService {
     } else {
       return null
     }
+  }
+
+  async closePedido(documentId: string, status: EnumStatusOptions) {
+    const pedido = await getDoc(doc(this.firestore, PEDIDOS, documentId));
+    if(pedido.exists) {
+      await updateDoc(pedido.ref, {
+        status: status
+      });
+    }
+
   }
 
   async updateDocumentStatusByDocId(documentId: string, novoStatus: Status) {

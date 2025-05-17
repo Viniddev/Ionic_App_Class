@@ -7,6 +7,7 @@ import { HeaderComponent } from 'src/components/header/header.component';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { IPedido } from 'src/@types/IPedido';
 import { listaStatusOptions } from 'src/@types/Enums/Status';
+
 @Component({
   selector: 'app-visualizar-pedidos',
   templateUrl: './visualizar-pedidos.page.html',
@@ -29,7 +30,8 @@ export class VisualizarPedidosPage implements OnInit {
   listaStatusOptions: Array<string> = listaStatusOptions;
   statusFiltro: string;
 
-  constructor(private pedidosService: PedidosFirestoreService) {}
+  constructor(private pedidosService: PedidosFirestoreService) {
+  }
 
   ngOnInit() {
     this.getAllPedidos();

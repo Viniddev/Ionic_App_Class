@@ -1,3 +1,4 @@
+import { documentId } from '@angular/fire/firestore';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -22,10 +23,16 @@ export class CardComandaItemComponent  implements OnInit {
     this.router.navigateByUrl(CADASTRO_COMANDA)
   }
 
-  fechar(documentId: string){
-    this.pedidosService.getPedidoDocumentById(documentId).then(pedido => {
-      this.router.navigateByUrl(FINALIZAR_COMANDA, { state: { documentId: documentId } }
-      );
-    });
+  fecharComanda(documentId: string) {
+    this.pedidosService.getPedidoDocumentById(documentId).then(itemComanda => {
+      this.router.navigate([FINALIZAR_COMANDA, documentId])
+    })
   }
+
+  // fechar(documentId: string){
+  //   this.pedidosService.getPedidoDocumentById(documentId).then(pedido => {
+  //     this.router.navigateByUrl(FINALIZAR_COMANDA, { state: { documentId: documentId } }
+  //     );
+  //   });
+  // }
 }
