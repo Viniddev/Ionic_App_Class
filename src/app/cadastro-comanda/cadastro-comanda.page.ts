@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonSearchbar, IonSelect, IonSelectOption  } from '@ionic/angular/standalone';
@@ -33,8 +33,8 @@ import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firest
   ],
 })
 export class CadastroComandaPage implements OnInit {
-  PedidosFiltrados: Array<IProdutos> = ListaProdutos;
-  ProdutosCardapio: Array<IProdutos> = ListaProdutos;
+  PedidosFiltrados: Array<IProdutos> = Array.from([...ListaProdutos]);
+  ProdutosCardapio: Array<IProdutos> = Array.from([...ListaProdutos]);
 
   mesas: Array<IMesas>;
   mesaSelecionada: string;
@@ -49,6 +49,10 @@ export class CadastroComandaPage implements OnInit {
   ngOnInit() {
     this.mesaSelecionada = '';
     this.pesquisaMesasVazias();
+  }
+
+  ionViewWillLeave() {
+    this.LimpaCampos();
   }
 
   pesquisa(event: any) {
@@ -80,7 +84,7 @@ export class CadastroComandaPage implements OnInit {
     const lista: Array<IProdutos> = this.ProdutosCardapio.filter(
       (product: IProdutos) => product.quantidade > 0
     );
-    
+
     if (lista.length > 0 && this.mesaSelecionada !== '') {
       this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, '');
 
@@ -96,6 +100,9 @@ export class CadastroComandaPage implements OnInit {
           })),
       };
 
+      //limpar os campos apos a submissao do formulario
+      this.LimpaCampos();
+
       await this.pedidosService.setNewPedidoDocuments(pedido);
 
       this.pedidosService.notificarAtualizacao();
@@ -106,6 +113,12 @@ export class CadastroComandaPage implements OnInit {
         'É necessário informar o número da mesa e o pedido para finalizar.'
       );
     }
+  }
+
+  LimpaCampos() {
+    this.mesaSelecionada = '';
+    this.PedidosFiltrados = Array.from([...ListaProdutos]);
+    this.ProdutosCardapio = Array.from([...ListaProdutos]);
   }
 
   async showAlert(header: string, message: string) {

@@ -28,11 +28,4 @@ export class CardComandaItemComponent  implements OnInit {
       this.router.navigate([FINALIZAR_COMANDA, documentId])
     })
   }
-
-  // fechar(documentId: string){
-  //   this.pedidosService.getPedidoDocumentById(documentId).then(pedido => {
-  //     this.router.navigateByUrl(FINALIZAR_COMANDA, { state: { documentId: documentId } }
-  //     );
-  //   });
-  // }
 }

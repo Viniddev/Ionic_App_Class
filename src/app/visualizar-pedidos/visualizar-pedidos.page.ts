@@ -20,7 +20,7 @@ import { listaStatusOptions } from 'src/@types/Enums/Status';
     CardItemComponent,
     HeaderComponent,
     IonSelect,
-    IonSelectOption
+    IonSelectOption,
   ],
 })
 export class VisualizarPedidosPage implements OnInit {
@@ -30,10 +30,13 @@ export class VisualizarPedidosPage implements OnInit {
   listaStatusOptions: Array<string> = listaStatusOptions;
   statusFiltro: string;
 
-  constructor(private pedidosService: PedidosFirestoreService) {
-  }
+  constructor(private pedidosService: PedidosFirestoreService) {}
 
   ngOnInit() {
+    this.getAllPedidos();
+  }
+
+  ionViewWillEnter() {
     this.getAllPedidos();
   }
 
@@ -46,7 +49,7 @@ export class VisualizarPedidosPage implements OnInit {
       this.pedidosFiltrados = listaFiltrada;
     } else {
       this.pedidosFiltrados = this.pedidos;
-      this.statusFiltro = "";
+      this.statusFiltro = '';
     }
   }
 
