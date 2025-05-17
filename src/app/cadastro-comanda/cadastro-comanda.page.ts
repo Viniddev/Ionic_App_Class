@@ -14,6 +14,7 @@ import { AlertController } from '@ionic/angular';
 import { EnumStatusOptions } from 'src/@types/Enums/Status';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
+import { CardapioFirestoreService } from 'src/utils/services/firestore/cardapio-firestore.service';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -33,8 +34,8 @@ import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firest
   ],
 })
 export class CadastroComandaPage implements OnInit {
-  PedidosFiltrados: Array<IProdutos> = Array.from([...ListaProdutos]);
-  ProdutosCardapio: Array<IProdutos> = Array.from([...ListaProdutos]);
+  ProdutosFiltrados: Array<IProdutos>;
+  ProdutosCardapio: Array<IProdutos>;
 
   mesas: Array<IMesas>;
   mesaSelecionada: string;
@@ -43,12 +44,13 @@ export class CadastroComandaPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private pedidosService: PedidosFirestoreService,
-    private mesasService: MesasFirestoreService
+    private mesasService: MesasFirestoreService,
+    private cardapioSerive: CardapioFirestoreService
   ) {}
 
   ngOnInit() {
     this.mesaSelecionada = '';
-    this.pesquisaMesasVazias();
+    this.pesquisaInformacoesEstabelecimento();
   }
 
   ionViewWillLeave() {
@@ -63,9 +65,9 @@ export class CadastroComandaPage implements OnInit {
         (element: IProdutos) =>
           element.nome.toLowerCase().includes(termo.toLowerCase())
       );
-      this.PedidosFiltrados = listaFiltrada;
+      this.ProdutosFiltrados = listaFiltrada;
     } else {
-      this.PedidosFiltrados = this.ProdutosCardapio;
+      this.ProdutosFiltrados = this.ProdutosCardapio;
     }
   }
 
@@ -73,11 +75,13 @@ export class CadastroComandaPage implements OnInit {
     const listaFiltrada: Array<IProdutos> = this.ProdutosCardapio.filter(
       (element: IProdutos) => element.categoria === categoria
     );
-    this.PedidosFiltrados = listaFiltrada;
+    this.ProdutosFiltrados = listaFiltrada;
   }
 
-  async pesquisaMesasVazias() {
+  async pesquisaInformacoesEstabelecimento() {
     this.mesas = await this.mesasService.buscaListaMesasVazias();
+    this.ProdutosCardapio = await this.cardapioSerive.getCardapio();
+    this.ProdutosFiltrados = Array.from([...this.ProdutosCardapio]);
   }
 
   async finalizarPedido() {
@@ -116,9 +120,7 @@ export class CadastroComandaPage implements OnInit {
   }
 
   LimpaCampos() {
-    this.mesaSelecionada = '';
-    this.PedidosFiltrados = Array.from([...ListaProdutos]);
-    this.ProdutosCardapio = Array.from([...ListaProdutos]);
+    this.pesquisaInformacoesEstabelecimento();
   }
 
   async showAlert(header: string, message: string) {

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { collection, doc, documentId, Firestore, getDoc, getDocs, updateDoc } from '@angular/fire/firestore';
+import { collection, doc, Firestore, getDoc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { EnumStatusMesa } from 'src/@types/Enums/StatusMesa';
 import { IMesas } from 'src/@types/IMesas';
-import { MESAS, PEDIDOS } from 'src/utils/constants/backEndUrls';
+import { MESAS } from 'src/utils/constants/backEndUrls';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +23,8 @@ export class MesasFirestoreService {
   async buscaListaTodasAsMesas() {
     const mesas = await getDocs(collection(this.firestore, MESAS));
 
-    const listaMesasUteis = mesas.docs.map((element: any) => {
-      const mesa = element.data();
+    let listaMesasUteis = mesas.docs.map((element: any) => {
+      const mesa: IMesas = element.data();
 
       return {
         codigo: element.id,
@@ -33,9 +33,15 @@ export class MesasFirestoreService {
       } as IMesas;
     });
 
-    this.listaMesas = listaMesasUteis;
+    listaMesasUteis = listaMesasUteis.sort(
+      (a, b) =>
+        this.formatElementIdentificador(a.identificador) -
+        this.formatElementIdentificador(b.identificador)
+    );
 
-    return listaMesasUteis;
+    this.listaMesas = Array.from([...listaMesasUteis]);
+
+    return Array.from([...listaMesasUteis]);
   }
 
   async buscaListaMesasVazias() {
@@ -45,8 +51,8 @@ export class MesasFirestoreService {
       (element: any) => element.data().status !== EnumStatusMesa.ocupado
     );
 
-    const listaMesasUteis = listaMesasVazias.map((element: any) => {
-      const mesa = element.data();
+    let listaMesasUteis = listaMesasVazias.map((element: any) => {
+      const mesa: IMesas = element.data();
 
       return {
         codigo: element.id,
@@ -55,9 +61,15 @@ export class MesasFirestoreService {
       } as IMesas;
     });
 
-    this.listaMesas = listaMesasUteis;
+    listaMesasUteis = listaMesasUteis.sort(
+      (a, b) =>
+        this.formatElementIdentificador(a.identificador) -
+        this.formatElementIdentificador(b.identificador)
+    );
 
-    return listaMesasUteis;
+    this.listaMesas = Array.from([...listaMesasUteis]);
+
+    return Array.from([...listaMesasUteis]);
   }
 
   async bloqueiaMesa(mesaSelecionada: number) {

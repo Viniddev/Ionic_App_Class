@@ -7,16 +7,22 @@ import { BehaviorSubject } from 'rxjs';
 import { PEDIDOS } from 'src/utils/constants/backEndUrls';
 import { MesasFirestoreService } from './mesas-firestore.service';
 import { EnumStatusOptions } from 'src/@types/Enums/Status';
+import { IItemComanda } from 'src/@types/IItemComanda';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PedidosFirestoreService {
   private atualizarPedidos = new BehaviorSubject<boolean>(false);
 
   atualizarPedidos$ = this.atualizarPedidos.asObservable();
+  comandas: Array<IItemComanda> = [];
+  pedidos: Array<IPedido> = [];
 
-  constructor(private firestore: Firestore, private mesasService: MesasFirestoreService) { }
+  constructor(
+    private firestore: Firestore,
+    private mesasService: MesasFirestoreService
+  ) {}
 
   notificarAtualizacao() {
     this.atualizarPedidos.next(true);
@@ -25,20 +31,33 @@ export class PedidosFirestoreService {
   async getAllPedidosDocuments(): Promise<IPedido[]> {
     const collectionDocs = await getDocs(collection(this.firestore, PEDIDOS));
 
-    const pedidos = collectionDocs.docs
-      .filter(doc => doc.data()['status'] !== 'Fechado')
-      .map(doc => {
+    let pedidos = collectionDocs.docs
+      .filter((doc) => doc.data()['status'] !== 'Fechado')
+      .map((doc) => {
         const pedido = doc.data();
 
         return {
           id: doc.id,
           numero: pedido['numero'],
           status: pedido['status'],
-          itens: pedido['itens']
+          itens: pedido['itens'],
         } as IPedido;
-    });
+      });
 
-    return pedidos;
+    this.pedidos = Array.from([...pedidos]);
+    //sim, estou retornando duas coisas ao mesmo tempo
+    return Array.from([...pedidos]);
+  }
+
+  async montarComandas(): Promise<IItemComanda[]> {
+    if (!this.pedidos) return [];
+    
+    return this.pedidos.map(pedido => ({
+      id: pedido.id,
+      numero: pedido.numero,
+      itens: pedido.itens,
+      total: this.calculaTotal(pedido),
+    }));
   }
 
   async setNewPedidoDocuments(pedido: INovoPedido) {
@@ -48,34 +67,47 @@ export class PedidosFirestoreService {
 
   async getPedidoDocumentById(documentId: string) {
     const pedido = await getDoc(doc(this.firestore, PEDIDOS, documentId));
-    if(pedido.exists) {
-      const data = pedido.data() as Omit<IPedido, 'id'>
-      return { id: pedido.id, numero: data.numero, status: data.status,  itens: data.itens }
+    if (pedido.exists) {
+      const data = pedido.data() as Omit<IPedido, 'id'>;
+      return {
+        id: pedido.id,
+        numero: data.numero,
+        status: data.status,
+        itens: data.itens,
+      };
     } else {
-      return null
+      return null;
     }
   }
 
   async closePedido(documentId: string, status: EnumStatusOptions) {
     const pedido = await getDoc(doc(this.firestore, PEDIDOS, documentId));
-    if(pedido.exists) {
+    if (pedido.exists) {
       await updateDoc(pedido.ref, {
-        status: status
+        status: status,
       });
     }
-
   }
 
   async updateDocumentStatusByDocId(documentId: string, novoStatus: Status) {
     const pedido = await getDoc(doc(this.firestore, PEDIDOS, documentId));
 
-    if(pedido.exists) {
+    if (pedido.exists) {
       await updateDoc(pedido.ref, {
-        status: novoStatus
+        status: novoStatus,
       });
       return pedido;
     } else {
       return null;
     }
+  }
+
+  calculaTotal(pedido: IPedido) {
+    let totalPedido = 0;
+
+    for (const item of pedido.itens) {
+      totalPedido += item.preco * item.quantidade;
+    }
+    return totalPedido;
   }
 }

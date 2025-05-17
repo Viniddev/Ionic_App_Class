@@ -15,6 +15,7 @@ import { IPedido } from 'src/@types/IPedido';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
 import { IMesas } from 'src/@types/IMesas';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-resumo-pedidos',
@@ -34,7 +35,7 @@ import { IMesas } from 'src/@types/IMesas';
 export class ResumoPedidosPage implements OnInit {
   total: number;
   mesaFiltro: string;
-  listaMesas: Array<IMesas>;
+  listaMesas: Array<IMesas> = [];
   pedidos: Array<IPedido> = [];
 
   comandas: Array<IItemComanda> = [];
@@ -44,40 +45,30 @@ export class ResumoPedidosPage implements OnInit {
     private router: Router,
     private pedidosService: PedidosFirestoreService,
     private mesasService: MesasFirestoreService,
-  ) {
-
-  }
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.getAllOpenPedidos();
-    this.listaComandasFiltradas = this.comandas;
+  }
+
+  ionViewWillLeave() {
+    this.getAllOpenPedidos();
   }
 
   async getAllOpenPedidos() {
     this.pedidos = await this.pedidosService.getAllPedidosDocuments();
+    this.comandas = await this.pedidosService.montarComandas();
     this.listaMesas = await this.mesasService.buscaListaTodasAsMesas();
 
-    this.pedidos.forEach((pedido) => {
-      this.comandas.push({
-        id: pedido.id,
-        numero: pedido.numero,
-        itens: pedido.itens,
-        total: this.calculaTotal(pedido),
-      });
-    });
-  }
-
-  calculaTotal(pedido: IPedido) {
-    let totalPedido = 0;
-
-    for (const item of pedido.itens) {
-      totalPedido += item.preco * item.quantidade;
-    }
-    return totalPedido;
+    this.listaComandasFiltradas = [...this.comandas];
+    this.cdr.detectChanges();
   }
 
   filtrarPedidosPorMesa($event: any) {
-    const idMesa =  this.mesasService.formatElementIdentificador($event.detail?.value);
+    const idMesa = this.mesasService.formatElementIdentificador(
+      $event.detail?.value
+    );
 
     const listaFiltrada = this.comandas.filter(
       (element: IItemComanda) => element.numero === idMesa
