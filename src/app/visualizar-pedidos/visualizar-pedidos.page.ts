@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { CardItemComponent } from 'src/components/card-item/card-item.component';
 import { HeaderComponent } from 'src/components/header/header.component';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { IPedido } from 'src/@types/IPedido';
+import { listaStatusOptions } from 'src/@types/Enums/Status';
 @Component({
   selector: 'app-visualizar-pedidos',
   templateUrl: './visualizar-pedidos.page.html',
@@ -16,29 +17,40 @@ import { IPedido } from 'src/@types/IPedido';
     CommonModule,
     FormsModule,
     CardItemComponent,
-    HeaderComponent
-  ]
+    HeaderComponent,
+    IonSelect,
+    IonSelectOption
+  ],
 })
 export class VisualizarPedidosPage implements OnInit {
-  pedidos: IPedido[];
+  pedidos: Array<IPedido>;
+  pedidosFiltrados: Array<IPedido>;
 
-  constructor(
-    private pedidosService: PedidosFirestoreService, 
-  ) { }
+  listaStatusOptions: Array<string> = listaStatusOptions;
+  statusFiltro: string;
+
+  constructor(private pedidosService: PedidosFirestoreService) {}
 
   ngOnInit() {
-    this.getAllPedidos()
-    
-    // this.pedidosService.atualizarPedidos$.subscribe(atualizar => {
-    //   if(atualizar) {
-    //     this.getAllPedidos();
-    //     this.pedidosService.notificarAtualizacao();
-    //   }
-    // })
+    this.getAllPedidos();
+  }
+
+  filtrarStatusPedidos($event: any) {
+    if ($event.detail?.value !== 'Limpar Filtro') {
+      const listaFiltrada: Array<IPedido> = this.pedidos.filter(
+        (element: IPedido) => element.status === $event.detail?.value
+      );
+
+      this.pedidosFiltrados = listaFiltrada;
+    } else {
+      this.pedidosFiltrados = this.pedidos;
+      this.statusFiltro = "";
+    }
   }
 
   async getAllPedidos() {
     this.pedidos = await this.pedidosService.getAllPedidosDocuments();
+    this.pedidosFiltrados = this.pedidos;
     return this.pedidos;
   }
 }

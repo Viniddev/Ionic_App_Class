@@ -1,8 +1,22 @@
 <app-header title="Visualizar Pedidos"/>
 
 <ion-content class="ion-padding">
+  <ion-select
+    class="customSelect"
+    label="Selecionar status"
+    size="large"
+    label-placement="floating"
+    fill="outline"
+    name="statusFiltro"
+    (ionChange)="filtrarStatusPedidos($event)"
+  >
+    <ion-select-option *ngFor="let status of listaStatusOptions"
+      >{{status}}</ion-select-option
+    >
+  </ion-select>
+
   <app-card-item
-    *ngFor="let pedido of pedidos"
+    *ngFor="let pedido of pedidosFiltrados"
     [mesa]="{
       id: pedido.id,
       numero: pedido.numero,

@@ -1,9 +1,22 @@
 <app-header title="Resumo Pedidos"/>
 
 <ion-content class="ion-padding">
+  <ion-select
+    class="customSelect"
+    label="Selecionar a mesa"
+    size="large"
+    label-placement="floating"
+    fill="outline"
+    name="mesaFiltro"
+    (ionChange)="filtrarPedidosPorMesa($event)"
+  >
+    <ion-select-option *ngFor="let mesa of listaMesas"
+      >{{mesa.identificador}}</ion-select-option
+    >
+  </ion-select>
 
   <app-card-comanda-item
-    *ngFor="let item of comandas"
+    *ngFor="let item of listaComandasFiltradas"
     [itemComanda]="{
       id: item?.id,
       numero: item?.numero,

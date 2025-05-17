@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonSelect,
+  IonSelectOption,
+} from '@ionic/angular/standalone';
 import { CardComandaItemComponent } from 'src/components/card-comanda-item/card-comanda-item.component';
 import { Router } from '@angular/router';
 import { HOME } from 'src/utils/constants/frontEndUrls';
@@ -9,6 +13,9 @@ import { HeaderComponent } from 'src/components/header/header.component';
 import { IItemComanda } from 'src/@types/IItemComanda';
 import { IPedido } from 'src/@types/IPedido';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
+import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
+import { IMesas } from 'src/@types/IMesas';
+import { IItem } from 'src/@types/IItem';
 
 @Component({
   selector: 'app-resumo-pedidos',
@@ -20,43 +27,66 @@ import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-fi
     CommonModule,
     FormsModule,
     CardComandaItemComponent,
-    HeaderComponent
-  ]
+    HeaderComponent,
+    IonSelect,
+    IonSelectOption,
+  ],
 })
 export class ResumoPedidosPage implements OnInit {
-  pedidos: IPedido[] = [];
-  comandas: IItemComanda[] = [];
   total: number;
+  mesaFiltro: string;
+  listaMesas: Array<IMesas>;
+  pedidos: Array<IPedido> = [];
 
-  constructor(private router: Router, private pedidosService: PedidosFirestoreService) { }
+  comandas: Array<IItemComanda> = [];
+  listaComandasFiltradas: Array<IItemComanda> = [];
+
+  constructor(
+    private router: Router,
+    private pedidosService: PedidosFirestoreService,
+    private mesasService: MesasFirestoreService
+  ) {}
 
   ngOnInit() {
     this.getAllOpenPedidos();
+    this.listaComandasFiltradas = this.comandas;
   }
 
   async getAllOpenPedidos() {
     this.pedidos = await this.pedidosService.getAllPedidosDocuments();
-    this.pedidos.forEach(pedido => {
+    this.listaMesas = await this.mesasService.buscaListaTodasAsMesas();
+
+    this.pedidos.forEach((pedido) => {
       this.comandas.push({
         id: pedido.id,
         numero: pedido.numero,
         itens: pedido.itens,
-        total: this.calculaTotal(pedido)
-      })
-    })
+        total: this.calculaTotal(pedido),
+      });
+    });
   }
 
   calculaTotal(pedido: IPedido) {
     let totalPedido = 0;
 
-    for(const item of pedido.itens) {
-      totalPedido += item.preco * item.quantidade
+    for (const item of pedido.itens) {
+      totalPedido += item.preco * item.quantidade;
     }
     return totalPedido;
   }
 
-  Voltar(){
-    this.router.navigateByUrl(HOME)
+  filtrarPedidosPorMesa($event: any) {
+    const idMesa =  this.mesasService.formatElementIdentificador($event.detail?.value);
+
+    const listaFiltrada = this.comandas.filter(
+      (element: IItemComanda) => element.numero === idMesa
+    );
+
+    this.listaComandasFiltradas = listaFiltrada;
+  }
+
+  Voltar() {
+    this.router.navigateByUrl(HOME);
   }
 }
 

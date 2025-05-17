@@ -20,6 +20,24 @@ export class MesasFirestoreService {
     return Number(identificador.replace(/\D/g, ''));
   }
 
+  async buscaListaTodasAsMesas() {
+    const mesas = await getDocs(collection(this.firestore, MESAS));
+
+    const listaMesasUteis = mesas.docs.map((element: any) => {
+      const mesa = element.data();
+
+      return {
+        codigo: element.id,
+        identificador: mesa.identificador,
+        status: mesa.status,
+      } as IMesas;
+    });
+
+    this.listaMesas = listaMesasUteis;
+
+    return listaMesasUteis;
+  }
+
   async buscaListaMesasVazias() {
     const mesas = await getDocs(collection(this.firestore, MESAS));
 
@@ -52,7 +70,10 @@ export class MesasFirestoreService {
     );
 
     if (mesaDisponivel !== null || mesaDisponivel !== undefined) {
-      await this.atualizaStatusMesa(EnumStatusMesa.ocupado, mesaDisponivel.codigo);
+      await this.atualizaStatusMesa(
+        EnumStatusMesa.ocupado,
+        mesaDisponivel.codigo
+      );
     }
   }
 
