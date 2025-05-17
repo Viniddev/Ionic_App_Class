@@ -6,11 +6,11 @@
 ![Firebase](https://img.shields.io/badge/Firebase-Authentication%20%26%20Database-orange)
 ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
 
-Este projeto está sendo desenvolvido com o objetivo de criar um aplicativo mobile moderno e escalável. Durante o desenvolvimento, estamos utilizando tecnologias robustas para garantir uma experiência de usuário fluida e intuitiva. O aplicativo é baseado no **Ionic**, **Angular** e **TypeScript**, e utiliza o **Firebase** para autenticação e persistência de dados.
+Este projeto está sendo desenvolvido com o objetivo de criar um aplicativo mobile moderno e escalável para gestão de comanda digital em restaurantes e bares. Durante o desenvolvimento, estamos utilizando tecnologias robustas para garantir uma experiência de usuário fluida e intuitiva. O aplicativo é baseado no **Ionic**, **Angular** e **TypeScript**, e utiliza o **Firebase** para autenticação e persistência de dados.
 
 ## 📋 Índice
 
-- [Sobre o Projeto](#sobre-o-projeto)
+- [Sobre o Projeto](##sobre-o-projeto)
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Estrutura do Projeto](#estrutura-do-projeto)
@@ -96,7 +96,6 @@ Caso esteja utilizando um dispositivo físico, é necessário ativar a **Depura�
 - **Ionic Framework**: Framework para desenvolvimento híbrido
 - **Angular**: Framework baseado em TypeScript para construção do front-end
 - **Firebase**: Plataforma para autenticação e banco de dados em tempo real
-- **Capacitor**: Ferramenta para integração com funcionalidades nativas
 - **TypeScript**: Superset do JavaScript para tipagem estática
 
 ## 🤝 Contribuição
