@@ -1,4 +1,4 @@
-# Mobile App
+# EasyOrder: Gestão simplificada de comanda digital.
 
 ![Badge Status](https://img.shields.io/badge/status-Em%20Desenvolvimento-yellow)
 ![Ionic](https://img.shields.io/badge/Ionic-%3E%3D%206.0-blue)
