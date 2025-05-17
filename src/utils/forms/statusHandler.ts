@@ -23,10 +23,10 @@ export class StatusHandler {
         },
       },
       {
-        text: 'Aguardando confirmação da cozinha',
+        text: 'Entregue',
         data: {
-          action: EnumStatusOptions.AguardandoConfirmacaoCozinha,
-        },
+          action: EnumStatusOptions.Entregue,
+        }
       },
       {
         text: 'Cancelar',

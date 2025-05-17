@@ -38,9 +38,10 @@ export class CardItemComponent implements OnInit {
 
   getStatusClass(status: string): { [key: string]: boolean } {
     const statusMap: Record<string, string> = {
-      Pronto: 'pronto',
+      'Pronto': 'pronto',
       'Em Produção': 'em-producao',
       'Aguardando confirmação da cozinha': 'aguardando',
+      'Entregue': 'entregue'
     };
 
     const normalizedStatus =
@@ -56,9 +57,10 @@ export class CardItemComponent implements OnInit {
 
   getTranslatedStatus(status: string): string {
     const statusTranslations: Record<string, string> = {
-      Pronto: 'Pronto',
+      'Pronto': 'Pronto',
       'Em Produção': 'Em Produção',
       'Aguardando confirmação da cozinha': 'Aguardando',
+      'Entregue': 'Entregue'
     };
 
     return statusTranslations[status] || status;
