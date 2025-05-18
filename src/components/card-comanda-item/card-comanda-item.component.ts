@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { CADASTRO_COMANDA, FINALIZAR_COMANDA } from 'src/utils/constants/frontEndUrls';
+import { CADASTRO_COMANDA, FINALIZAR_COMANDA, NEW_PRODUCT } from 'src/utils/constants/frontEndUrls';
 import { IItemComanda } from 'src/@types/IItemComanda';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { IonButton } from '@ionic/angular/standalone';
@@ -10,22 +10,30 @@ import { IonButton } from '@ionic/angular/standalone';
   selector: 'app-card-comanda-item',
   templateUrl: './card-comanda-item.component.html',
   styleUrls: ['./card-comanda-item.component.scss'],
-  imports: [CommonModule, IonButton]
+  imports: [CommonModule, IonButton],
 })
-export class CardComandaItemComponent  implements OnInit {
+export class CardComandaItemComponent implements OnInit {
   @Input({ required: true }) itemComanda!: IItemComanda;
 
-  constructor(private router: Router, private pedidosService: PedidosFirestoreService) { }
+  constructor(
+    private router: Router,
+    private pedidosService: PedidosFirestoreService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cdr.detectChanges();
+  }
 
-  editar(){
-    this.router.navigateByUrl(CADASTRO_COMANDA)
+  editar(itemComanda: IItemComanda) {
+    this.router.navigate([CADASTRO_COMANDA, itemComanda.id]);
   }
 
   fecharComanda(documentId: string) {
-    this.pedidosService.getPedidoDocumentById(documentId).then(itemComanda => {
-      this.router.navigate([FINALIZAR_COMANDA, documentId])
-    })
+    this.pedidosService
+      .getPedidoDocumentById(documentId)
+      .then((itemComanda) => {
+        this.router.navigate([FINALIZAR_COMANDA, documentId]);
+      });
   }
 }

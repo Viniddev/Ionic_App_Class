@@ -20,6 +20,10 @@ export class MesasFirestoreService {
     return Number(identificador.replace(/\D/g, ''));
   }
 
+  createElementIdentificador(numeroMesa: number){
+    return numeroMesa > 10 ? `Mesa ${numeroMesa}` : `Mesa 0${numeroMesa}`;
+  }
+
   async buscaListaTodasAsMesas() {
     const mesas = await getDocs(collection(this.firestore, MESAS));
 

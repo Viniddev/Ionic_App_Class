@@ -12,6 +12,7 @@
         fill="outline"
         [(ngModel)]="mesaSelecionada"
         name="mesaSelecionada"
+        [disabled]="seletorMesaDisabled"
       >
         <ion-select-option *ngFor="let mesa of mesas"
           >{{mesa.identificador}}</ion-select-option

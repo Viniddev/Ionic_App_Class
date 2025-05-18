@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CADASTRO, HOME, LOGIN } from 'src/utils/constants/frontEndUrls';
+import { CADASTRO_COMANDA, LOGIN, NEW_PRODUCT } from 'src/utils/constants/frontEndUrls';
 import { AlertController } from '@ionic/angular';
 
 import {
@@ -58,17 +58,13 @@ export class LoginPage implements OnInit {
     return this.credentials.get('password');
   }
 
-  async register() {
-    this.router.navigateByUrl(CADASTRO)
-  }
-
   async login() {
     if(!this.credentials.invalid){
       this.isDisabled = true;
       const user = await this.auth.login(this.credentials.value);
 
       if (user) {
-        this.router.navigateByUrl(HOME);
+        this.router.navigate([CADASTRO_COMANDA, NEW_PRODUCT]);
       } else {
         this.showAlert('Email ou Senha incorretos.', 'Tente novamente!');
       }

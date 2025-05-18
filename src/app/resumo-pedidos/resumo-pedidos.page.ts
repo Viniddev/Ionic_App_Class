@@ -8,7 +8,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CardComandaItemComponent } from 'src/components/card-comanda-item/card-comanda-item.component';
 import { Router } from '@angular/router';
-import { HOME } from 'src/utils/constants/frontEndUrls';
+import { CADASTRO_COMANDA, NEW_PRODUCT } from 'src/utils/constants/frontEndUrls';
 import { HeaderComponent } from 'src/components/header/header.component';
 import { IItemComanda } from 'src/@types/IItemComanda';
 import { IPedido } from 'src/@types/IPedido';
@@ -85,7 +85,7 @@ export class ResumoPedidosPage implements OnInit {
   }
 
   Voltar() {
-    this.router.navigateByUrl(HOME);
+    this.router.navigate([CADASTRO_COMANDA, NEW_PRODUCT]);
   }
 }
 

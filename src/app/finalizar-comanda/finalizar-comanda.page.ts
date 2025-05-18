@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent } from '@ionic/angular/standalone';
 import { CardFechamentoItemComponent } from 'src/components/card-fechamento-item/card-fechamento-item.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HOME } from 'src/utils/constants/frontEndUrls';
+import { CADASTRO_COMANDA, NEW_PRODUCT } from 'src/utils/constants/frontEndUrls';
 import { HeaderComponent } from 'src/components/header/header.component';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { IItemComanda } from 'src/@types/IItemComanda';
@@ -66,6 +66,6 @@ export class FinalizarComandaPage implements OnInit {
   }
 
   Voltar() {
-    this.router.navigateByUrl(HOME);
+    this.router.navigate([CADASTRO_COMANDA, NEW_PRODUCT]);
   }
 }

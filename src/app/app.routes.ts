@@ -17,7 +17,7 @@ export const routes: Routes = [
     component: TabNavegacaoComponent,
     children: [
       {
-        path: 'cadastro-comanda',
+        path: 'cadastro-comanda/:id',
         loadComponent: () =>
           import('./cadastro-comanda/cadastro-comanda.page').then(
             (m) => m.CadastroComandaPage
@@ -62,7 +62,7 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'cadastro-comanda',
+        redirectTo: 'cadastro-comanda:id',
         pathMatch: 'full',
       },
     ],

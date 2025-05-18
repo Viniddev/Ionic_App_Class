@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ProfileInfo } from 'src/utils/mock/profile-info';
 import { Router } from '@angular/router';
-import { HOME } from 'src/utils/constants/frontEndUrls';
+import { CADASTRO_COMANDA, NEW_PRODUCT } from 'src/utils/constants/frontEndUrls';
 import { ProfileFirestoreService } from 'src/utils/services/firestore/profile-firestore.service';
 import { IUserInformations } from 'src/@types/IUserInformations';
 
@@ -37,6 +37,6 @@ export class PerfilPage implements OnInit {
   }
 
   Voltar() {
-    this.router.navigateByUrl(HOME);
+    this.router.navigate([CADASTRO_COMANDA, NEW_PRODUCT]);
   }
 }

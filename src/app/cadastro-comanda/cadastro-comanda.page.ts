@@ -5,15 +5,14 @@ import { IonButton, IonContent, IonSearchbar, IonSelect, IonSelectOption  } from
 import { HeaderComponent } from 'src/components/header/header.component';
 import { IMesas } from 'src/@types/IMesas';
 import { CardPedidoComponent } from 'src/components/card-pedido/card-pedido.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IProdutos } from 'src/@types/IProdutos';
-import { VISUALIZAR_PEDIDO } from 'src/utils/constants/frontEndUrls';
-import { INovoPedido } from 'src/@types/INovoPedido';
+import { NEW_PRODUCT, RESUMO_PEDIDO, VISUALIZAR_PEDIDO } from 'src/utils/constants/frontEndUrls';
 import { AlertController } from '@ionic/angular';
-import { EnumStatusOptions } from 'src/@types/Enums/Status';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
 import { CardapioFirestoreService } from 'src/utils/services/firestore/cardapio-firestore.service';
+import { IItem } from 'src/@types/IItem';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -37,20 +36,23 @@ export class CadastroComandaPage implements OnInit {
   ProdutosCardapio: Array<IProdutos>;
 
   mesas: Array<IMesas>;
-  mesaSelecionada: string;
+  mesaSelecionada: string = '';
 
   isDisabled: boolean = false;
+  IdPedido: string = '';
+  seletorMesaDisabled: boolean = false;
 
   constructor(
     private router: Router,
     private alertController: AlertController,
     private pedidosService: PedidosFirestoreService,
     private mesasService: MesasFirestoreService,
-    private cardapioSerive: CardapioFirestoreService
+    private cardapioSerive: CardapioFirestoreService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.mesaSelecionada = '';
+    this.IdPedido = this.activatedRoute.snapshot.paramMap.get('id');
     this.pesquisaInformacoesEstabelecimento();
   }
 
@@ -83,43 +85,54 @@ export class CadastroComandaPage implements OnInit {
     this.mesas = await this.mesasService.buscaListaMesasVazias();
     this.ProdutosCardapio = await this.cardapioSerive.getCardapio();
     this.ProdutosFiltrados = Array.from([...this.ProdutosCardapio]);
+
+    if(this.IdPedido !== NEW_PRODUCT)
+      this.pesquisaInformacoesComanda();
+  }
+
+  async pesquisaInformacoesComanda(){
+    this.seletorMesaDisabled = true;
+    const produto = await this.pedidosService.getPedidoDocumentById(this.IdPedido);
+
+    this.mesaSelecionada = this.mesasService.createElementIdentificador(produto.numero);
+
+    this.ProdutosCardapio = this.ProdutosCardapio.map((element: IProdutos) => {
+      const item = produto.itens.find(
+        (produto: IItem) => produto.id === element.id
+      );
+      if (item) {
+        element.quantidade = item.quantidade;
+      }
+      return element;
+    });
   }
 
   async finalizarPedido() {
-    const lista: Array<IProdutos> = this.ProdutosCardapio.filter(
-      (product: IProdutos) => product.quantidade > 0
-    );
-
-    if (lista.length > 0 && this.mesaSelecionada !== '') {
-      this.isDisabled = true;
-      this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, '');
-
-      const pedido: INovoPedido = {
-        numero: Number(this.mesaSelecionada),
-        status: EnumStatusOptions.AguardandoConfirmacaoCozinha,
-        itens: lista
-          .filter((item) => item.quantidade > 0)
-          .map((item) => ({
-            nome: item.nome,
-            quantidade: item.quantidade,
-            preco: item.preco,
-          })),
-      };
-
-      //limpar os campos apos a submissao do formulario
-      this.LimpaCampos();
-      
-      await this.pedidosService.setNewPedidoDocuments(pedido);
-      this.pedidosService.notificarAtualizacao();
-      this.router.navigateByUrl(VISUALIZAR_PEDIDO);
-
-      this.isDisabled = true;
-    } else {
-      this.showAlert(
-        'Dados inválidos',
-        'É necessário informar o número da mesa e o pedido para finalizar.'
-      );
+    if(this.IdPedido !== NEW_PRODUCT){
+      this.editaPedidos();
+    }else{
+      this.cadastraPedido();      
     }
+  }
+  
+  async editaPedidos() {
+    this.isDisabled = true;
+    //chamada
+    await this.pedidosService.editaPedido(this.ProdutosCardapio, this.IdPedido);
+
+    this.LimpaCampos();
+    this.isDisabled = false;
+    this.router.navigateByUrl(VISUALIZAR_PEDIDO);
+  }
+
+  async cadastraPedido() {
+    this.isDisabled = true;
+    //chamada
+    await this.pedidosService.cadastroPedido(this.ProdutosCardapio, this.mesaSelecionada);
+
+    this.LimpaCampos();
+    this.isDisabled = false;
+    this.router.navigateByUrl(RESUMO_PEDIDO);
   }
 
   LimpaCampos() {
