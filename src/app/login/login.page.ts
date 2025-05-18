@@ -32,6 +32,7 @@ import { AuthService } from 'src/utils/services/auth/auth.service';
 })
 export class LoginPage implements OnInit {
   credentials!: FormGroup;
+  isDisabled: boolean = false;
 
   constructor(
     private router: Router,
@@ -65,7 +66,7 @@ export class LoginPage implements OnInit {
 
   async login() {
     if(!this.credentials.invalid){
-
+      this.isDisabled = true;
       const user = await this.auth.login(this.credentials.value);
 
       if (user) {
@@ -73,6 +74,8 @@ export class LoginPage implements OnInit {
       } else {
         this.showAlert('Email ou Senha incorretos.', 'Tente novamente!');
       }
+      
+      this.isDisabled = false;
     }else{
       this.showAlert('Email / Senha inválidos.', 'Login e senha não podem ser vazios.');
     }

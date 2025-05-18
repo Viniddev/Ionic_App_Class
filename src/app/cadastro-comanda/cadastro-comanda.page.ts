@@ -40,6 +40,8 @@ export class CadastroComandaPage implements OnInit {
   mesas: Array<IMesas>;
   mesaSelecionada: string;
 
+  isDisabled: boolean = false;
+
   constructor(
     private router: Router,
     private alertController: AlertController,
@@ -90,6 +92,7 @@ export class CadastroComandaPage implements OnInit {
     );
 
     if (lista.length > 0 && this.mesaSelecionada !== '') {
+      this.isDisabled = true;
       this.mesaSelecionada = this.mesaSelecionada.replace(/\D/g, '');
 
       const pedido: INovoPedido = {
@@ -106,11 +109,12 @@ export class CadastroComandaPage implements OnInit {
 
       //limpar os campos apos a submissao do formulario
       this.LimpaCampos();
-
+      
       await this.pedidosService.setNewPedidoDocuments(pedido);
-
       this.pedidosService.notificarAtualizacao();
       this.router.navigateByUrl(VISUALIZAR_PEDIDO);
+
+      this.isDisabled = true;
     } else {
       this.showAlert(
         'Dados inválidos',

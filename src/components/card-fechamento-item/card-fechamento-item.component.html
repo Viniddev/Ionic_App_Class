@@ -14,12 +14,9 @@
         <div class="total-label">Total:</div>
         <div class="total-value">R$ {{ item?.total?.toFixed(2).replace('.', ',') }}</div>
       </div>
-
-      <div class="botoes-container">
-        <button class="btn-fechar" (click)="fecharComanda()">
-          FECHAR COMANDA
-        </button>
-      </div>
     </div>
   </div>
+  <ion-button class="btn-fechar" (click)="fecharComanda()" [disabled]="isDisabled" expand="full">
+    FECHAR COMANDA
+  </ion-button>
 </div>
