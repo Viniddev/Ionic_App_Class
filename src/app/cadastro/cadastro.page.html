@@ -113,7 +113,13 @@
         ></ion-input>
       </ion-item>
 
-      <ion-button type="button" expand="block" color="secondary" (click)="Cadastrar()">
+      <ion-button 
+        type="button" 
+        expand="block" 
+        color="secondary" 
+        (click)="Cadastrar()" 
+        [blocked]="isBlocked"
+      >
         Confirmar
       </ion-button>
     </form>

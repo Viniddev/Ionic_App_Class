@@ -7,7 +7,6 @@ import {
   IonContent,
   IonButton,
   IonItem,
-  IonNote,
   IonInput
 } from '@ionic/angular/standalone';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +23,6 @@ import { AuthService } from 'src/utils/services/auth/auth.service';
     IonContent,
     IonButton,
     IonItem,
-    IonNote,
     IonInput,
     ReactiveFormsModule,
     CommonModule,

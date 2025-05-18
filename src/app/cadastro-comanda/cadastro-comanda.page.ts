@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonSearchbar, IonSelect, IonSelectOption  } from '@ionic/angular/standalone';
@@ -7,7 +7,6 @@ import { IMesas } from 'src/@types/IMesas';
 import { CardPedidoComponent } from 'src/components/card-pedido/card-pedido.component';
 import { Router } from '@angular/router';
 import { IProdutos } from 'src/@types/IProdutos';
-import { ListaProdutos } from 'src/utils/mock/lista-produtos';
 import { VISUALIZAR_PEDIDO } from 'src/utils/constants/frontEndUrls';
 import { INovoPedido } from 'src/@types/INovoPedido';
 import { AlertController } from '@ionic/angular';
