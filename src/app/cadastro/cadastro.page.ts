@@ -13,6 +13,7 @@ import { FirestoreService } from 'src/utils/services/firestore/firestore.service
 import { USUARIOS } from 'src/utils/constants/backEndUrls';
 import { LOGIN } from 'src/utils/constants/frontEndUrls';
 import { IUserInformations, MapUserInformations } from 'src/@types/IUserInformations';
+import { ProfileInfo } from 'src/utils/mock/profile-info';
 
 @Component({
   selector: 'app-cadastro',
@@ -33,6 +34,7 @@ import { IUserInformations, MapUserInformations } from 'src/@types/IUserInformat
 })
 export class CadastroPage implements OnInit {
   cadastro!: FormGroup;
+  isBlocked: boolean = false;
 
   readonly phoneMask: MaskitoOptions = {
     mask: [
@@ -127,6 +129,7 @@ export class CadastroPage implements OnInit {
 
   async Cadastrar() {
     if(!this.cadastro.invalid){
+      this.isBlocked = true;
 
       const credentials: ICredentials = MapUserCredentials(this.cadastro);
       const userInformations: IUserInformations = MapUserInformations(this.cadastro)
@@ -135,10 +138,13 @@ export class CadastroPage implements OnInit {
       const user = await this.authService.register(credentials);
 
       if (user) {
-        this.router.navigateByUrl(LOGIN);
+        this.cadastro.reset();
+        this.showAlert('Sucesso', 'Usuario cadastrado no sistema!');
       } else {
         this.showAlert('Falha no registro', 'Tente novamente!');
       }
+
+      this.isBlocked = false;
     }else{
        this.showAlert('Dados inválidos', 'Todos os campos devem ser preenchidos antes de submeter.');
     }
