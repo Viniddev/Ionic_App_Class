@@ -1,6 +1,6 @@
 export const LOGIN = "/login";
-export const CADASTRO = '/cadastro';
 
+export const CADASTRO = '/service/cadastro';
 export const PERFIL = '/service/perfil';
 export const HOME = '/service/cadastro-comanda';
 export const CADASTRO_COMANDA = '/service/cadastro-comanda';

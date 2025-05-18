@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 10%;
+    padding-top: 5%;
     gap: 7%;
     height: 100%;
 
@@ -22,15 +22,6 @@
         display: flex;
         justify-content: space-between;
         flex-direction: column;
-
-        #esqueceu-senha{
-            line-height: 10px;
-            margin: 0;
-            padding: 0;
-            text-align: end;
-            text-decoration: underline;
-            color: white;
-        }
 
         .login-title{
             color: var(--colorPrimary);

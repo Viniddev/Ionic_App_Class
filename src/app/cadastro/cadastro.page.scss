@@ -5,15 +5,8 @@
     justify-content: center;
     flex-direction: column;
 
-    #title-cadastro{
-        font-weight: 600;
-        color: var(--backgroundPrimary);
-        margin: .5rem 0px 0rem 0px;
-    }
-
-    #subtitle-cadastro{
-        color: var(--backgroundSecondary);
-        margin: .3rem 0px 2rem 0px;
+    .titulo-form{
+        margin-bottom: 1rem;
     }
 
     .form-cadastro{
