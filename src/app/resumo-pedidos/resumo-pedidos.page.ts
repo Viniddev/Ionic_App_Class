@@ -49,20 +49,27 @@ export class ResumoPedidosPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getAllOpenPedidos();
+    this.pedidosService.atualizarPedidos$.subscribe(async (atualizar) => {
+      if (atualizar) {
+        await this.carregarDados();
+      }
+    });
+
+    this.pedidosService['atualizarPedidos'].next(true);
   }
 
   ionViewWillLeave() {
-    this.getAllOpenPedidos();
+    this.carregarDados();
   }
 
-  async getAllOpenPedidos() {
+  private async carregarDados() {
     this.pedidos = await this.pedidosService.getAllPedidosDocuments();
     this.comandas = await this.pedidosService.montarComandas();
-    this.listaMesas = await this.mesasService.buscaListaTodasAsMesas();
 
     this.listaComandasFiltradas = [...this.comandas];
-    this.cdr.detectChanges();
+    this.listaMesas = await this.mesasService.buscaListaTodasAsMesas();
+
+    this.cdr.detectChanges(); // força atualização do DOM se necessário
   }
 
   filtrarPedidosPorMesa($event: any) {

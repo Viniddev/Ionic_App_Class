@@ -1,7 +1,7 @@
 import { Status } from './../../../../node_modules/google-gax/node_modules/@grpc/grpc-js/src/constants';
 import { IPedido } from 'src/@types/IPedido';
 import { Injectable } from '@angular/core';
-import { Firestore, collection, getDocs, addDoc, getDoc, doc, updateDoc, query } from '@angular/fire/firestore';
+import { Firestore, collection, getDocs, addDoc, getDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { INovoPedido } from 'src/@types/INovoPedido';
 import { BehaviorSubject } from 'rxjs';
 import { PEDIDOS } from 'src/utils/constants/backEndUrls';
@@ -14,8 +14,8 @@ import { IItemComanda } from 'src/@types/IItemComanda';
 })
 export class PedidosFirestoreService {
   private atualizarPedidos = new BehaviorSubject<boolean>(false);
-
   atualizarPedidos$ = this.atualizarPedidos.asObservable();
+
   comandas: Array<IItemComanda> = [];
   pedidos: Array<IPedido> = [];
 
@@ -24,7 +24,7 @@ export class PedidosFirestoreService {
     private mesasService: MesasFirestoreService
   ) {}
 
-  notificarAtualizacao() {
+  async notificarAtualizacao() {
     this.atualizarPedidos.next(true);
   }
 
