@@ -18,6 +18,10 @@ export class ProfileFirestoreService {
     return this.UserId;
   }
 
+  get User(){
+    return this.UserInformations;
+  }
+
   async getUserProfileInformations() {
     const pedido = await getDocs(collection(this.firestore, USUARIOS));
 

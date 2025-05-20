@@ -149,7 +149,7 @@ export class PedidosFirestoreService {
             id: item.id,
             nome: item.nome,
             quantidade: item.quantidade,
-            preco: item.preco,
+            preco: item.preco,                                                                                                      
           })),
       };
 
