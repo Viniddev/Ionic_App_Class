@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, doc, Firestore, getDoc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { IComanda } from 'src/@types/IComanda';
-import { COMANDAS, PEDIDOS } from 'src/utils/constants/backEndUrls';
+import { COMANDAS } from 'src/utils/constants/backEndUrls';
 import { ProfileFirestoreService } from './profile-firestore.service';
-import { StatusMesa } from 'src/@types/Enums/statusComanda';
+import { StatusComanda } from 'src/@types/Enums/statusComanda';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComandaFirestoreService {
   comandas: Array<IComanda>;
+  docRef: string;
 
   constructor(
     private firestore: Firestore,
     private profileService: ProfileFirestoreService
   ) { }
+
+  get docId(){
+    return this.docRef;
+  }
 
   async CriaComanda(mesaSelecionada: string) {
     let user = this.profileService.User;
@@ -23,17 +28,21 @@ export class ComandaFirestoreService {
 
     if (!this.comandas) await this.buscarTodasAsComandas();
 
-    const comandaJaExiste = this.comandas.some((element: IComanda) => element.mesa === mesaSelecionada);
+    const comandaJaExiste = this.comandas.some(
+      (element: IComanda) => element.mesa === mesaSelecionada && element.status === StatusComanda.aberta);
 
     if (comandaJaExiste) return null;
 
     const novaComanda: IComanda = {
       mesa: mesaSelecionada,
       criador: user.cpf,
-      status: StatusMesa.aberta
+      status: StatusComanda.aberta
     }
 
-    await addDoc(collection(this.firestore, COMANDAS), novaComanda);
+    const docRef = await addDoc(collection(this.firestore, COMANDAS), novaComanda);
+
+    this.docRef = docRef.id;
+    return docRef.id
   }
 
   async FechaComandaPorId(idComanda: string) {
@@ -41,7 +50,7 @@ export class ComandaFirestoreService {
 
     if (comanda.exists) {
       await updateDoc(comanda.ref, {
-        status: StatusMesa.fechada,
+        status: StatusComanda.fechada,
       });
       return comanda;
     } else {

@@ -1,4 +1,4 @@
-export enum StatusMesa{
+export enum StatusComanda{
     aberta = "Aberta",
     fechada = "Fechada"
 }

@@ -13,7 +13,6 @@ import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-fi
 import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
 import { CardapioFirestoreService } from 'src/utils/services/firestore/cardapio-firestore.service';
 import { IItem } from 'src/@types/IItem';
-import { ComandaFirestoreService } from 'src/utils/services/firestore/comanda-firestore.service';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -50,12 +49,9 @@ export class CadastroComandaPage implements OnInit {
     private mesasService: MesasFirestoreService,
     private cardapioSerive: CardapioFirestoreService,
     private activatedRoute: ActivatedRoute,
-    private comandaService: ComandaFirestoreService
   ) {}
 
   ngOnInit() {
-    this.comandaService.CriaComanda("Mesa 01");
-    this.comandaService.buscarTodasAsComandas();
     this.IdPedido = this.activatedRoute.snapshot.paramMap.get('id');
     this.pesquisaInformacoesEstabelecimento();
   }
@@ -115,7 +111,7 @@ export class CadastroComandaPage implements OnInit {
     if(this.IdPedido !== NEW_PRODUCT){
       this.editaPedidos();
     }else{
-      this.cadastraPedido();      
+      this.cadastraComanda();      
     }
   }
   
@@ -129,8 +125,9 @@ export class CadastroComandaPage implements OnInit {
     this.router.navigateByUrl(VISUALIZAR_PEDIDO);
   }
 
-  async cadastraPedido() {
+  async cadastraComanda() {
     this.isDisabled = true;
+
     //chamada
     await this.pedidosService.cadastroPedido(this.ProdutosCardapio, this.mesaSelecionada);
 
