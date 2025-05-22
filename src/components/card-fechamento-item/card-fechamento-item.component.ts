@@ -30,7 +30,6 @@ export class CardFechamentoItemComponent implements OnInit {
     this.isDisabled = true;
 
     await this.pedidosService.closePedido( this.item.id, EnumStatusOptions.Fechado );
-    await this.mesaService.desbloqueiaMesa(this.item.numero);
     this.pedidosService.notificarAtualizacao();
     this.isDisabled = false;
     

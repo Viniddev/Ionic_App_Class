@@ -6,5 +6,6 @@ export interface IPedido {
   numero: number;
   status: EnumStatusOptions;
   itens: Array<IItem>;
+  comandaId: string;
 }
 

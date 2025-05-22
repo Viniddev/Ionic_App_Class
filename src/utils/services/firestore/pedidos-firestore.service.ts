@@ -39,12 +39,13 @@ export class PedidosFirestoreService {
       .filter((doc) => doc.data()['status'] !== 'Fechado')
       .map((doc) => {
         const pedido = doc.data();
-
+        
         return {
           id: doc.id,
           numero: pedido['numero'],
           status: pedido['status'],
           itens: pedido['itens'],
+          comandaId: pedido['comandaId']
         } as IPedido;
       });
 
@@ -56,17 +57,36 @@ export class PedidosFirestoreService {
   async montarComandas(): Promise<IItemComanda[]> {
     if (!this.pedidos) return [];
 
-    return this.pedidos.map((pedido) => ({
-      id: pedido.id,
-      numero: pedido.numero,
-      itens: pedido.itens,
-      total: this.calculaTotal(pedido),
-    }));
+    // agrupamento por comandaId
+    const agrupado = this.pedidos.reduce<Record<string, IPedido[]>>((acc, obj) => {
+      const { comandaId } = obj;
+      if (!acc[comandaId]) {
+        acc[comandaId] = [];
+      }
+      acc[comandaId].push(obj);
+      return acc;
+    }, {});
+
+    // agrupando os itens de cada comanda e calculando o total geral da comanda
+    const resultado = Object.entries(agrupado).map(([comandaId, pedidos]) => {
+      const todosItens = pedidos.flatMap(pedido => pedido.itens);
+
+      const pedidoCombinado = {
+        id: comandaId,
+        numero: pedidos[0].numero,
+        pedidos: pedidos.map(p => p.id), // opcional: lista de ids dos pedidos
+        itens: todosItens,
+        total: this.calculaTotal({ ...pedidos[0], itens: todosItens }), // passa todos os itens para calcular total
+      } as IItemComanda;
+
+      return pedidoCombinado;
+    });
+
+    return resultado;
   }
 
   async setNewPedidoDocuments(pedido: INovoPedido) {
     await addDoc(collection(this.firestore, PEDIDOS), pedido);
-    await this.mesasService.bloqueiaMesa(pedido.numero);
   }
 
   async getPedidoDocumentById(documentId: string) {
@@ -79,7 +99,8 @@ export class PedidosFirestoreService {
         numero: data.numero,
         status: data.status,
         itens: data.itens,
-      };
+        comandaId: data.comandaId
+      } as IPedido;
     } else {
       return null;
     }
@@ -131,7 +152,8 @@ export class PedidosFirestoreService {
 
   async cadastroPedido(
     ProdutosCardapio: Array<IProdutos>,
-    mesaSelecionada: string
+    mesaSelecionada: string,
+    comandaId: string
   ) {
     const lista: Array<IProdutos> = ProdutosCardapio.filter(
       (product: IProdutos) => product.quantidade > 0
@@ -143,6 +165,7 @@ export class PedidosFirestoreService {
       const pedido: INovoPedido = {
         numero: Number(mesaSelecionada),
         status: EnumStatusOptions.AguardandoConfirmacaoCozinha,
+        comandaId: comandaId,
         itens: lista
           .filter((item) => item.quantidade > 0)
           .map((item) => ({

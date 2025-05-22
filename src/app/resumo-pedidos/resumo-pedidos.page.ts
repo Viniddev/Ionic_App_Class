@@ -16,6 +16,8 @@ import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-fi
 import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
 import { IMesas } from 'src/@types/IMesas';
 import { ChangeDetectorRef } from '@angular/core';
+import { ComandaFirestoreService } from 'src/utils/services/firestore/comanda-firestore.service';
+import { IComanda } from 'src/@types/IComanda';
 
 @Component({
   selector: 'app-resumo-pedidos',
@@ -40,12 +42,15 @@ export class ResumoPedidosPage implements OnInit {
 
   comandas: Array<IItemComanda> = [];
   listaComandasFiltradas: Array<IItemComanda> = [];
+  
+  listaComanda: Array<IComanda> = [];
 
   constructor(
     private router: Router,
     private pedidosService: PedidosFirestoreService,
     private mesasService: MesasFirestoreService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private comandaService: ComandaFirestoreService
   ) {}
 
   ngOnInit() {
@@ -62,14 +67,14 @@ export class ResumoPedidosPage implements OnInit {
     this.carregarDados();
   }
 
-  private async carregarDados() {
+  async carregarDados() {
     this.pedidos = await this.pedidosService.getAllPedidosDocuments();
     this.comandas = await this.pedidosService.montarComandas();
 
     this.listaComandasFiltradas = [...this.comandas];
     this.listaMesas = await this.mesasService.buscaListaTodasAsMesas();
 
-    this.cdr.detectChanges(); // força atualização do DOM se necessário
+    this.cdr.detectChanges(); 
   }
 
   filtrarPedidosPorMesa($event: any) {

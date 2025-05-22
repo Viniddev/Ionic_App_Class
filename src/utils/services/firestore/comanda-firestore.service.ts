@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, doc, Firestore, getDoc, getDocs, updateDoc } from '@angular/fire/firestore';
-import { IComanda } from 'src/@types/IComanda';
+import { IComanda, IListarComanda } from 'src/@types/IComanda';
 import { COMANDAS } from 'src/utils/constants/backEndUrls';
 import { ProfileFirestoreService } from './profile-firestore.service';
 import { StatusComanda } from 'src/@types/Enums/statusComanda';
@@ -61,16 +61,26 @@ export class ComandaFirestoreService {
   async buscarTodasAsComandas() {
     const comandas = await getDocs(collection(this.firestore, COMANDAS));
 
-    var ListaComandas: Array<IComanda> = comandas.docs.map((element: any) => {
+    var ListaComandas: Array<IListarComanda> = comandas.docs.map((element: any) => {
       const valores: IComanda = element.data();
       return {
+        id: element.id,
         criador: valores.criador,
         mesa: valores.mesa,
         status: valores.status
-      } as IComanda;
+      } as IListarComanda;
     })
     
     this.comandas = Array.from([...ListaComandas]);
     return Array.from([...ListaComandas]);
+  }
+
+  async ComandaJaExiste(mesaSelecionada: string){
+    const listaComandas = await this.buscarTodasAsComandas();
+
+    const comandaExiste = listaComandas.find(
+      (element: IListarComanda) => element.mesa === mesaSelecionada && element.status === StatusComanda.aberta);
+
+    return comandaExiste !== null ? comandaExiste.id : "";
   }
 }

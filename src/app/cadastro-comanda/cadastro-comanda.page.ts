@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonButton, IonContent, IonSearchbar, IonSelect, IonSelectOption  } from '@ionic/angular/standalone';
+import { IonButton, IonContent, IonSearchbar, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/components/header/header.component';
 import { IMesas } from 'src/@types/IMesas';
 import { CardPedidoComponent } from 'src/components/card-pedido/card-pedido.component';
@@ -13,6 +13,7 @@ import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-fi
 import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
 import { CardapioFirestoreService } from 'src/utils/services/firestore/cardapio-firestore.service';
 import { IItem } from 'src/@types/IItem';
+import { ComandaFirestoreService } from 'src/utils/services/firestore/comanda-firestore.service';
 
 @Component({
   selector: 'app-cadastro-comanda',
@@ -49,7 +50,8 @@ export class CadastroComandaPage implements OnInit {
     private mesasService: MesasFirestoreService,
     private cardapioSerive: CardapioFirestoreService,
     private activatedRoute: ActivatedRoute,
-  ) {}
+    private ComandaService: ComandaFirestoreService
+  ) { }
 
   ngOnInit() {
     this.IdPedido = this.activatedRoute.snapshot.paramMap.get('id');
@@ -82,15 +84,15 @@ export class CadastroComandaPage implements OnInit {
   }
 
   async pesquisaInformacoesEstabelecimento() {
-    this.mesas = await this.mesasService.buscaListaMesasVazias();
+    this.mesas = await this.mesasService.buscaListaTodasAsMesas();
     this.ProdutosCardapio = await this.cardapioSerive.getCardapio();
     this.ProdutosFiltrados = Array.from([...this.ProdutosCardapio]);
 
-    if(this.IdPedido !== NEW_PRODUCT)
+    if (this.IdPedido !== NEW_PRODUCT)
       this.pesquisaInformacoesComanda();
   }
 
-  async pesquisaInformacoesComanda(){
+  async pesquisaInformacoesComanda() {
     this.seletorMesaDisabled = true;
     const produto = await this.pedidosService.getPedidoDocumentById(this.IdPedido);
 
@@ -108,13 +110,13 @@ export class CadastroComandaPage implements OnInit {
   }
 
   async finalizarPedido() {
-    if(this.IdPedido !== NEW_PRODUCT){
+    if (this.IdPedido !== NEW_PRODUCT) {
       this.editaPedidos();
-    }else{
-      this.cadastraComanda();      
+    } else {
+      this.cadastraComanda();
     }
   }
-  
+
   async editaPedidos() {
     this.isDisabled = true;
     //chamada
@@ -128,8 +130,18 @@ export class CadastroComandaPage implements OnInit {
   async cadastraComanda() {
     this.isDisabled = true;
 
-    //chamada
-    await this.pedidosService.cadastroPedido(this.ProdutosCardapio, this.mesaSelecionada);
+    //se ja tiver comanda aberta pra essa mesa
+    //eu passo o Id da comanda, senao eu crio uma
+    const comandaJaExiste = await this.ComandaService.ComandaJaExiste(this.mesaSelecionada);
+
+    let comandaId = '';
+    if (comandaJaExiste === "") {
+      comandaId = await this.ComandaService.CriaComanda(this.mesaSelecionada);
+    }else{
+      comandaId = comandaJaExiste;
+    }
+
+    await this.pedidosService.cadastroPedido(this.ProdutosCardapio, this.mesaSelecionada, comandaId);
 
     this.LimpaCampos();
     this.isDisabled = false;

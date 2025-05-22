@@ -3,3 +3,10 @@ export interface IComanda{
     criador: string;
     status: string;
 }
+
+export interface IListarComanda{
+    id: string;
+    mesa: string;
+    criador: string;
+    status: string;
+}
