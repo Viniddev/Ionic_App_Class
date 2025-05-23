@@ -61,6 +61,11 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
+        path: 'detalhes-comanda/:id',
+        loadComponent: () => import('./detalhes-comanda/detalhes-comanda.page').then( m => m.DetalhesComandaPage),
+        canActivate: [authGuard],
+      },
+      {
         path: '',
         redirectTo: 'cadastro-comanda:id',
         pathMatch: 'full',

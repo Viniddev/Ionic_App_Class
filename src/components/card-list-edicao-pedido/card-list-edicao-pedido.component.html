@@ -1,0 +1,22 @@
+<div class="comanda-card">
+  <div class="card-content">
+    <div class="left-column">
+      <div class="comanda-number">Mesa: {{ item?.numero }}</div>
+      <div class="pedidos-itens">
+          <div *ngFor="let item of item.itens" class="comanda-item">
+            {{ item?.quantidade }}x {{ item?.nome }}
+          </div>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="total-container">
+        <div class="total-label">Total:</div>
+        <div class="total-value">R$ {{ item?.total?.toFixed(2).replace('.', ',') }}</div>
+      </div>
+    </div>
+  </div>
+  <ion-button class="btn-fechar" (click)="fecharComanda()" [disabled]="isDisabled" expand="full">
+    FECHAR COMANDA
+  </ion-button>
+</div>

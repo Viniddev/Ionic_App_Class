@@ -1,0 +1,59 @@
+.comanda-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.left-column {
+  flex: 1;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 120px;
+}
+
+.comanda-number {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: var(--ion-color-primary);
+}
+
+.comanda-item {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: #333333;
+}
+
+.total-container {
+  margin-bottom: 16px;
+  text-align: right;
+}
+
+.total-label {
+  color: #777777;
+  font-size: 14px;
+}
+
+.total-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+ion-button.btn-fechar {
+  --color: white;
+  font-weight: 400;
+  margin-top: 1rem;
+}

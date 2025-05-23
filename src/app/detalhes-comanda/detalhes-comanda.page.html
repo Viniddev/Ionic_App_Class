@@ -1,0 +1,12 @@
+<app-header title="Detalhes Comanda"/>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <app-card-list-edicao-pedido
+    *ngFor="let item of ListaPedidosMapeados"
+    [itemComanda]="{
+      id: item?.id,
+      numero: item?.numero,
+      itens: item?.itens,
+      total: 0
+  }"></app-card-list-edicao-pedido>
+</ion-content>

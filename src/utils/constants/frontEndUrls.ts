@@ -7,5 +7,6 @@ export const CADASTRO_COMANDA = '/service/cadastro-comanda';
 export const RESUMO_PEDIDO = '/service/resumo-pedidos'
 export const VISUALIZAR_PEDIDO = '/service/visualizar-pedidos'
 export const FINALIZAR_COMANDA = '/service/finalizar-comanda'
+export const DETALHES_COMANDA = '/service/detalhes-comanda'
 
 export const NEW_PRODUCT = 'new';

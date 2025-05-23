@@ -106,6 +106,29 @@ export class PedidosFirestoreService {
     }
   }
 
+  async getPedidosByComandaID(comandaId: string) {
+    const pedido = await getDocs(collection(this.firestore, PEDIDOS))
+
+    if(pedido.docs.length > 0){
+      const listaPedidos = pedido.docs.filter((element)=> element.data()["comandaId"] === comandaId);
+
+      const listaPedidoMapeado = listaPedidos.map((element)=>{
+        const data = element.data() as Omit<IPedido, 'id'>;
+        return {
+          id: element.id,
+          numero: data.numero,
+          status: data.status,
+          itens: data.itens,
+          comandaId: data.comandaId
+        } as IPedido;
+      })
+
+      return listaPedidoMapeado;
+    }else{
+      return null;
+    }
+  }
+
   async closePedido(documentId: string, status: EnumStatusOptions) {
     const pedido = await getDoc(doc(this.firestore, PEDIDOS, documentId));
     if (pedido.exists) {

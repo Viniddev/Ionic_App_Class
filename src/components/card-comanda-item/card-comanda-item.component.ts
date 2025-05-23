@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { CADASTRO_COMANDA, FINALIZAR_COMANDA, NEW_PRODUCT } from 'src/utils/constants/frontEndUrls';
+import { DETALHES_COMANDA, FINALIZAR_COMANDA } from 'src/utils/constants/frontEndUrls';
 import { IItemComanda } from 'src/@types/IItemComanda';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { IonButton } from '@ionic/angular/standalone';
@@ -26,7 +26,7 @@ export class CardComandaItemComponent implements OnInit {
   }
 
   editar(itemComanda: IItemComanda) {
-    this.router.navigate([CADASTRO_COMANDA, itemComanda.id]);
+    this.router.navigate([DETALHES_COMANDA,  itemComanda.id])
   }
 
   fecharComanda(documentId: string) {
