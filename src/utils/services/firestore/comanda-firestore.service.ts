@@ -4,6 +4,7 @@ import { IComanda, IListarComanda } from 'src/@types/IComanda';
 import { COMANDAS } from 'src/utils/constants/backEndUrls';
 import { ProfileFirestoreService } from './profile-firestore.service';
 import { StatusComanda } from 'src/@types/Enums/statusComanda';
+import { colorPalette } from 'ionicons/icons';
 
 @Injectable({
   providedIn: 'root'
@@ -70,17 +71,18 @@ export class ComandaFirestoreService {
         status: valores.status
       } as IListarComanda;
     })
-    
+
     this.comandas = Array.from([...ListaComandas]);
     return Array.from([...ListaComandas]);
   }
 
   async ComandaJaExiste(mesaSelecionada: string){
     const listaComandas = await this.buscarTodasAsComandas();
-
+    
     const comandaExiste = listaComandas.find(
       (element: IListarComanda) => element.mesa === mesaSelecionada && element.status === StatusComanda.aberta);
+      
 
-    return comandaExiste !== null ? comandaExiste.id : "";
+    return comandaExiste !== null && comandaExiste !== undefined ? comandaExiste.id : "";
   }
 }

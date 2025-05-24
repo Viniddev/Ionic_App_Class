@@ -4,7 +4,8 @@ export interface IItemComanda {
   id: string;
   numero: number;
   itens: Array<IItem>;
-  total: number,
+  total: number;
+  pedidos: Array<string>;
 }
 
 export interface IItemComandaResumida {

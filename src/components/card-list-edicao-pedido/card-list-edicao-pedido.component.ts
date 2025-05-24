@@ -1,27 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IItemComanda } from 'src/@types/IItemComanda';
-import { MesasFirestoreService } from 'src/utils/services/firestore/mesas-firestore.service';
-import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
-
+import { IonButton } from '@ionic/angular/standalone';
+import { CADASTRO_COMANDA } from 'src/utils/constants/frontEndUrls';
+import { IPedido } from 'src/@types/IPedido';
 @Component({
   selector: 'app-card-list-edicao-pedido',
   templateUrl: './card-list-edicao-pedido.component.html',
   styleUrls: ['./card-list-edicao-pedido.component.scss'],
+  imports: [CommonModule, IonButton],
 })
-export class CardListEdicaoPedidoComponent  implements OnInit {
-  @Input({ required: true }) item!: IItemComanda;
+export class CardListEdicaoPedidoComponent implements OnInit {
+  @Input({ required: true }) pedido!: IPedido;
   isDisabled: boolean = false;
 
-  constructor(
-    private mesaService: MesasFirestoreService,
-    private pedidosService: PedidosFirestoreService,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
-  async fecharComanda() {
-   
+  async EditarPedido(idPedido: string) {
+    this.router.navigate([CADASTRO_COMANDA, idPedido]);
   }
 }

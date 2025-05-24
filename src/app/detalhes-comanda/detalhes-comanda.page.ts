@@ -5,8 +5,8 @@ import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/components/header/header.component';
 import { ActivatedRoute } from '@angular/router';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
-import { IPedido } from 'src/@types/IPedido';
 import { CardListEdicaoPedidoComponent } from 'src/components/card-list-edicao-pedido/card-list-edicao-pedido.component';
+import { IPedido } from 'src/@types/IPedido';
 
 @Component({
   selector: 'app-detalhes-comanda',
@@ -14,30 +14,36 @@ import { CardListEdicaoPedidoComponent } from 'src/components/card-list-edicao-p
   styleUrls: ['./detalhes-comanda.page.scss'],
   standalone: true,
   imports: [
-    IonContent, 
-    CommonModule, 
+    IonContent,
+    CommonModule,
     FormsModule,
     HeaderComponent,
-    CardListEdicaoPedidoComponent
-  ]
+    CardListEdicaoPedidoComponent,
+  ],
 })
 export class DetalhesComandaPage implements OnInit {
   idComanda: string;
-  ListaPedidosMapeados: Array<IPedido> 
+  ListaPedidosMapeados: Array<IPedido>;
 
   constructor(
-    private activatedRoute: ActivatedRoute, 
+    private activatedRoute: ActivatedRoute,
     private pedidoService: PedidosFirestoreService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.searchPedidos();
   }
 
-  async searchPedidos(){
-    this.idComanda = this.activatedRoute.snapshot.paramMap.get('id');
-    this.ListaPedidosMapeados = await this.pedidoService.getPedidosByComandaID(this.idComanda);
+  ionViewWillEnter() {
+    this.searchPedidos();
+  }
 
-    console.log('teste', this.ListaPedidosMapeados)
-  } 
+  async searchPedidos() {
+    this.idComanda = this.activatedRoute.snapshot.paramMap.get('id');
+
+    const pedidos: Array<IPedido> =
+      await this.pedidoService.getPedidosByComandaID(this.idComanda);
+
+    this.ListaPedidosMapeados = pedidos;
+  }
 }

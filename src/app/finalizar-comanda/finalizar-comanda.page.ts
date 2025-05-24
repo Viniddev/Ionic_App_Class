@@ -8,7 +8,7 @@ import { CADASTRO_COMANDA, NEW_PRODUCT } from 'src/utils/constants/frontEndUrls'
 import { HeaderComponent } from 'src/components/header/header.component';
 import { PedidosFirestoreService } from 'src/utils/services/firestore/pedidos-firestore.service';
 import { IItemComanda } from 'src/@types/IItemComanda';
-import { IPedido } from 'src/@types/IPedido';
+import { IItem } from 'src/@types/IItem';
 
 @Component({
   selector: 'app-finalizar-comanda',
@@ -25,7 +25,6 @@ import { IPedido } from 'src/@types/IPedido';
 })
 export class FinalizarComandaPage implements OnInit {
   documentId: string;
-  pedido: IPedido;
   item: IItemComanda;
 
   constructor(
@@ -46,20 +45,23 @@ export class FinalizarComandaPage implements OnInit {
     const idComanda = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (idComanda) {
-      this.pedido = await this.pedidosService.getPedidoDocumentById(idComanda);
+      const pedidosPorComanda = await this.pedidosService.getPedidosByComandaID(idComanda);
+      var comandaMapeada: IItemComanda = this.pedidosService.reduceList(pedidosPorComanda)[0];
+
       this.item = {
         id: idComanda,
-        numero: this.pedido.numero,
-        itens: this.pedido.itens,
-        total: this.calculaTotal(this.pedido),
+        numero: comandaMapeada.numero,
+        itens: comandaMapeada.itens,
+        total: this.calculaTotal(comandaMapeada.itens),
+        pedidos: comandaMapeada.pedidos
       };
     }
   }
 
-  calculaTotal(pedido: IPedido) {
+  calculaTotal(itens: Array<IItem>) {
     let totalPedido = 0;
 
-    for (const item of pedido.itens) {
+    for (const item of itens) {
       totalPedido += item.preco * item.quantidade;
     }
     return totalPedido;

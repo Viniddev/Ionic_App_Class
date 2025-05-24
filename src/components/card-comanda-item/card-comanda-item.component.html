@@ -19,6 +19,15 @@
 
   <div class="botoes-container">
     <ion-button 
+      class="btn-fechar" 
+      expand="block" 
+      size="medium"
+      (click)="fecharComanda(itemComanda?.id)" 
+    >
+      FECHAR COMANDA
+    </ion-button>
+
+    <ion-button 
       class="btn-editar" 
       expand="block" 
       size="medium"
@@ -26,13 +35,6 @@
     >
       EDITAR
     </ion-button>
-    <ion-button 
-      class="btn-fechar" 
-      expand="block" 
-      size="medium"
-      (click)="fecharComanda(itemComanda.id)" 
-    >
-      FECHAR COMANDA
-    </ion-button>
+   
   </div>
 </div>

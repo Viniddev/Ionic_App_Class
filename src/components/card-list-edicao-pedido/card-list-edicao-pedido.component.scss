@@ -53,7 +53,8 @@
 }
 
 ion-button.btn-fechar {
-  --color: white;
+  --background: brown;
+  --color: white !important;
   font-weight: 400;
   margin-top: 1rem;
 }

@@ -3,10 +3,11 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <app-card-list-edicao-pedido
     *ngFor="let item of ListaPedidosMapeados"
-    [itemComanda]="{
+    [pedido]="{
       id: item?.id,
       numero: item?.numero,
       itens: item?.itens,
-      total: 0
+      status: item?.status, 
+      comandaId: item?.comandaId
   }"></app-card-list-edicao-pedido>
 </ion-content>
