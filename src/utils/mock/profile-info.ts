@@ -1,3 +1,4 @@
+import { EnumCargos } from "src/@types/Enums/Cargos";
 import { IPerfilInformations } from "src/@types/IPerfilInformations";
 
 export const ProfileInfo: IPerfilInformations = {
@@ -5,5 +6,5 @@ export const ProfileInfo: IPerfilInformations = {
     email: "",
     cpf: "",
     telefone: "",
-    cargo: ""
+    cargo: EnumCargos.Garcom
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { getDocs, collection, Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { getDocs, collection, Firestore, doc, getDoc, updateDoc, query, where } from '@angular/fire/firestore';
 import { IUserInformations } from 'src/@types/IUserInformations';
 import { USUARIOS } from 'src/utils/constants/backEndUrls';
 
@@ -35,10 +35,23 @@ export class ProfileFirestoreService {
       cpf: userData['cpf'],
       email: userData['email'],
       nome: userData['nome'],
-      telefone: userData['telefone']
+      telefone: userData['telefone'],
+      cargo: userData['cargo'],
     } as IUserInformations;
 
     return this.UserInformations;
+  }
+
+  async getUser(email: string) {
+    const usuariosRef = collection(this.firestore, USUARIOS);
+    const queryUser = query(usuariosRef, where("email", "==", email))
+
+    const queryUserSnap = await getDocs(queryUser)
+
+    const userSnap = queryUserSnap.docs[0];
+    const user = userSnap.data() as IUserInformations
+
+    return user;
   }
 
   async updateUserProfileInformations(userData: IUserInformations) {
@@ -50,6 +63,7 @@ export class ProfileFirestoreService {
         cpf: userData.cpf,
         email: userData.email,
         telefone: userData.telefone,
+        cargo: userData.cargo,
       });
       return usuario;
     } else {

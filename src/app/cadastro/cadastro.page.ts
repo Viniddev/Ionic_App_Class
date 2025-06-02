@@ -1,7 +1,7 @@
 import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { IonContent, IonItem, IonInput, IonNote, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonItem, IonInput, IonNote, IonButton, IonSelectOption, IonSelect, IonLabel } from '@ionic/angular/standalone';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Validacoes } from 'src/utils/forms/validacoes';
@@ -13,7 +13,7 @@ import { FirestoreService } from 'src/utils/services/firestore/firestore.service
 import { USUARIOS } from 'src/utils/constants/backEndUrls';
 import { LOGIN } from 'src/utils/constants/frontEndUrls';
 import { IUserInformations, MapUserInformations } from 'src/@types/IUserInformations';
-import { ProfileInfo } from 'src/utils/mock/profile-info';
+import { EnumCargos } from 'src/@types/Enums/Cargos';
 
 @Component({
   selector: 'app-cadastro',
@@ -27,6 +27,9 @@ import { ProfileInfo } from 'src/utils/mock/profile-info';
     IonItem,
     IonInput,
     IonNote,
+    IonLabel,
+    IonSelectOption,
+    IonSelect,
     ReactiveFormsModule,
     IonButton,
   ],
@@ -35,6 +38,13 @@ import { ProfileInfo } from 'src/utils/mock/profile-info';
 export class CadastroPage implements OnInit {
   cadastro!: FormGroup;
   isBlocked: boolean = false;
+
+  enumCargos = [
+    {label: "Administrador", value: EnumCargos.Administrador},
+    {label: "Cozinheiro", value: EnumCargos.Cozinheiro},
+    {label: "Garçom", value: EnumCargos.Garcom}
+  ]
+
 
   readonly phoneMask: MaskitoOptions = {
     mask: [
@@ -47,13 +57,13 @@ export class CadastroPage implements OnInit {
   readonly maskPredicate: MaskitoElementPredicate = async (el) => {
     return (el as unknown as HTMLIonInputElement).getInputElement();
   };
-  
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
     private alertController: AlertController,
-    private fs: FirestoreService
+    private fs: FirestoreService,
   ) {}
 
   ngOnInit() {
@@ -96,6 +106,7 @@ export class CadastroPage implements OnInit {
           Validacoes.senhasCombinam('password', false),
         ]),
       ],
+      cargo: ['', [Validators.required]],
     });
   }
 
@@ -121,6 +132,10 @@ export class CadastroPage implements OnInit {
 
   get cpf() {
     return this.cadastro.get('cpf');
+  }
+
+  get cargo() {
+    return this.cadastro.get('cargo');
   }
 
   voltar() {
