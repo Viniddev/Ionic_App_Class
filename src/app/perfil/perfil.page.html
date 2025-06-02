@@ -7,41 +7,41 @@
             <img src="../../assets/icon/profile.png" alt="Avatar do Usuário" />
           </ion-avatar>
         </div>
-  
+
         <ion-list class="input-area">
           <ion-item class="input-item">
             <ion-label position="stacked">Nome Completo:</ion-label>
-            <ion-input 
+            <ion-input
               class="teste"
-              [(ngModel)]="perfil.nome" 
+              [(ngModel)]="perfil.nome"
               placeholder="Digite seu nome"
             ></ion-input>
           </ion-item>
-  
+
           <ion-item class="input-item">
             <ion-label position="stacked">Email:</ion-label>
-            <ion-input 
-              [(ngModel)]="perfil.email" 
-              type="email" 
+            <ion-input
+              [(ngModel)]="perfil.email"
+              type="email"
               placeholder="exemplo@email.com"
               disabled
             ></ion-input>
           </ion-item>
-  
+
           <ion-item class="input-item">
             <ion-label position="stacked">CPF:</ion-label>
-            <ion-input 
-              [(ngModel)]="perfil.cpf" 
+            <ion-input
+              [(ngModel)]="perfil.cpf"
               placeholder="000.000.000-00"
               disabled
             ></ion-input>
           </ion-item>
-  
+
           <ion-item class="input-item">
             <ion-label position="stacked">Telefone:</ion-label>
-            <ion-input 
-              [(ngModel)]="perfil.telefone" 
-              type="tel" 
+            <ion-input
+              [(ngModel)]="perfil.telefone"
+              type="tel"
               placeholder="(00) 00000-0000"
             ></ion-input>
           </ion-item>
@@ -51,15 +51,14 @@
 
       <section class="navigation">
         <div class="button-container">
-          <ion-button expand="block" color="danger" (click)="Atualizar()">EDITAR PERFIL</ion-button>
+          <ion-button expand="block" color="dark" (click)="Atualizar()">EDITAR PERFIL</ion-button>
         </div>
         <div class="button-container">
-          <ion-button expand="block" color="dark" (click)="Voltar()">Voltar</ion-button>
+          <ion-button expand="block" color="danger" (click)="sair()">Sair</ion-button>
         </div>
       </section>
     </div>
   </div>
 </ion-content>
 
-  
-  
+

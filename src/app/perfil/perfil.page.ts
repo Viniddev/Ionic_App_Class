@@ -3,9 +3,10 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ProfileInfo } from 'src/utils/mock/profile-info';
 import { Router } from '@angular/router';
-import { CADASTRO_COMANDA, NEW_PRODUCT } from 'src/utils/constants/frontEndUrls';
+import { LOGIN } from 'src/utils/constants/frontEndUrls';
 import { ProfileFirestoreService } from 'src/utils/services/firestore/profile-firestore.service';
 import { IUserInformations } from 'src/@types/IUserInformations';
+import { AuthService } from 'src/utils/services/auth/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -20,23 +21,25 @@ export class PerfilPage implements OnInit {
 
   constructor(
     private router: Router,
-    private profileService: ProfileFirestoreService
+    private profileService: ProfileFirestoreService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.getAllPedidos();
   }
-  
+
   async getAllPedidos() {
     this.perfil = await this.profileService.getUserProfileInformations();
     return this.perfil;
   }
-  
+
   async Atualizar(){
     await this.profileService.updateUserProfileInformations(this.perfil)
   }
 
-  Voltar() {
-    this.router.navigate([CADASTRO_COMANDA, NEW_PRODUCT]);
+  sair() {
+    this.authService.logout();
+    this.router.navigate([LOGIN])
   }
 }
