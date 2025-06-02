@@ -39,9 +39,7 @@ export class TabNavegacaoComponent implements OnInit {
     this.authService.user$.subscribe((authUser: User | null) => {
       if(authUser) {
         this.getUserProfile(authUser.email).then(() => {
-          console.log(this.user['cargo'])
           this.atualizarVisualizacaoTab(this.user["cargo"])
-          console.log(this.mostrarVisualizarPedidos, this.mostrarCadastrarPedido, this.mostrarResumoPedido, this.mostrarCadastroUsuario)
         })
       }
     })
@@ -53,10 +51,8 @@ export class TabNavegacaoComponent implements OnInit {
 
 
   private atualizarVisualizacaoTab(cargo: EnumCargos) {
-    console.log(cargo, "Inicio")
 
     if(!cargo) {
-      console.log(cargo, "Not cargo")
       this.mostrarVisualizarPedidos = false;
       this.mostrarCadastrarPedido = false;
       this.mostrarResumoPedido = false;
@@ -72,7 +68,6 @@ export class TabNavegacaoComponent implements OnInit {
         this.mostrarCadastroUsuario  = true;
         break;
       case EnumCargos.Garcom:
-        console.log(cargo, "Garcom")
         this.mostrarVisualizarPedidos = true;
         this.mostrarCadastrarPedido   = true;
         this.mostrarResumoPedido     = true;
@@ -85,8 +80,5 @@ export class TabNavegacaoComponent implements OnInit {
         this.mostrarCadastroUsuario  = false;
         break;
     }
-
-    console.log(cargo, "Final")
   }
-
 }
