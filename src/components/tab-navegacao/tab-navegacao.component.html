@@ -1,18 +1,18 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="visualizar-pedidos">
+    <ion-tab-button *ngIf="mostrarVisualizarPedidos" tab="visualizar-pedidos">
       <ion-icon name="library"></ion-icon>
       Visualizar Pedidos
     </ion-tab-button>
-    <ion-tab-button tab="cadastro-comanda/new">
+    <ion-tab-button *ngIf="mostrarCadastrarPedido" tab="cadastro-comanda/new">
       <ion-icon name="radio"></ion-icon>
       Cadastrar Pedido
     </ion-tab-button>
-    <ion-tab-button tab="resumo-pedidos">
+    <ion-tab-button *ngIf="mostrarResumoPedido" tab="resumo-pedidos">
       <ion-icon name="search"></ion-icon>
       Resumo Comandas
     </ion-tab-button>
-    <ion-tab-button tab="cadastro">
+    <ion-tab-button *ngIf="mostrarCadastroUsuario" tab="cadastro">
       <ion-icon name="person-outline"></ion-icon>
       Cadastro Usuários
     </ion-tab-button>

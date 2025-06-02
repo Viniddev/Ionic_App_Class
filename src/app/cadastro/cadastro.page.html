@@ -55,7 +55,7 @@
           placeholder="999.999.999-99"
         ></ion-input>
       </ion-item>
-      
+
       <ion-note
         slot="error"
         *ngIf="(telefone?.dirty || telefone?.touched) && telefone?.errors"
@@ -94,7 +94,7 @@
           type="password"
         ></ion-input>
       </ion-item>
-      
+
       <ion-note
         slot="error"
         *ngIf="(passwordConfirm?.dirty || passwordConfirm?.touched) && passwordConfirm?.errors"
@@ -113,11 +113,33 @@
         ></ion-input>
       </ion-item>
 
-      <ion-button 
-        type="button" 
-        expand="block" 
-        color="secondary" 
-        (click)="Cadastrar()" 
+      <ion-note
+        slot="error"
+        *ngIf="(cargo?.dirty || cargo?.touched) && cargo?.errors"
+        color="danger"
+      >
+        Selecione um cargo válido
+      </ion-note>
+      <ion-item>
+        <ion-label>Cargo</ion-label>
+        <ion-select
+          formControlName="cargo"
+          placeholder="Selecione um Cargo"
+        >
+          <ion-select-option
+            *ngFor="let cargo of enumCargos"
+            [value]="cargo.value"
+          >
+            {{ cargo.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button
+        type="button"
+        expand="block"
+        color="secondary"
+        (click)="Cadastrar()"
         [blocked]="isBlocked"
       >
         Confirmar

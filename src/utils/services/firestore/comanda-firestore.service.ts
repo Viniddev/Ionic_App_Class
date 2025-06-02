@@ -78,10 +78,10 @@ export class ComandaFirestoreService {
 
   async ComandaJaExiste(mesaSelecionada: string){
     const listaComandas = await this.buscarTodasAsComandas();
-    
+
     const comandaExiste = listaComandas.find(
       (element: IListarComanda) => element.mesa === mesaSelecionada && element.status === StatusComanda.aberta);
-      
+
 
     return comandaExiste !== null && comandaExiste !== undefined ? comandaExiste.id : "";
   }
