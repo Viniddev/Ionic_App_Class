@@ -64,11 +64,12 @@ export class LoginPage implements OnInit {
       const user = await this.auth.login(this.credentials.value);
 
       if (user) {
+        this.credentials.reset();
         this.router.navigate([CADASTRO_COMANDA, NEW_PRODUCT]);
       } else {
         this.showAlert('Email ou Senha incorretos.', 'Tente novamente!');
       }
-      
+
       this.isDisabled = false;
     }else{
       this.showAlert('Email / Senha inválidos.', 'Login e senha não podem ser vazios.');

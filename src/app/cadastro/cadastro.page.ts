@@ -142,6 +142,9 @@ export class CadastroPage implements OnInit {
     this.router.navigate([LOGIN]);
   }
 
+  ionViewWillLeave() {
+    this.cadastro.reset();
+  }
   async Cadastrar() {
     if(!this.cadastro.invalid){
       this.isBlocked = true;
