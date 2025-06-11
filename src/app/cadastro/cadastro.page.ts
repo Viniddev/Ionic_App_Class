@@ -73,7 +73,7 @@ export class CadastroPage implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(10),
           Validators.maxLength(100),
           Validators.email,
         ]),
@@ -82,17 +82,20 @@ export class CadastroPage implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(11),
           Validators.maxLength(100),
           Validacoes.validaCpf,
         ]),
       ],
-      telefone: ['', [Validators.required]],
+      telefone: [
+        '',
+        [Validators.required, Validators.pattern(/^\(?\d{2}\)?[\s-]?\d{4,5}[-]?\d{4}$/)],
+      ],
       password: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(6),
           Validators.maxLength(100),
           Validacoes.senhasCombinam('passwordConfirm', true),
         ]),
@@ -101,7 +104,7 @@ export class CadastroPage implements OnInit {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(6),
           Validators.maxLength(100),
           Validacoes.senhasCombinam('password', false),
         ]),

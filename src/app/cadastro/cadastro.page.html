@@ -71,9 +71,7 @@
           labelPlacement="stacked"
           formControlName="telefone"
           placeholder="(99) 99999-9999"
-          [maskito]="phoneMask"
-          [maskitoElement]="maskPredicate"
-          maxlength="15"
+          maxlength="11"
         ></ion-input>
       </ion-item>
 
@@ -92,6 +90,7 @@
           label="Senha:"
           [clearInput]="true"
           type="password"
+          minlenght="6"
         ></ion-input>
       </ion-item>
 
@@ -110,6 +109,7 @@
           label="Repita a senha:"
           [clearInput]="true"
           type="password"
+          minlenght="6"
         ></ion-input>
       </ion-item>
 
