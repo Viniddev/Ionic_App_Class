@@ -148,6 +148,7 @@ export class CadastroPage implements OnInit {
   ionViewWillLeave() {
     this.cadastro.reset();
   }
+
   async Cadastrar() {
     if(!this.cadastro.invalid){
       this.isBlocked = true;
@@ -161,6 +162,15 @@ export class CadastroPage implements OnInit {
       if (user) {
         this.cadastro.reset();
         this.showAlert('Sucesso', 'Usuario cadastrado no sistema!');
+        await this.authService.logout();
+        
+        if (this.authService.userEmail && this.authService.userPassword) {
+          await this.authService.login({
+            email: this.authService.userEmail,
+            password: this.authService.userPassword,
+          });
+        }
+
       } else {
         this.showAlert('Falha no registro', 'Tente novamente!');
       }

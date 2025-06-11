@@ -18,6 +18,8 @@ import { ICredentials } from 'src/@types/ICredentials';
 })
 export class AuthService {
   user$: Observable<User | null>;
+  userEmail: string;
+  userPassword: string;
 
   constructor(private firebaseAuth: Auth) {
     this.setSessionStoragePersistence();
@@ -29,6 +31,10 @@ export class AuthService {
   }
 
   async login({ email, password }: ICredentials) {
+    
+    this.userEmail = email;
+    this.userPassword = password;
+
     try {
       const user = await signInWithEmailAndPassword(
         this.firebaseAuth,
